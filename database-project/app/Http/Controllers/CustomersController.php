@@ -37,7 +37,6 @@ class CustomersController extends Controller
     {
         //
         customers::create( [
-            'customerNumber' => $request->customerNumber,
             'customerName' => $request->customerName,
             'contactLastName' => $request->contactLastName,
             'contactFirstName' => $request->contactFirstName,

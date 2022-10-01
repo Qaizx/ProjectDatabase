@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use App\Models\User;
 
 class customers extends Model
 {
@@ -12,7 +13,6 @@ class customers extends Model
     protected $primaryKey = 'customerNumber';
 
     protected $fillable = [
-        'customerNumber',
         'customerName',
         'contactLastName',
         'contactFirstName',

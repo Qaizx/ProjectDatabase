@@ -14,16 +14,11 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
-        \Eloquent::unguard();
+        $this->call([
+            CustomersSeeder::class,
+            UserSeeder::class,
+        ]);
 
-        $path = 'database\SQL\customers.sql';
-        \DB::unprepared(file_get_contents($path));
-        $this->command->info('customers seeded!');
     }
 }

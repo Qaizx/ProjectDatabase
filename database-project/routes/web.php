@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\CustomersController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,6 +20,10 @@ Route::get('/', function () {
 });
 
 Route::apiResource('customers' , CustomersController::class);
+Route::apiResource('users' , UserController::class);
+
+Route::get('users/getCustomer/{id}' , [UserController::class,'getCustomer']);
+
 
 
 // Route::apiResources([

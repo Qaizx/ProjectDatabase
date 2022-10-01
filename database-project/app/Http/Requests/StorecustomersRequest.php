@@ -24,7 +24,6 @@ class StorecustomersRequest extends FormRequest
     public function rules()
     {
         return [
-            'customerNumber' => ['required'],
             'customerName' => ['required'],
             'contactLastName' => ['required'],
             'contactFirstName' => ['required'],
