@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\EmployeesController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,26 +20,24 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::apiResource('customers' , CustomersController::class);
-Route::apiResource('users' , UserController::class);
+Route::apiResources([
+    'customers' => CustomersController::class,
+    'employees' => EmployeesController::class,
+    'users' => UserController::class,
+
+    // 'offices' => OfficesController::class,
+    // 'orderdetails' => OrderDetailsController::class,
+    // 'orders' => OrdersController::class,
+    // 'payments' => PaymentsController::class,
+    // 'productlines' => ProductLinesController::class,
+    // 'products' => ProductsController::class,
+]);
 
 Route::get('users/getCustomer/{id}' , [UserController::class,'getCustomer']);
 
-
-
-// Route::apiResources([
-//     'customers' => CustomersController::class,
-//     'employees' => EmployeesController::class,
-//     'offices' => OfficesController::class,
-//     'orderdetails' => OrderDetailsController::class,
-//     'orders' => OrdersController::class,
-//     'payments' => PaymentsController::class,
-//     'productlines' => ProductLinesController::class,
-//     'products' => ProductsController::class,
-// ]);
-
-// get -> /
-// getById -> /{id}
-// post -> /
-// put,patch -> /{id}
-// delete -> /{id}
+// Verb          Path                        Action  Route Name
+// GET           /users                      index   users.index
+// POST          /users                      store   users.store
+// GET           /users/{user}               show    users.show
+// PUT|PATCH     /users/{user}               update  users.update
+// DELETE        /users/{user}               destroy users.destroy
