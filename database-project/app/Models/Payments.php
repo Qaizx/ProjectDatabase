@@ -8,4 +8,12 @@ use Illuminate\Database\Eloquent\Model;
 class Payments extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'checkNumber';
+
+    protected $fillable = [
+        'checkNumber',
+        'paymentDate',
+        'amount'
+    ];
 }
