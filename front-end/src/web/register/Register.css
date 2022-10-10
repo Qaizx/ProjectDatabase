@@ -1,0 +1,57 @@
+.head {
+    font-size: 90px;
+    text-align: center;
+    padding: 30px 16px;
+}
+
+.info{
+    font-size: 40px;
+    text-align: left;
+    padding: 30px 400px;
+}
+
+.text_info{
+    font-size: 40px;
+}
+
+.input_info1{
+    font-size: 30px;
+    margin-left: 110px;
+    width: 50%;
+}
+
+.input_info2{
+    font-size: 30px;
+    margin-left: 247px;
+}
+
+.All_button{
+    text-align: center;
+    padding: 30px 16px;
+}
+
+.login_button{
+    background-color: green;
+    border-left-color: green;
+    border-top-color: green;
+    border-right-color: green;
+    border-bottom-color: green;
+    font-size: 30px;
+    margin-right: 10px;
+}
+
+.register_button{
+    
+    background-color: yellow;
+    border-left-color: yellow;
+    border-top-color: yellow;
+    border-right-color: yellow;
+    border-bottom-color: yellow;
+    font-size: 30px;
+    margin-right: 90px;
+}
+
+.forgot{
+    text-align: center;
+    color: red;
+}
