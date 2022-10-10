@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Http\Requests\StoreUserRequest;
 use App\Http\Requests\UpdateUserRequest;
 use Illuminate\Support\Facades\Hash;
+use Request;
 
 class UserController extends Controller
 {
@@ -40,10 +41,24 @@ class UserController extends Controller
     public function store(StoreUserRequest $request)
     {
         //
+        $username = $request->username;
+        $email = $request->email;
+        $password = $request->password;
+
+        $duplicateUsername = User::where('username' , $username)->first();
+        $duplicateEmail = User::where('email' , $email)->first();
+
+        if($duplicateEmail) {
+            return ["error" => "This Email is already taken."];
+        }
+        if($duplicateUsername) {
+            return ["error" => "This Username is already taken."];
+        }
+
         $user = new User();
-        $user->username = $request->username;
-        $user->email = $request->email;
-        $user->password = Hash::make($request->email);
+        $user->username = $username;
+        $user->email = $email;
+        $user->password = Hash::make($password);
         $user->save();
         return $user;
     }
@@ -97,5 +112,13 @@ class UserController extends Controller
         
         $customer = \DB::table('customers')->where('customerNumber','=' , $id)->get();
         return $customer;
+    }
+
+    public function login(Request $request){
+        $user = User::where('email' , $request->email)->first();
+        if($user || !Hash::check($request->password , $user->password)) {
+            return ["error" => "Email or password is not matched."];
+        }
+        return $user;
     }
 }

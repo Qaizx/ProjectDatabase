@@ -15,8 +15,8 @@ return new class extends Migration
     {
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('employeeNumber');
-            $table->string('lastName');
-            $table->string('firstName');
+            $table->string('lastName',50);
+            $table->string('firstName',50);
             $table->string('extension');
             $table->string('email');
             $table->string('officeCode');

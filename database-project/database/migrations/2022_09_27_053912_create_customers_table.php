@@ -15,18 +15,18 @@ return new class extends Migration
     {
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('customerNumber');
-            $table->string('customerName');
-            $table->string('contactLastName');
-            $table->string('contactFirstName');
-            $table->string('phone');
-            $table->string('addressLine1');
-            $table->string('addressLine2')->nullable();
-            $table->string('city');
-            $table->string('state')->nullable();
-            $table->string('postalCode')->nullable();
-            $table->string('country');
+            $table->string('customerName',50);
+            $table->string('contactLastName',50);
+            $table->string('contactFirstName',50);
+            $table->string('phone',50);
+            $table->string('addressLine1',50);
+            $table->string('addressLine2',50)->nullable();
+            $table->string('city',50);
+            $table->string('state',50)->nullable();
+            $table->string('postalCode',15)->nullable();
+            $table->string('country',50);
             $table->integer('salesRepEmployeeNumber')->nullable();
-            $table->integer('creditLimit');
+            $table->decimal('creditLimit', 10 , 2);
             $table->nullableTimestamps();
         });
     }
