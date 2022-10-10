@@ -36,8 +36,9 @@ const NavbarRegister = () => {
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"
-                title="Dropdown"
+                title="User"
                 menuVariant="dark"
+                style={{margin: "0px 10px"}}
               >
                 <NavDropdown.Item href="/login">Login</NavDropdown.Item>
                 <NavDropdown.Item href="/register">Register</NavDropdown.Item>
@@ -46,7 +47,7 @@ const NavbarRegister = () => {
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Outlet/>
+      <Outlet />
     </>
   );
 };
