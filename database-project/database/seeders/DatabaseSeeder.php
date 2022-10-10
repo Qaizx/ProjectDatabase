@@ -3,7 +3,11 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Offices;
+use App\Models\Orderdetails;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -14,12 +18,14 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-
         $this->call([
             CustomersSeeder::class,
             UserSeeder::class,
-            EmployeesSeeder::class
+            EmployeesSeeder::class,
+            Offices::class,
+            Orderdetails::class
         ]);
+        
 
     }
 }
