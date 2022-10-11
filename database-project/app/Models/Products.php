@@ -13,11 +13,12 @@ class Products extends Model
 
     protected $fillable = [
         'productCode',
+        'productName',
+        'productLine',
         'productScale',
         'productVendor',
         'productDescription',
         'quantityInStock',
-        'productName',
         'buyPrice',
         'MSRP'
     ];
