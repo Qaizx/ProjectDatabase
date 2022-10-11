@@ -3,7 +3,8 @@ INSERT INTO
     (
         productLine ,
         textDescription ,
-        htmlDescription
+        htmlDescription ,
+        image
     )
 VALUES
     (

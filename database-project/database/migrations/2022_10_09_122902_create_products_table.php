@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('productLine',50);
             $table->string('productScale',10);
             $table->string('productVendor',50);
-            $table->string('productDescription');
+            $table->string('productDescription',5000);
             $table->smallInteger('quantityInStock');
             $table->decimal('buyPrice',10,2);
             $table->decimal('MSRP',10,2);
