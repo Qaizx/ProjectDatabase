@@ -24,7 +24,10 @@ class DatabaseSeeder extends Seeder
             EmployeesSeeder::class,
             OfficesSeeder::class,
             OrderdetailsSeeder::class,
-            OrdersSeeder::class
+            OrdersSeeder::class,
+            PaymentsSeeder::class,
+            ProductlinesSeeder::class,
+            ProductsSeeder::class
         ]);
         
 

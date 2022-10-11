@@ -14,8 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('productlines', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+            $table->string('productLine');
+            $table->string('textDescription',4000)->nullable();
+            $table->string('htmlDescription')->nullable();
+            $table->string('image')->nullable();
+            $table->nullableTimestamps();
         });
     }
 
