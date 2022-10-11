@@ -9,9 +9,10 @@ class Payments extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'checkNumber';
+    protected $primaryKey = 'customerNumber';
 
     protected $fillable = [
+        'customerNumber',
         'checkNumber',
         'paymentDate',
         'amount'
