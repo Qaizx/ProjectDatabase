@@ -15,5 +15,11 @@ class ProductlinesSeeder extends Seeder
     public function run()
     {
         //
+        \Eloquent::unguard();
+
+        $path = 'database\SQL\productlines.sql';
+        \DB::unprepared(file_get_contents($path));
+
+        $this->command->info('productlines seeded!');
     }
 }

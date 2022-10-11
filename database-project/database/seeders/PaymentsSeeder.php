@@ -15,5 +15,11 @@ class PaymentsSeeder extends Seeder
     public function run()
     {
         //
+        \Eloquent::unguard();
+
+        $path = 'database\SQL\payments.sql';
+        \DB::unprepared(file_get_contents($path));
+
+        $this->command->info('payments seeded!');
     }
 }
