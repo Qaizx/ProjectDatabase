@@ -22,8 +22,9 @@ class DatabaseSeeder extends Seeder
             CustomersSeeder::class,
             UserSeeder::class,
             EmployeesSeeder::class,
-            Offices::class,
-            Orderdetails::class
+            OfficesSeeder::class,
+            OrderdetailsSeeder::class,
+            OrdersSeeder::class
         ]);
         
 
