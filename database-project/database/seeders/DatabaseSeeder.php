@@ -4,10 +4,7 @@ namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
-use App\Models\Offices;
-use App\Models\Orderdetails;
 use Illuminate\Database\Seeder;
-use Illuminate\Support\Facades\Log;
 
 class DatabaseSeeder extends Seeder
 {
@@ -20,7 +17,7 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
             CustomersSeeder::class,
-            UserSeeder::class,
+            UsersSeeder::class,
             EmployeesSeeder::class,
             OfficesSeeder::class,
             OrderdetailsSeeder::class,

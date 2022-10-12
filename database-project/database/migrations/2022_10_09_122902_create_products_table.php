@@ -23,6 +23,7 @@ return new class extends Migration
             $table->smallInteger('quantityInStock');
             $table->decimal('buyPrice',10,2);
             $table->decimal('MSRP',10,2);
+            $table->string('url',5000);
             $table->nullableTimestamps();
         });
     }

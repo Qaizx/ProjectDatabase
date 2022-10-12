@@ -17,7 +17,7 @@ class ProductsSeeder extends Seeder
         //
         \Eloquent::unguard();
 
-        $path = 'database\SQL\products.sql';
+        $path = 'database\SQL\products_with_url.sql';
         \DB::unprepared(file_get_contents($path));
 
         $this->command->info('products seeded!');

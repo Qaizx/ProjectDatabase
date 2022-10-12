@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\User;
-use App\Http\Requests\StoreUserRequest;
-use App\Http\Requests\UpdateUserRequest;
+use App\Models\Users;
+use App\Http\Requests\StoreUsersRequest;
+use App\Http\Requests\UpdateUsersRequest;
 use Illuminate\Support\Facades\Hash;
 use Request;
 
@@ -18,7 +18,7 @@ class UserController extends Controller
     public function index()
     {
         //
-        $users = user::all();
+        $users = Users::all();
         return $users;
     }
 
@@ -38,15 +38,15 @@ class UserController extends Controller
      * @param  \App\Http\Requests\StoreUserRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreUserRequest $request)
+    public function store(StoreUsersRequest $request)
     {
         //
         $username = $request->username;
         $email = $request->email;
         $password = $request->password;
 
-        $duplicateUsername = User::where('username' , $username)->first();
-        $duplicateEmail = User::where('email' , $email)->first();
+        $duplicateUsername = Users::where('username' , $username)->first();
+        $duplicateEmail = Users::where('email' , $email)->first();
 
         if($duplicateEmail) {
             return ["error" => "This Email is already taken."];
@@ -55,7 +55,7 @@ class UserController extends Controller
             return ["error" => "This Username is already taken."];
         }
 
-        $user = new User();
+        $user = new Users();
         $user->username = $username;
         $user->email = $email;
         $user->password = Hash::make($password);
@@ -69,7 +69,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(User $user)
+    public function show(Users $user)
     {
         //
     }
@@ -80,7 +80,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function edit(User $user)
+    public function edit(Users $user)
     {
         //
     }
@@ -92,9 +92,10 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUserRequest $request, User $user)
+    public function update(UpdateUsersRequest $request, Users $user)
     {
         //
+        $data = $request;
     }
 
     /**
@@ -103,7 +104,7 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(User $user)
+    public function destroy(Users $user)
     {
         //
     }
@@ -115,7 +116,7 @@ class UserController extends Controller
     }
 
     public function login(Request $request){
-        $user = User::where('email' , $request->email)->first();
+        $user = Users::where('email' , $request->email)->first();
         if($user || !Hash::check($request->password , $user->password)) {
             return ["error" => "Email or password is not matched."];
         }

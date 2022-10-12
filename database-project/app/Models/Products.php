@@ -20,6 +20,7 @@ class Products extends Model
         'productDescription',
         'quantityInStock',
         'buyPrice',
-        'MSRP'
+        'MSRP',
+        'url'
     ];
 }
