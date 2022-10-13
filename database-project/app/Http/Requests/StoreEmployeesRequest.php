@@ -29,7 +29,7 @@ class StoreEmployeesRequest extends FormRequest
             'extension' => ['required'],
             'email'=> ['required'],
             'officeCode'=> ['required'],
-            'reportsTo'=> ['integer','nullable'],
+            'reportsTo'=> ['required' , 'integer','nullable'],
             'jobTitle'=> ['required'],
         ];
     }

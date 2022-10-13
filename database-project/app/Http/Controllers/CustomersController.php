@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\customers;
-use App\Http\Requests\StorecustomersRequest;
-use App\Http\Requests\UpdatecustomersRequest;
+use App\Models\Customers;
+use App\Http\Requests\StoreCustomersRequest;
+use App\Http\Requests\UpdateCustomersRequest;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -17,26 +17,26 @@ class CustomersController extends Controller
     public function index()
     {
         //
-        $customers = customers::all();
+        $customers = Customers::all();
         return $customers;
     }
 
     public function show($id)
     {
-        $customer = customers::find($id);
+        $customer = Customers::find($id);
         return $customer;
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StorecustomersRequest  $request
+     * @param  \App\Http\Requests\StoreCustomersRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StorecustomersRequest $request)
+    public function store(StoreCustomersRequest $request)
     {
         //
-        customers::create( [
+        Customers::create( [
             'customerName' => $request->customerName,
             'contactLastName' => $request->contactLastName,
             'contactFirstName' => $request->contactFirstName,
@@ -59,10 +59,10 @@ class CustomersController extends Controller
      * @param  \App\Models\customers  $customers
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatecustomersRequest $request, $id)
+    public function update(UpdateCustomersRequest $request, $id)
     {
         //
-        $customer = customers::find($id);
+        $customer = Customers::find($id);
         $customer->update($request->all());
     }
 
@@ -75,7 +75,7 @@ class CustomersController extends Controller
     public function destroy($id)
     {
         //
-        $customer = customers::find($id);
+        $customer = Customers::find($id);
         $customer->delete();
     }
 }

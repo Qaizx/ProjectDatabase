@@ -6,9 +6,9 @@ use App\Models\Users;
 use App\Http\Requests\StoreUsersRequest;
 use App\Http\Requests\UpdateUsersRequest;
 use Illuminate\Support\Facades\Hash;
-use Request;
+use Illuminate\Http\Request;
 
-class UserController extends Controller
+class UsersController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -20,16 +20,6 @@ class UserController extends Controller
         //
         $users = Users::all();
         return $users;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -69,20 +59,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function show(Users $user)
+    public function show($id)
     {
         //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\User  $user
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Users $user)
-    {
-        //
+        $user = Users::find($id);
+        return $user;
     }
 
     /**
@@ -92,10 +73,11 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateUsersRequest $request, Users $user)
+    public function update(UpdateUsersRequest $request, $id)
     {
         //
-        $data = $request;
+        // $user = Users::find($id);
+        // $user->update($request->all());
     }
 
     /**
@@ -104,20 +86,30 @@ class UserController extends Controller
      * @param  \App\Models\User  $user
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Users $user)
+    public function destroy($id)
     {
         //
+        $user = Users::find($id);
+        $user->delete();
     }
 
     public function getCustomer($id) {
-        
         $customer = \DB::table('customers')->where('customerNumber','=' , $id)->get();
         return $customer;
     }
 
     public function login(Request $request){
-        $user = Users::where('email' , $request->email)->first();
-        if($user || !Hash::check($request->password , $user->password)) {
+
+        $username = $request->username;
+        $email = $request->email;
+        $password = $request->password;
+
+        $user = Users::where([
+            ['username' , '=' ,  $username],
+            ['email' , '=' ,  $email],
+        ])->first();
+
+        if(!$user || !Hash::check($password , $user->password)) {
             return ["error" => "Email or password is not matched."];
         }
         return $user;
