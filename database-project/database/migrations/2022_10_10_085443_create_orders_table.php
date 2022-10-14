@@ -21,7 +21,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('orders', function (Blueprint $table) {
-            $table->integer('orderNumber');
+            $table->increments('orderNumber');
             $table->date('orderDate');
             $table->date('requiredDate');
             $table->date('shippedDate')->nullable();
