@@ -48,18 +48,19 @@ class OfficesController extends Controller
         // 'country' ,
         // 'postalCode',
         // 'territory'
-        Offices::create( [
+        // Offices::create( [
             
-            'officeCode' => $request->officeCode,
-            'city' => $request->city,
-            'phone' => $request->phone,
-            'addressLine1' => $request->addressLine1,
-            'addressLine2'=> $request->addressLine2,
-            'state'=> $request->state,
-            'country'=> $request->country,
-            'postalCode'=> $request->postalCode,
-            'territory' => $request ->territory
-         ]);
+        //     'officeCode' => $request->officeCode,
+        //     'city' => $request->city,
+        //     'phone' => $request->phone,
+        //     'addressLine1' => $request->addressLine1,
+        //     'addressLine2'=> $request->addressLine2,
+        //     'state'=> $request->state,
+        //     'country'=> $request->country,
+        //     'postalCode'=> $request->postalCode,
+        //     'territory' => $request ->territory
+        //  ]);
+         Offices::create($request->all());
     }
 
     /**
@@ -68,9 +69,11 @@ class OfficesController extends Controller
      * @param  \App\Models\Offices  $offices
      * @return \Illuminate\Http\Response
      */
-    public function show(Offices $offices)
+    public function show($id)
     {
         //
+        $office = Offices::find($id);
+        return $office;
     }
 
     /**
@@ -91,9 +94,11 @@ class OfficesController extends Controller
      * @param  \App\Models\Offices  $offices
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOfficesRequest $request, Offices $offices)
+    public function update(UpdateOfficesRequest $request, $id)
     {
         //
+        $office = Offices::find($id);
+        $office->update($request->all());
     }
 
     /**
@@ -102,8 +107,11 @@ class OfficesController extends Controller
      * @param  \App\Models\Offices  $offices
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Offices $offices)
+    public function destroy($id)
     {
         //
+        $office = Offices::find($id);
+        $office -> delete();
+
     }
 }

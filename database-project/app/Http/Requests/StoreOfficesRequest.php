@@ -13,7 +13,7 @@ class StoreOfficesRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,18 @@ class StoreOfficesRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'officeCode' => ['required'],
+            'city' => ['required'] ,
+            'phone' => ['required'] ,
+            'addressLine1' => ['required'] ,
+            'addressLine2' => ['sometimes','nullable'] ,
+            'state' => ['sometimes','nullable'],
+            'country' => ['required'] ,
+            'postalCode' => ['required'],
+            'territory' => ['required']
+
+
+
         ];
     }
 }
