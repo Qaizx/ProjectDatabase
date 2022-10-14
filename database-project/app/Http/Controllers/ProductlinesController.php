@@ -16,16 +16,21 @@ class ProductlinesController extends Controller
     public function index()
     {
         //
+        $productlines = Productlines::all();
+        return $productlines;
     }
-
+    
     /**
-     * Show the form for creating a new resource.
+     * Display the specified resource.
      *
+     * @param  \App\Models\Productlines  $productlines
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function show($id)
     {
         //
+        $productlines = Productlines::find($id);
+        return $productlines;
     }
 
     /**
@@ -37,28 +42,12 @@ class ProductlinesController extends Controller
     public function store(StoreProductlinesRequest $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Productlines  $productlines
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Productlines $productlines)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Productlines  $productlines
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Productlines $productlines)
-    {
-        //
+        Productlines::create([
+            'productLine' => $request->productLine,
+            'textDescription' => $request->textDescription,
+            'htmlDescription' => $request->htmlDescription,
+            'image' => $request->image
+        ]);
     }
 
     /**
@@ -68,9 +57,12 @@ class ProductlinesController extends Controller
      * @param  \App\Models\Productlines  $productlines
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductlinesRequest $request, Productlines $productlines)
+    public function update(UpdateProductlinesRequest $request, $id)
     {
         //
+        $productlines = Productlines::find($id);
+        $productlines->update($request->all());
+        
     }
 
     /**
@@ -79,8 +71,10 @@ class ProductlinesController extends Controller
      * @param  \App\Models\Productlines  $productlines
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Productlines $productlines)
+    public function destroy($id)
     {
         //
+        $productlines = Productlines::find($id);
+        $productlines->delete();
     }
 }
