@@ -13,7 +13,7 @@ class UpdateOrdersRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,27 @@ class UpdateOrdersRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if($method == 'PUT'){
+            return [
+                'orderNumber' => ['required','integer'],
+                'orderDate'=> ['required','date'] ,                 //might bug
+                'requiredDate'=> ['required','date'] ,              //might bug
+                'shippedDate'=> ['sometimes','nullable','date'],    //might bug
+                'status '=> ['required'] ,
+                'comments'=> ['sometimes','nullable'],
+                'customerNumber'=> ['required','integer'],
+            ];
+        }else{
+            return [
+                'orderNumber' => ['required','integer'],
+                'orderDate'=> ['sometims','required','date'] ,                 //might bug
+                'requiredDate'=> ['sometims','required','date'] ,              //might bug
+                'shippedDate'=> ['sometimes','nullable','date'],               //might bug
+                'status '=> ['sometims','required'] ,
+                'comments'=> ['sometimes','nullable'],
+                'customerNumber'=> ['sometims','required','integer'],
+            ];
+        }
     }
 }

@@ -16,6 +16,8 @@ class OrdersController extends Controller
     public function index()
     {
         //
+        $orders = Orders::all();
+        return $orders;
     }
 
     /**
@@ -37,6 +39,7 @@ class OrdersController extends Controller
     public function store(StoreOrdersRequest $request)
     {
         //
+        Orders::create($request->all());
     }
 
     /**
@@ -45,9 +48,11 @@ class OrdersController extends Controller
      * @param  \App\Models\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function show(Orders $orders)
+    public function show($id)
     {
-        //
+        $order = Orders::find($id);
+        return $order;
+
     }
 
     /**
@@ -68,9 +73,11 @@ class OrdersController extends Controller
      * @param  \App\Models\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrdersRequest $request, Orders $orders)
+    public function update(UpdateOrdersRequest $request, $id)
     {
-        //
+        
+        $order = orders::find($id);
+        $order->update($request->all());
     }
 
     /**
@@ -79,8 +86,9 @@ class OrdersController extends Controller
      * @param  \App\Models\Orders  $orders
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Orders $orders)
+    public function destroy($id)
     {
-        //
+        $order = Orders::find($id);
+        $order->delete();
     }
 }

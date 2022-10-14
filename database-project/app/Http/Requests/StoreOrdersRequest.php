@@ -13,7 +13,7 @@ class StoreOrdersRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,13 @@ class StoreOrdersRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'orderNumber' => ['required','integer'],
+            'orderDate'=> ['required','date'] ,                 //might bug
+            'requiredDate'=> ['required','date'] ,              //might bug
+            'shippedDate'=> ['sometimes','nullable','date'],    //might bug
+            'status '=> ['required'] ,
+            'comments'=> ['sometimes','nullable'],
+            'customerNumber'=> ['required','integer'],
         ];
     }
 }
