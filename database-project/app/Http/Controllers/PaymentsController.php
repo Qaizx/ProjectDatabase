@@ -16,17 +16,22 @@ class PaymentsController extends Controller
     public function index()
     {
         //
+        $payments = Payments::all();
+        return $payments;
     }
-
+    
     /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
-    }
+         * Display the specified resource.
+         *
+         * @param  \App\Models\Payments  $payments
+         * @return \Illuminate\Http\Response
+         */
+        public function show($id)
+        {
+            //
+            $payments = Payments::find($id);
+            return $payments;
+        }
 
     /**
      * Store a newly created resource in storage.
@@ -37,28 +42,12 @@ class PaymentsController extends Controller
     public function store(StorePaymentsRequest $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Payments  $payments
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Payments $payments)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Payments  $payments
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Payments $payments)
-    {
-        //
+        Payments::create([
+            'customerNumber' => $request->customerNumber,
+            'checkNumber' => $request->checkNumber,
+            'paymentDate' => $request->paymentDate,
+            'amount' => $request->amount
+        ]);    
     }
 
     /**
@@ -68,9 +57,11 @@ class PaymentsController extends Controller
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePaymentsRequest $request, Payments $payments)
+    public function update(UpdatePaymentsRequest $request, $id)
     {
         //
+        $payments = Payments::find($id);
+        $payments->update($request->all());
     }
 
     /**
@@ -79,8 +70,10 @@ class PaymentsController extends Controller
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Payments $payments)
+    public function destroy($id)
     {
         //
+        $payments = Payments::find($id);
+        $payments->delete();
     }
 }
