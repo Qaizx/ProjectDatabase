@@ -3,6 +3,10 @@
 use App\Http\Controllers\CustomersController;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\ProductlinesController;
+use App\Http\Controllers\ProductsController;
+
 use Illuminate\Support\Facades\Route;
 
 /*

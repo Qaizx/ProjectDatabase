@@ -27,16 +27,17 @@ class EmployeesController extends Controller
      */
     public function store(StoreEmployeesRequest $request)
     {
-        Employees::create( [
-            'employeeNumber' => $request->employeeNumber,
-            'lastName' => $request->lastName,
-            'firstName' => $request->firstName,
-            'extension' => $request->extension,
-            'email'=> $request->email,
-            'officeCode'=> $request->officeCode,
-            'reportsTo'=> $request->reportsTo,
-            'jobTitle'=> $request->jobTitle,
-         ]);
+        // Employees::create( [
+        //     'employeeNumber' => $request->employeeNumber,
+        //     'lastName' => $request->lastName,
+        //     'firstName' => $request->firstName,
+        //     'extension' => $request->extension,
+        //     'email'=> $request->email,
+        //     'officeCode'=> $request->officeCode,
+        //     'reportsTo'=> $request->reportsTo,
+        //     'jobTitle'=> $request->jobTitle,
+        //  ]);
+         Employees::create($request->all());
     }
 
     /**

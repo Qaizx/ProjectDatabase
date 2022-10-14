@@ -42,18 +42,19 @@ class ProductsController extends Controller
     public function store(StoreProductsRequest $request)
     {
         //
-        Products::create( [
-            'productCode' => $request->productCode,
-            'productName' => $request->productName,
-            'productLine' => $request->productLine,
-            'productScale' => $request->productScale,
-            'productVendor' => $request->producrtVendor,
-            'productDescription' => $request->productDescription,
-            'quantityInStock' => $request->quantityInStock,
-            'buyPrice' => $request->buyPrice,
-            'MSRP' => $request->MSRP,
-            'url' => $request->url
-         ]);
+        // Products::create( [
+        //     'productCode' => $request->productCode,
+        //     'productName' => $request->productName,
+        //     'productLine' => $request->productLine,
+        //     'productScale' => $request->productScale,
+        //     'productVendor' => $request->producrtVendor,
+        //     'productDescription' => $request->productDescription,
+        //     'quantityInStock' => $request->quantityInStock,
+        //     'buyPrice' => $request->buyPrice,
+        //     'MSRP' => $request->MSRP,
+        //     'url' => $request->url
+        //  ]);
+         Products::create($request->all());
     }
 
     /**

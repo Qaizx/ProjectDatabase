@@ -36,20 +36,21 @@ class CustomersController extends Controller
     public function store(StoreCustomersRequest $request)
     {
         //
-        Customers::create( [
-            'customerName' => $request->customerName,
-            'contactLastName' => $request->contactLastName,
-            'contactFirstName' => $request->contactFirstName,
-            'phone' => $request->phone,
-            'addressLine1'=> $request->addressLine1,
-            'addressLine2'=> $request->addressLine2,
-            'city'=> $request->city,
-            'state'=> $request->state,
-            'country' => $request->country,
-            'postalCode'=> $request->postalCode,
-            'salesRepEmployeeNumber'=> $request->salesRepEmployeeNumber,
-            'creditLimit'=> $request->creditLimit
-         ]);
+        // Customers::create( [
+        //     'customerName' => $request->customerName,
+        //     'contactLastName' => $request->contactLastName,
+        //     'contactFirstName' => $request->contactFirstName,
+        //     'phone' => $request->phone,
+        //     'addressLine1'=> $request->addressLine1,
+        //     'addressLine2'=> $request->addressLine2,
+        //     'city'=> $request->city,
+        //     'state'=> $request->state,
+        //     'country' => $request->country,
+        //     'postalCode'=> $request->postalCode,
+        //     'salesRepEmployeeNumber'=> $request->salesRepEmployeeNumber,
+        //     'creditLimit'=> $request->creditLimit
+        //  ]);
+        Customers::create($request->all());
     }
 
     /**

@@ -19,19 +19,19 @@ class PaymentsController extends Controller
         $payments = Payments::all();
         return $payments;
     }
-    
+
     /**
-         * Display the specified resource.
-         *
-         * @param  \App\Models\Payments  $payments
-         * @return \Illuminate\Http\Response
-         */
-        public function show($id)
-        {
-            //
-            $payments = Payments::find($id);
-            return $payments;
-        }
+     * Display the specified resource.
+     *
+     * @param  \App\Models\Payments  $payments
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
+    {
+        //
+        $payments = Payments::find($id);
+        return $payments;
+    }
 
     /**
      * Store a newly created resource in storage.
@@ -42,12 +42,13 @@ class PaymentsController extends Controller
     public function store(StorePaymentsRequest $request)
     {
         //
-        Payments::create([
-            'customerNumber' => $request->customerNumber,
-            'checkNumber' => $request->checkNumber,
-            'paymentDate' => $request->paymentDate,
-            'amount' => $request->amount
-        ]);    
+        // Payments::create([
+        //     'customerNumber' => $request->customerNumber,
+        //     'checkNumber' => $request->checkNumber,
+        //     'paymentDate' => $request->paymentDate,
+        //     'amount' => $request->amount
+        // ]);  
+        Payments::create($request->all());
     }
 
     /**

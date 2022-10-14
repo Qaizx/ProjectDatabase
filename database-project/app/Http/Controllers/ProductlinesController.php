@@ -42,12 +42,13 @@ class ProductlinesController extends Controller
     public function store(StoreProductlinesRequest $request)
     {
         //
-        Productlines::create([
-            'productLine' => $request->productLine,
-            'textDescription' => $request->textDescription,
-            'htmlDescription' => $request->htmlDescription,
-            'image' => $request->image
-        ]);
+        // Productlines::create([
+        //     'productLine' => $request->productLine,
+        //     'textDescription' => $request->textDescription,
+        //     'htmlDescription' => $request->htmlDescription,
+        //     'image' => $request->image
+        // ]);
+        Productlines::create($request->all());
     }
 
     /**
