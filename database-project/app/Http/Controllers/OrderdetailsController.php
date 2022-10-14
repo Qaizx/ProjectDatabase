@@ -15,7 +15,8 @@ class OrderdetailsController extends Controller
      */
     public function index()
     {
-        //
+        $orderdetails = Orderdetails::all();
+        return $orderdetails;
     }
 
     /**
@@ -36,7 +37,7 @@ class OrderdetailsController extends Controller
      */
     public function store(StoreOrderdetailsRequest $request)
     {
-        //
+        Orderdetails::create($request->all());
     }
 
     /**
@@ -45,9 +46,10 @@ class OrderdetailsController extends Controller
      * @param  \App\Models\Orderdetails  $orderdetails
      * @return \Illuminate\Http\Response
      */
-    public function show(Orderdetails $orderdetails)
+    public function show($id)
     {
-        //
+        $orderD = Orderdetails::find($id);
+        return $$orderD;
     }
 
     /**
@@ -68,9 +70,11 @@ class OrderdetailsController extends Controller
      * @param  \App\Models\Orderdetails  $orderdetails
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderdetailsRequest $request, Orderdetails $orderdetails)
+    public function update(UpdateOrderdetailsRequest $request,$id)
     {
         //
+        $orderD = Orderdetails::find($id);
+        $orderD->update($request->all());
     }
 
     /**
@@ -79,8 +83,9 @@ class OrderdetailsController extends Controller
      * @param  \App\Models\Orderdetails  $orderdetails
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Orderdetails $orderdetails)
+    public function destroy($id)
     {
-        //
+        $orderD = Orderdetails::find($id);
+        $orderD->delete();
     }
 }

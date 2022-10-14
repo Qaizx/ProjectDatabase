@@ -13,7 +13,7 @@ class UpdateOrderdetailsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,23 @@ class UpdateOrderdetailsRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+        if($method == 'PUT') {
+            return [
+                'orderNumber'=> ['required','integer'],
+                'productCode'=> ['required'],
+                'quantityOrdered'=> ['required','integer'] ,
+                'priceEach'=> ['required','decimal'] ,
+                'orderLineNumber'=> ['required','smallInteger']
+            ];
+        }else{
+            return [
+                'orderNumber'=> ['required','integer'],
+                'productCode'=> ['required'],
+                'quantityOrdered'=> ['sometime','required','integer'] ,
+                'priceEach'=> ['sometime','required','decimal'] ,
+                'orderLineNumber'=> ['sometime','required','smallInteger']
+            ];
+        }
     }
 }
