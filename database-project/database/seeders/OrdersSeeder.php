@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class UserSeeder extends Seeder
+class OrdersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +17,9 @@ class UserSeeder extends Seeder
         //
         \Eloquent::unguard();
 
-        $path = 'database\SQL\users.sql';
+        $path = 'database\SQL\orders.sql';
         \DB::unprepared(file_get_contents($path));
 
-        $this->command->info('users seeded!');
+        $this->command->info('orders seeded !');
     }
 }

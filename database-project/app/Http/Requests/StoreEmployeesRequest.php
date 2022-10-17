@@ -24,13 +24,12 @@ class StoreEmployeesRequest extends FormRequest
     public function rules()
     {
         return [
-            'employeeNumber' => ['required'],
             'lastName' => ['required'],
             'firstName' => ['required'],
             'extension' => ['required'],
             'email'=> ['required'],
             'officeCode'=> ['required'],
-            'reportsTo'=> ['integer','nullable'],
+            'reportsTo'=> ['required' , 'integer','nullable'],
             'jobTitle'=> ['required'],
         ];
     }

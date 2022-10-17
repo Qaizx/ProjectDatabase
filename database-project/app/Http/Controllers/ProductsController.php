@@ -16,16 +16,21 @@ class ProductsController extends Controller
     public function index()
     {
         //
+        $products = Products::all();
+        return $products;
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Display the specified resource.
      *
+     * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function show($id)
     {
         //
+        $products = Products::find($id);
+        return $products;
     }
 
     /**
@@ -37,28 +42,19 @@ class ProductsController extends Controller
     public function store(StoreProductsRequest $request)
     {
         //
-    }
-
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
-     */
-    public function show(Products $products)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Products  $products
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Products $products)
-    {
-        //
+        // Products::create( [
+        //     'productCode' => $request->productCode,
+        //     'productName' => $request->productName,
+        //     'productLine' => $request->productLine,
+        //     'productScale' => $request->productScale,
+        //     'productVendor' => $request->producrtVendor,
+        //     'productDescription' => $request->productDescription,
+        //     'quantityInStock' => $request->quantityInStock,
+        //     'buyPrice' => $request->buyPrice,
+        //     'MSRP' => $request->MSRP,
+        //     'url' => $request->url
+        //  ]);
+         Products::create($request->all());
     }
 
     /**
@@ -68,9 +64,11 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateProductsRequest $request, Products $products)
+    public function update(UpdateProductsRequest $request, $id)
     {
         //
+        $products = Products::find($id);
+        $products->update($request->all());
     }
 
     /**
@@ -79,8 +77,10 @@ class ProductsController extends Controller
      * @param  \App\Models\Products  $products
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Products $products)
+    public function destroy($id)
     {
         //
+        $products = Products::find($id);
+        $products->delete();
     }
 }

@@ -13,7 +13,7 @@ class UpdatePaymentsRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +23,22 @@ class UpdatePaymentsRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        $method = $this->method();
+
+        if($method == 'PUT') {
+            return [
+                'customerNumber' => ['required'],
+                'checkNumber' => ['required'],
+                'paymentDate' => ['required'],
+                'amount' => ['required']
+            ];
+        } else {
+            return [
+                'customerNumber' => ['required'],
+                'checkNumber' => ['sometimes','required'],
+                'paymentDate' => ['sometimes','required'],
+                'amount' => ['sometimes','required']
+            ];
+        }
     }
 }

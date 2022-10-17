@@ -5,7 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 
-class ProductsSeeder extends Seeder
+class OfficesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -17,9 +17,9 @@ class ProductsSeeder extends Seeder
         //
         \Eloquent::unguard();
 
-        $path = 'database\SQL\products_with_url.sql';
+        $path = 'database\SQL\offices.sql';
         \DB::unprepared(file_get_contents($path));
 
-        $this->command->info('products seeded!');
+        $this->command->info('offices seeded !');
     }
 }

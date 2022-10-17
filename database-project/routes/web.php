@@ -1,8 +1,12 @@
 <?php
 
 use App\Http\Controllers\CustomersController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\UsersController;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\PaymentsController;
+use App\Http\Controllers\ProductlinesController;
+use App\Http\Controllers\ProductsController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -20,20 +24,23 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::get('users/getCustomer/{id}' , [UsersController::class,'getCustomer']);
+Route::post('users/register' , [UsersController::class,'store']);
+Route::post('users/login' , [UsersController::class,'login']);
+
 Route::apiResources([
     'customers' => CustomersController::class,
     'employees' => EmployeesController::class,
-    'users' => UserController::class,
-
-    // 'offices' => OfficesController::class,
-    // 'orderdetails' => OrderDetailsController::class,
-    // 'orders' => OrdersController::class,
-    // 'payments' => PaymentsController::class,
-    // 'productlines' => ProductLinesController::class,
-    // 'products' => ProductsController::class,
+    'users' => UsersController::class,
+    'offices' => OfficesController::class,
+    'orderdetails' => OrderDetailsController::class,
+    'orders' => OrdersController::class,
+    'payments' => PaymentsController::class,
+    'productlines' => ProductLinesController::class,
+    'products' => ProductsController::class,
 ]);
 
-Route::get('users/getCustomer/{id}' , [UserController::class,'getCustomer']);
 
 // Verb          Path                        Action  Route Name
 // GET           /users                      index   users.index
