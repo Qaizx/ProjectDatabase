@@ -92,7 +92,7 @@ const Register = () => {
               <Form.Control
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
-                type="text"
+                type="password"
                 placeholder="Confirm Password"
               />
             </Col>
@@ -109,6 +109,7 @@ const Register = () => {
             size="lg"
             style={{ margin: "0px 10px" }}
             active
+            href="/info"
           >
             confirm
           </Button>{" "}
