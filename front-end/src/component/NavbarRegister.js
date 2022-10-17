@@ -38,11 +38,16 @@ const NavbarRegister = () => {
                 id="nav-dropdown-dark-example"
                 title="User"
                 menuVariant="dark"
-                style={{margin: "0px 10px"}}
+                style={{ margin: "0px 10px" }}
+                align="end"
               >
-                <NavDropdown.Item href="/login">Login</NavDropdown.Item>
-                <NavDropdown.Item href="/register">Register</NavDropdown.Item>
+                <div style={{ textAlign: "right" }}>
+                  <NavDropdown.Item href="/login" >Login</NavDropdown.Item>
+                  <NavDropdown.Item href="/register">Register</NavDropdown.Item>
+                </div>
+
               </NavDropdown>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
