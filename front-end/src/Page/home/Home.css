@@ -1,0 +1,45 @@
+body {
+  background-color: dimgrey;
+}
+
+.welcomeText {
+  color: white;
+  text-align: center;
+  margin-top: 50px;
+  font-size: 150px;
+}
+
+#down {
+  margin-top: 100%;
+  padding-bottom: 25%;
+}
+
+
+
+.get_start {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
+
+.product_today {
+    background-color: #ece22b; /* Green */
+  border: none;
+  color: white;
+  padding: 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 30px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 12px;
+}
