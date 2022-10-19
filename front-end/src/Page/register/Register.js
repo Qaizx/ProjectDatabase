@@ -2,25 +2,30 @@ import "./Register.css";
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
 import React, { useState } from "react";
 
-const Register = () => {
+const Register = () => {  
   const [validated, setValidated] = useState(false);
+  const [disabled, setDisable] = useState(true);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setDisable(true);
+    }else{
+      setDisable(false);
     }
 
     setValidated(true);
   };
+
 
   return (
     <div>
       <div class="head"> Register</div>
 
 
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form noValidate onChange={handleSubmit}>
         <div>
           <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
             <Form.Label
@@ -109,7 +114,8 @@ const Register = () => {
             size="lg"
             style={{ margin: "0px 10px" }}
             active
-            href="/info"
+            href="/login"
+            disabled={disabled}
           >
             confirm
           </Button>{" "}

@@ -4,12 +4,16 @@ import React, { useState } from "react";
 
 const Login = () => {
   const [validated, setValidated] = useState(false);
+  const [disabled, setDisable] = useState(true);
 
   const handleSubmit = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
+      setDisable(true)
+    } else {
+      setDisable(false);
     }
 
     setValidated(true);
@@ -19,7 +23,7 @@ const Login = () => {
     <div>
       <div class="head"> Login</div>
 
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      <Form noValidate onChange={handleSubmit}>
         <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
           <Form.Label
             style={{ margin: "0px 350px", fontSize: "30px" }}
@@ -67,7 +71,8 @@ const Login = () => {
             size="lg"
             style={{ margin: "0px 10px" }}
             active
-            
+            href="/log"
+            disabled={disabled}
           >
             login
           </Button>{" "}
