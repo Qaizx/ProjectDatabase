@@ -2,7 +2,7 @@ import "./Login.css";
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
 import React, { useState } from "react";
 
-const Login = () => {
+const Login = ({ handleClick }) => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisable] = useState(true);
 
@@ -11,7 +11,7 @@ const Login = () => {
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
-      setDisable(true)
+      setDisable(true);
     } else {
       setDisable(false);
     }
@@ -71,8 +71,9 @@ const Login = () => {
             size="lg"
             style={{ margin: "0px 10px" }}
             active
-            href="/log"
+            href="/"
             disabled={disabled}
+            onClick={(event) => handleClick(event, true)}
           >
             login
           </Button>{" "}
@@ -87,6 +88,8 @@ const Login = () => {
           </Button>{" "}
         </div>
       </Form>
+
+      
 
       <div class="forgot">
         <label>FORGOT PASSWORD ?</label>
