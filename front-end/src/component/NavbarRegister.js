@@ -5,31 +5,13 @@ import { useEffect, useRef, useState } from "react";
 import { Axios } from "axios";
 
 const NavbarRegister = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [data, setData] = useState([]);
-  const inputRef = useRef(null);
-
+  
   return (
-    // <>
-    //   <nav>
-    //     <div class="navbar-left">
-    //       <Link to="/" style={{ float: "left" }}>
-    //         Home
-    //       </Link>
-    //       <Link to="/register" style={{ float: "right" }}>
-    //         register
-    //       </Link>
-    //       <Link to="/login" style={{ float: "right" }}>
-    //         Login
-    //       </Link>
-    //     </div>
-    //   </nav>
-    //   <Outlet />
-    // </>
+    
     <>
       <Navbar variant="dark" bg="dark" expand="lg">
         <Container fluid>
-          <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Navbar.Brand href="/log">Home</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-dark-example" />
           <Navbar.Collapse id="navbar-dark-example">
             <div className="me-auto"></div>
