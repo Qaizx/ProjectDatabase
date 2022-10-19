@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 const Home = () => {
   return (
     <>
-      <h1 class="welcomeText">
+      <h1 class="welcomeText" id="head">
         Welcome to <span style={{ color: "red" }}>shop</span>
       </h1>
       <div style={{ textAlign: "center" }}>
@@ -26,14 +26,22 @@ const Home = () => {
             </svg>
           </span>
         </button>
-        
+
         <button class="product_today">
-          <a href="#down" style={{color: "white"}}>Product Today</a>
+          <a href="#down" style={{ color: "white" }}>
+            Product Today
+          </a>
         </button>
       </div>
       <div id="down">
         <h1>You are down!</h1>
       </div>
+
+      <button class="myBtn">
+        <a href="#head" style={{ color: "white" }}>
+          Top
+        </a>
+      </button>
     </>
   );
 };
