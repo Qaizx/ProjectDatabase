@@ -14,17 +14,23 @@ const NavbarLogin = () => {
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"
-                title="Dropdown"
+                title="user before login"
                 menuVariant="dark"
+                style={{ margin: "0px 10px" }}
+                align="end"
               >
-                <NavDropdown.Item href="/login">User</NavDropdown.Item>
-                <NavDropdown.Item href="/register">Logout</NavDropdown.Item>
+                <div style={{ textAlign: "right" }}>
+                  <NavDropdown.Item href="/log/info" >info</NavDropdown.Item>
+                  <NavDropdown.Item href="/">logout</NavDropdown.Item>
+                </div>
+
               </NavDropdown>
+
             </Nav>
           </Navbar.Collapse>
         </Container>
       </Navbar>
-      <Outlet/>
+      <Outlet />
     </>
   );
 };
