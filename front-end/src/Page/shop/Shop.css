@@ -1,0 +1,57 @@
+@import url('https://fonts.googleapis.com/css?family=Montserrat');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+
+h1{
+    font-family: 'Montserrat', sans-serif
+}
+
+p{
+    font-family: 'Open Sans', sans-serif;
+    text-align: justify
+    
+}
+  
+.blue-bg{
+    position: fixed;
+    background: url(https://live.staticflickr.com/1656/26031883676_182191d803_b.jpg);
+    background-size: cover;
+    background-color: #58aff6;
+    top: 0;
+    height: 400px;
+    width: 100vw;
+    z-index: -1;
+    overflow-x: hidden;
+  
+  
+}
+.white-bg{
+    position: absolute;
+    top: 0;
+    background-color: #fff;
+    min-height: 500px;
+    margin: 210px 0px;
+    width: 100vw;
+    height: 100vh;
+    transform: skewY(5deg);
+    z-index: -1;
+}
+
+
+.content{
+    position: absolute;
+    top: 0;
+    margin: 100px 50px;
+    max-width: 60vw;
+    background-color: transparent;
+}
+    
+.shadow{
+    box-shadow: -2px -5px 5px 0px rgba(0,0,0,0.3)
+
+}
+
+
+.cardcss {
+    width:400px
+}
+

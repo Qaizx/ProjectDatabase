@@ -7,8 +7,11 @@ import NavbarLogin from "./component/NavbarLogin";
 import Login from "./Page/login/Login";
 import Register from "./Page/register/Register";
 import Info from "./Page/info/Info";
+import Shop from "./Page/shop/Shop";
+import Cart from "./Page/cart/Cart";
+import Product from "./Page/product/Product";
+import Payment from "./Page/payment/Payment";
 
-import Parent from "./Parrent";
 
 function App() {
   const [checkLogin, setCount] = useState(false);
@@ -26,6 +29,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login handleClick={handleClick} />} />
           <Route path="register" element={<Register />} />
+          <Route path="shop" element={<Shop />}/>
+          <Route path="cart" element={<Cart />}/>
+          <Route path="product" element={<Product />}/>
+          <Route path="payment" element={<Payment />}/>
         </Route>
       );
     } else {

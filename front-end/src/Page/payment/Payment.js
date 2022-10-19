@@ -1,14 +1,14 @@
-import "./Cart.css"
+import "./Payment.css"
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
 import React from "react"
 
-const Cart = () => {
+const Payment = () => {
     return (
         <div>
-            <div class="head"> This is Cart page</div>
+            <div class="head"> This is Payment page</div>
         </div>
     )
 }
 
 
-export default Cart;
+export default Payment;
