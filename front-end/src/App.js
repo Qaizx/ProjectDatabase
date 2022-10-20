@@ -8,7 +8,7 @@ import Login from "./Page/login/Login";
 import Register from "./Page/register/Register";
 import Info from "./Page/info/Info";
 import Shop from "./Page/shop/Shop";
-import Cart from "./Page/cart/Cart";
+import Cart from "./Page/cart/cart";
 import Product from "./Page/product/Product";
 import Payment from "./Page/payment/Payment";
 
@@ -20,7 +20,7 @@ function App() {
     var myHeaders = new Headers();
     myHeaders.append(
       "Authorization",
-      "Bearer" + token
+      "Bearer " + token
     );
 
     var requestOptions = {
@@ -33,10 +33,8 @@ function App() {
       .then((response) => response.json())
       .then((result)=> {
         if(result.status === 'ok'){
-          console.log("that right");
           setLogin(true)
         }else{
-          console.log(result.message);
           setLogin(false)
         }
       })
