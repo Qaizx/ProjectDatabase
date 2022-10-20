@@ -1,5 +1,5 @@
 import "./App.css";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Routes, Route } from "react-router-dom";
 import Home from "./Page/home/Home";
 import NavbarRegister from "./component/NavbarRegister";
@@ -11,36 +11,58 @@ import Info from "./Page/info/Info";
 import Parent from "./Parrent";
 
 function App() {
-  const [checkLogin, setCount] = useState(false);
+  const [checkLogin, setLogin] = useState(false);
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    var myHeaders = new Headers();
+    myHeaders.append(
+      "Authorization",
+      "Bearer" + token
+    );
 
-  const handleClick = (event, check) => {
-    console.log(checkLogin);
-    setCount((current) => check);
-  };
-  console.log(checkLogin);
+    var requestOptions = {
+      method: "GET",
+      headers: myHeaders,
+      redirect: "follow",
+    };
+
+    fetch("https://www.melivecode.com/api/auth/user", requestOptions)
+      .then((response) => response.json())
+      .then((result)=> {
+        if(result.status === 'ok'){
+          console.log("that right");
+          setLogin(true)
+        }else{
+          console.log(result.message);
+          setLogin(false)
+        }
+      })
+      .catch((error) => console.log("error", error));
+  }, []);
 
   const ro = () => {
-    if (checkLogin == false) {
+    if (checkLogin) {
+      return(
+        <Route path="/" element={<NavbarLogin />}>
+        <Route index element={<Home />} />
+        <Route path="info" element={<Info />} />
+      </Route>
+      );
+    } else {
       return (
         <Route path="/" element={<NavbarRegister />}>
           <Route index element={<Home />} />
-          <Route path="login" element={<Login handleClick={handleClick} />} />
+          <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
         </Route>
       );
-    } else {
-      <Route path="/log" element={<NavbarLogin />}>
-        <Route index element={<Home />} />
-        <Route path="info" element={<Info />} />
-      </Route>;
     }
   };
 
   return (
     <div>
-      <Routes>
-        {ro()}
-      </Routes>
+      <Routes>{ro()}</Routes>
+      {/* <Parent/> */}
     </div>
   );
 }
