@@ -13,8 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        // Schema::enableForeignKeyConstraints();
+
         Schema::create('users', function (Blueprint $table) {
             $table->increments('customerNumber');
+            $table->foreign('customerNumber')->references('customerNumber')->on('customers')->onUpdate('cascade')->onDelete('cascade');
+
             $table->string('username')->unique();
             $table->string('email')->unique();
             $table->string('password');
