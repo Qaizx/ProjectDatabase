@@ -1,31 +1,74 @@
 import "./Register.css";
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
 import React, { useState } from "react";
+import { useNavigate } from "react-router-dom";
 
-const Register = () => {  
+const Register = () => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisable] = useState(true);
+  const [inputs, setInputs] = useState({});
 
-  const handleSubmit = (event) => {
+  const navigate = useNavigate()
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+  };
+
+  const handleCheck = (event) => {
     const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.preventDefault();
       event.stopPropagation();
       setDisable(true);
-    }else{
+    } else {
       setDisable(false);
     }
 
     setValidated(true);
   };
 
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(inputs);
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      fname: inputs.fname,
+      lname: inputs.lname,
+      username: inputs.username,
+      password: inputs.password,
+      email: inputs.email,
+      avatar: inputs.avatar,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("https://www.melivecode.com/api/users/create", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if(result.status === 'ok'){
+          navigate('/login')
+        }else{
+          console.log(result.message);
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
 
   return (
     <div>
       <div class="head"> Register</div>
 
-
-      <Form noValidate onChange={handleSubmit}>
+      <Form noValidate onChange={handleCheck} onSubmit={handleSubmit}>
         <div>
           <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
             <Form.Label
@@ -33,7 +76,7 @@ const Register = () => {
               column
               sm="2"
             >
-              Username
+              fname
             </Form.Label>
             <Col sm="5">
               <Form.Control
@@ -41,6 +84,9 @@ const Register = () => {
                 style={{ margin: "0px -290px", fontSize: "30px" }}
                 type="text"
                 placeholder="name"
+                name="fname"
+                value={inputs.fname || ""}
+                onChange={handleChange}
               />
             </Col>
           </Form.Group>
@@ -51,7 +97,7 @@ const Register = () => {
               column
               sm="2"
             >
-              Email
+              lname
             </Form.Label>
             <Col sm="5">
               <Form.Control
@@ -59,6 +105,9 @@ const Register = () => {
                 style={{ margin: "0px -290px", fontSize: "30px" }}
                 type="text"
                 placeholder="email"
+                name="lname"
+                value={inputs.lname || ""}
+                onChange={handleChange}
               />
             </Col>
           </Form.Group>
@@ -73,14 +122,17 @@ const Register = () => {
               column
               sm="2"
             >
-              Password
+              username
             </Form.Label>
             <Col sm="5">
               <Form.Control
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
-                type="password"
-                placeholder="Password"
+                type="text"
+                placeholder="Name"
+                name="username"
+                value={inputs.username || ""}
+                onChange={handleChange}
               />
             </Col>
           </Form.Group>
@@ -91,14 +143,59 @@ const Register = () => {
               column
               sm="2"
             >
-              Confirm Password
+              password
             </Form.Label>
             <Col sm="5">
               <Form.Control
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
                 type="password"
+                placeholder="Password"
+                name="password"
+                value={inputs.password || ""}
+                onChange={handleChange}
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
+            <Form.Label
+              style={{ margin: "0px 350px", fontSize: "30px" }}
+              column
+              sm="2"
+            >
+              email
+            </Form.Label>
+            <Col sm="5">
+              <Form.Control
+                required
+                style={{ margin: "0px -290px", fontSize: "30px" }}
+                type="email"
                 placeholder="Confirm Password"
+                name="email"
+                value={inputs.email || ""}
+                onChange={handleChange}
+              />
+            </Col>
+          </Form.Group>
+
+          <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
+            <Form.Label
+              style={{ margin: "0px 350px", fontSize: "30px" }}
+              column
+              sm="2"
+            >
+              avatar
+            </Form.Label>
+            <Col sm="5">
+              <Form.Control
+                required
+                style={{ margin: "0px -290px", fontSize: "30px" }}
+                type="text"
+                placeholder="Confirm Password"
+                name="avatar"
+                value={inputs.avatar || ""}
+                onChange={handleChange}
               />
             </Col>
           </Form.Group>
@@ -114,7 +211,7 @@ const Register = () => {
             size="lg"
             style={{ margin: "0px 10px" }}
             active
-            href="/login"
+            // href="/login"
             disabled={disabled}
           >
             confirm
