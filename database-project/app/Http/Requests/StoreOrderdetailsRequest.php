@@ -27,8 +27,8 @@ class StoreOrderdetailsRequest extends FormRequest
             'orderNumber'=> ['required','integer'],
             'productCode'=> ['required'],
             'quantityOrdered'=> ['required','integer'] ,
-            'priceEach'=> ['required','decimal'] ,
-            'orderLineNumber'=> ['required','smallInteger']
+            'priceEach'=> ['required','numeric'] ,
+            'orderLineNumber'=> ['required','integer']
         ];
     }
 }
