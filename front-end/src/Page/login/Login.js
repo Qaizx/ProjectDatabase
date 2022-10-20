@@ -39,7 +39,6 @@ const Login = () => {
     var raw = JSON.stringify({
       username: inputs.username,
       password: inputs.password,
-      expiresIn: 100000,
     });
 
     var requestOptions = {
