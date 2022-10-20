@@ -6,6 +6,7 @@ use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\PaymentsController;
 use App\Http\Controllers\ProductlinesController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\OrderdetailsController;
 
 use Illuminate\Support\Facades\Route;
 
