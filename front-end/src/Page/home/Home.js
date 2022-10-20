@@ -1,6 +1,4 @@
 import "./Home.css";
-import { Button } from "react-bootstrap";
-import { Link } from "react-router-dom";
 
 const Home = () => {
   return (
@@ -33,6 +31,7 @@ const Home = () => {
           </a>
         </button>
       </div>
+      
       <div id="down">
         <h1>You are down!</h1>
       </div>
@@ -42,6 +41,7 @@ const Home = () => {
           Top
         </a>
       </button>
+      
     </>
   );
 };
