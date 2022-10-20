@@ -25,8 +25,7 @@ const Cart = () => {
                                     </div>
                                     <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                         <p><strong>My heart</strong></p>
-                                        <p>Description here :</p>
-                                        <p>I cut my hair because you don't care my heart</p>
+                                        <p>Stock : 69</p>
                                         <button type="button" class="btn btn-primary btn-sm me-1 mb-2"
                                             title="Remove item">
                                             Remove item
@@ -56,8 +55,7 @@ const Cart = () => {
                                     </div>
                                     <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                         <p><strong>My heart</strong></p>
-                                        <p>Description here :</p>
-                                        <p>I cut my hair because you don't care my heart</p>
+                                        <p>Stock : 69</p>
                                         <button type="button" class="btn btn-primary btn-sm me-1 mb-2"
                                             title="Remove item">
                                             Remove item
@@ -87,8 +85,7 @@ const Cart = () => {
                                     </div>
                                     <div class="col-lg-5 col-md-6 mb-4 mb-lg-0">
                                         <p><strong>My heart</strong></p>
-                                        <p>Description here :</p>
-                                        <p>I cut my hair because you don't care my heart</p>
+                                        <p>Stock : 69</p>
                                         <button type="button" class="btn btn-primary btn-sm me-1 mb-2"
                                             title="Remove item">
                                             Remove item
