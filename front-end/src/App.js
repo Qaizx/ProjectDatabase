@@ -12,42 +12,31 @@ import Cart from "./Page/cart/cart";
 import Product from "./Page/product/Product";
 import Payment from "./Page/payment/Payment";
 
-
 function App() {
   const [checkLogin, setLogin] = useState(false);
+  const CryptoJS = require("crypto-js");
+
   useEffect(() => {
     const token = localStorage.getItem("token");
-    var myHeaders = new Headers();
-    myHeaders.append(
-      "Authorization",
-      "Bearer " + token
-    );
-
-    var requestOptions = {
-      method: "GET",
-      headers: myHeaders,
-      redirect: "follow",
-    };
-
-    fetch("https://www.melivecode.com/api/auth/user", requestOptions)
-      .then((response) => response.json())
-      .then((result)=> {
-        if(result.status === 'ok'){
-          setLogin(true)
-        }else{
-          setLogin(false)
-        }
-      })
-      .catch((error) => console.log("error", error));
+    // console.log(token);
+    if (token == null) {
+      setLogin(false);
+    } else {
+      setLogin(true);
+      const username = CryptoJS.enc.Base64.parse(token).toString(
+        CryptoJS.enc.Utf8
+      );
+      // console.log(username);
+    }
   }, []);
 
   const ro = () => {
     if (checkLogin) {
-      return(
+      return (
         <Route path="/" element={<NavbarLogin />}>
-        <Route index element={<Home />} />
-        <Route path="info" element={<Info />} />
-      </Route>
+          <Route index element={<Home />} />
+          <Route path="info" element={<Info />} />
+        </Route>
       );
     } else {
       return (
@@ -55,10 +44,10 @@ function App() {
           <Route index element={<Home />} />
           <Route path="login" element={<Login />} />
           <Route path="register" element={<Register />} />
-          <Route path="shop" element={<Shop />}/>
-          <Route path="cart" element={<Cart />}/>
-          <Route path="product" element={<Product />}/>
-          <Route path="payment" element={<Payment />}/>
+          <Route path="shop" element={<Shop />} />
+          <Route path="cart" element={<Cart />} />
+          <Route path="product" element={<Product />} />
+          <Route path="payment" element={<Payment />} />
         </Route>
       );
     }

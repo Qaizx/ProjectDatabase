@@ -3,6 +3,12 @@ import { Link, Outlet } from "react-router-dom";
 import { Button, Navbar, Nav, NavDropdown, Container } from "react-bootstrap";
 
 const NavbarLogin = () => {
+
+  const handleLogout = () => {
+    localStorage.removeItem("token")
+    window.location.href = '/'
+  }
+
   return (
     <>
       <Navbar variant="dark" bg="dark" expand="lg">
@@ -21,7 +27,7 @@ const NavbarLogin = () => {
               >
                 <div style={{ textAlign: "right" }}>
                   <NavDropdown.Item href="/info" >info</NavDropdown.Item>
-                  <NavDropdown.Item href="/">logout</NavDropdown.Item>
+                  <NavDropdown.Item onClick={handleLogout}>logout</NavDropdown.Item>
                 </div>
 
               </NavDropdown>
