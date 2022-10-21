@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('customers');
         Schema::create('customers', function (Blueprint $table) {
             $table->increments('customerNumber');
             $table->string('customerName',50);
@@ -25,7 +26,8 @@ return new class extends Migration
             $table->string('state',50)->nullable();
             $table->string('postalCode',15)->nullable();
             $table->string('country',50);
-            $table->integer('salesRepEmployeeNumber')->nullable();
+            $table->unsignedInteger('salesRepEmployeeNumber')->nullable();
+            $table->foreign('SalesRepEmployeeNumber')->references('employeeNumber')->on('employees');
             $table->decimal('creditLimit', 10 , 2);
             $table->nullableTimestamps();
         });
