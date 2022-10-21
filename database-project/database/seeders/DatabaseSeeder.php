@@ -20,11 +20,11 @@ class DatabaseSeeder extends Seeder
             UsersSeeder::class,
             EmployeesSeeder::class,
             OfficesSeeder::class,
-            OrderdetailsSeeder::class,
+            ProductsSeeder::class,
             OrdersSeeder::class,
+            OrderdetailsSeeder::class,
             PaymentsSeeder::class,
-            ProductlinesSeeder::class,
-            ProductsSeeder::class
+            ProductlinesSeeder::class
         ]);
         
 
