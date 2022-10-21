@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UsersController;
 
 /*
 |--------------------------------------------------------------------------
@@ -37,5 +38,24 @@ Route::group(
     ],
     function ($router) {
         Route::resource('products' , 'ProductsController');
+        Route::resource('customers' , 'CustomersController');
+        Route::resource('employees' , 'EmployeesController');
+        Route::resource('offices' , 'OfficesController');
+        Route::resource('orderdetails' , 'OrderdetailsController');
+        Route::resource('orders' , 'OrdersController');
+        Route::resource('payments' , 'PaymentssController');
+        Route::resource('productlines' , 'ProductlinesController');
+        Route::resource('users' , 'UsersController');
+    }
+);
+
+Route::group(
+    [
+        'middleware' => 'api' ,
+        'namespace' => 'App\Http\Controllers' ,
+    ],
+    function ($router) {
+        Route::post('/users/login' , [UsersController::class,'login']);
+        Route::post('/users/register' , [UsersController::class,'store']);
     }
 );

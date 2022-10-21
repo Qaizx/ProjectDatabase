@@ -15,7 +15,9 @@ return new class extends Migration
     {
         Schema::dropIfExists('customers');
         Schema::create('customers', function (Blueprint $table) {
-            $table->increments('customerNumber');
+            $table->unsignedInteger('customerNumber');
+            $table->foreign('customerNumber')->references('customerNumber')->on('users')->onUpdate('cascade')->onDelete('cascade');
+
             $table->string('customerName',50);
             $table->string('contactLastName',50);
             $table->string('contactFirstName',50);
