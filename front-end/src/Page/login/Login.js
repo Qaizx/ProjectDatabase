@@ -1,15 +1,14 @@
 import "./Login.css";
-import { Button, Row, Form, Col, Container } from "react-bootstrap";
+import { Button, Row, Form, Col } from "react-bootstrap";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
-
 
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisable] = useState(true);
   const [inputs, setInputs] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -33,8 +32,14 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
+    const CryptoJS = require('crypto-js');
+
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Cookie",
+      "XSRF-TOKEN=eyJpdiI6IkRDd2lMVUR6Sjl3NEQ1V0ZpRzlJc2c9PSIsInZhbHVlIjoicU84NEgvdDRBd0NkZjdDU1JLZndyRFoyS2ZLNzdGbkZjMzFRK012ZDZVWG5uTXlTcStwS0dudzhNbmlyUTAxRWhwbUMveFg4Q2wxaXFQTUhNVjBGK3ovNVBDTkZYVEZFa1haNklGWWh4MEVvdHVCWlUxV1VJVkMrbHZSUS9pYm8iLCJtYWMiOiIwYTU1M2IyM2NkY2QzYzI2OGMwYzUwMTFhY2M1MjQzMGU1OWVmNWRiOGI0NTMwN2Y5ODdiMDU5M2EwYTRlMjQyIiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6InRtdmpCR0JSNWUwaVRWdVpvV0NObUE9PSIsInZhbHVlIjoiREZaazlSYkR2Y0FNQ1I1bkhsQTZiR2JTWWNjSFZDOWNqei9vcVVrQ1B6S0x6aEFINFI2RStIbG1PZUEzVkp4TFc0eWk2cCs2ZjhUNWhydzJxQk50L2E4NmZMeHRMS3gra0hzb0xnSnJVeVhVeVkwTDBKOUVwQlNiQUJQNjNSdFQiLCJtYWMiOiJiY2M2YTM4ODA0ODZkYjVjZGQ5NzYxYWM5YzhiODcyNjU2MzZjYTVhNWE3Yjc5MzhlMzEyMThjYWJkYmU0MzI4IiwidGFnIjoiIn0%3D"
+    );
 
     var raw = JSON.stringify({
       username: inputs.username,
@@ -48,14 +53,17 @@ const Login = () => {
       redirect: "follow",
     };
 
-    fetch("https://www.melivecode.com/api/login", requestOptions)
+    //insecureBobolink6
+    //Qo196EqODjjreL4C3STk
+
+    fetch("http://127.0.0.1:8000/users/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        console.log(result);
-        if(result.status === 'ok'){
-          localStorage.setItem('token', result.accessToken)
-          navigate('/')
-        }
+        let text = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(result.username));
+        localStorage.setItem('token', text)
+        window.location.href = '/'
+        // console.log(result.username);
+        // console.log(text);
       })
       .catch((error) => console.log("error", error));
   };
