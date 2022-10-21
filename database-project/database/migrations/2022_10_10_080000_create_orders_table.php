@@ -20,6 +20,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('orders');
         Schema::create('orders', function (Blueprint $table) {
             $table->increments('orderNumber');
             $table->date('orderDate');
