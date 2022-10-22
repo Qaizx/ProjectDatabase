@@ -50,7 +50,7 @@ class UsersController extends Controller
         $user->email = $email;
         $user->password = Hash::make($password);
         $user->save();
-        return $user;
+        return ["status" => "ok"];
     }
 
     /**
