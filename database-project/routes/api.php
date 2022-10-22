@@ -46,6 +46,7 @@ Route::group(
         Route::resource('payments' , 'PaymentsController');
         Route::resource('productlines' , 'ProductlinesController');
         Route::resource('users' , 'UsersController');
+        Route::resource('carts', 'CartsController');
     }
 );
 
