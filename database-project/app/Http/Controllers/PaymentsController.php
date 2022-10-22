@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Payments;
 use App\Http\Requests\StorePaymentsRequest;
 use App\Http\Requests\UpdatePaymentsRequest;
+use Faker\Provider\ar_EG\Payment;
 
 class PaymentsController extends Controller
 {
@@ -49,6 +50,15 @@ class PaymentsController extends Controller
         //     'amount' => $request->amount
         // ]);  
         Payments::create($request->all());
+        $v1 = $request -> customerNumber;
+        $v2 = $request -> checkNumber;
+        $target = Payments::where([
+            ['customerNumber', '=', $v1],
+            ['checkNumber', '=', $v2],
+        ])->get();
+        
+        if(!$target ){Payments::create($request->all());}
+        else{ return ["error" => "This request already existed in db."];}
     }
 
     /**
