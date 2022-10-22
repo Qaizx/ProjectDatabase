@@ -1,12 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use DB;
 use App\Models\Orderdetails;
 use App\Http\Requests\StoreOrderdetailsRequest;
 use App\Http\Requests\UpdateOrderdetailsRequest;
 
-class OrderdetailsController extends Controller 
+class OrderdetailsController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -37,15 +38,18 @@ class OrderdetailsController extends Controller
      */
     public function store(StoreOrderdetailsRequest $request)
     {
-        $v1 = $request -> orderNumber;
-        $v2 = $request -> productCode;
+        $v1 = $request->orderNumber;
+        $v2 = $request->productCode;
         $target = Orderdetails::where([
             ['orderNumber', '=', $v1],
             ['productCode', '=', $v2],
         ])->get();
-        
-        if(!$target ){Orderdetails::create($request->all());}
-        else{ return ["error" => "This request already existed in db."];}
+
+        if (!$target) {
+            Orderdetails::create($request->all());
+        } else {
+            return ["error" => "This request already existed in db."];
+        }
     }
 
     /**
@@ -56,7 +60,7 @@ class OrderdetailsController extends Controller
      */
     public function show($id)
     {
-        $orderD = Orderdetails::where('orderNumber','=',$id)->get();
+        $orderD = Orderdetails::where('orderNumber', '=', $id)->get();
         return $orderD;
     }
 
@@ -78,7 +82,7 @@ class OrderdetailsController extends Controller
      * @param  \App\Models\Orderdetails  $orderdetails
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateOrderdetailsRequest $request,$id)
+    public function update(UpdateOrderdetailsRequest $request, $id)
     {
         //
         $orderD = Orderdetails::find($id);

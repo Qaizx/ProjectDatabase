@@ -7,6 +7,7 @@ use App\Http\Requests\StoreUsersRequest;
 use App\Http\Requests\UpdateUsersRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class UsersController extends Controller
 {
@@ -31,26 +32,41 @@ class UsersController extends Controller
     public function store(StoreUsersRequest $request)
     {
         //
-        $username = $request->username;
-        $email = $request->email;
-        $password = $request->password;
+        $result = DB::transaction(function() use ($request) {
+            $username = $request->username;
+            $email = $request->email;
+            $password = $request->password;
+    
+            $duplicateUsername = Users::where('username' , $username)->first();
+            $duplicateEmail = Users::where('email' , $email)->first();
 
-        $duplicateUsername = Users::where('username' , $username)->first();
-        $duplicateEmail = Users::where('email' , $email)->first();
+            if($duplicateEmail != NULL)
+                return 1; 
+            if($duplicateUsername != NULL)
+                return 2;
+            
+            $user = new Users();
+            $user->username = $username;
+            $user->email = $email;
+            $user->password = Hash::make($password);
+            $user->save();
 
-        if($duplicateEmail) {
+            $findUser = Users::where([
+                ['username' , '=' ,  $username],
+                ['email' , '=' ,  $email],
+            ])->first();
+
+            app('App\Http\Controllers\CustomersController')->createCustomer($findUser->customerNumber);
+            return 3;
+        });
+
+        if($result == 1) {
             return ["error" => "This Email is already taken."];
-        }
-        if($duplicateUsername) {
+        } else if($result == 2) {
             return ["error" => "This Username is already taken."];
+        } else {
+            return ["status" => "ok"];
         }
-
-        $user = new Users();
-        $user->username = $username;
-        $user->email = $email;
-        $user->password = Hash::make($password);
-        $user->save();
-        return ["status" => "ok"];
     }
 
     /**
@@ -113,15 +129,39 @@ class UsersController extends Controller
         //     return ["error" => "Email or password is not matched."];
         // }
 
-        if(!$user || $password != $user->password) {
-            if(!$user || !Hash::check($password, $user->password) ) {
-                return ["error" => "Email or password is not matched."];
-            }
+        if(!$user || $password != $user->password || !Hash::check($password, $user->password)) {
+            return ["error" => "Email or password is not matched."];
         }
         return ["status" => "ok"];
     }
 
     public function profile(Request $request) {
-        
+        $username = $request->username;
+
+        // $customerNumber = Users::where([
+        //     ['username' , '=' , $username]
+        // ]);
+
+        // $customer = Customers::where
+        $targetCustomer = DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(        
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username' , '=' , $username)->get()->first();
+
+        return $targetCustomer;
     }
 }

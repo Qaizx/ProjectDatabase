@@ -54,8 +54,7 @@ class CartsController extends Controller
             Carts::create($request->all());
         } else {
             $carts = $target;
-            $carts->update(['quantityInCart' => $carts->quantityInCart+1]); 
-            // $target->update(['quantityInCart', $target->quantityInCart + 1]);
+            $carts->update(['quantityInCart' => $carts->quantityInCart + 1]);
         }
     }
 

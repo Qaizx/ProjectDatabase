@@ -60,5 +60,6 @@ Route::group(
         Route::post('/users/login' , [UsersController::class,'login']);
         Route::post('/users/register' , [UsersController::class,'store']);
         Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
+        Route::post('/getProfile' , [UsersController::class,'profile']);
     }
 );

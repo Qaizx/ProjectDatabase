@@ -79,4 +79,24 @@ class CustomersController extends Controller
         $customer = Customers::find($id);
         $customer->delete();
     }
+
+    public function createCustomer($customerNumber) {
+        // Customers::create( [
+        //     'customerName' => $request->customerName,
+        //     'contactLastName' => $request->contactLastName,
+        //     'contactFirstName' => $request->contactFirstName,
+        //     'phone' => $request->phone,
+        //     'addressLine1'=> $request->addressLine1,
+        //     'addressLine2'=> $request->addressLine2,
+        //     'city'=> $request->city,
+        //     'state'=> $request->state,
+        //     'country' => $request->country,
+        //     'postalCode'=> $request->postalCode,
+        //     'salesRepEmployeeNumber'=> $request->salesRepEmployeeNumber,
+        //     'creditLimit'=> $request->creditLimit
+        //  ]);
+        Customers::create([
+            'customerNumber' => $customerNumber ,
+        ]);
+    }
 }
