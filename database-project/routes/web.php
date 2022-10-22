@@ -26,22 +26,6 @@ Route::get('/', function () {
 });
 
 
-Route::get('users/getCustomer/{id}' , [UsersController::class,'getCustomer']);
-Route::post('users/register' , [UsersController::class,'store']);
-Route::post('users/login' , [UsersController::class,'login']);
-
-Route::apiResources([
-    'customers' => CustomersController::class,
-    'employees' => EmployeesController::class,
-    'users' => UsersController::class,
-    'offices' => OfficesController::class,
-    'orderdetails' => OrderDetailsController::class,
-    'orders' => OrdersController::class,
-    'payments' => PaymentsController::class,
-    'productlines' => ProductLinesController::class,
-    'products' => ProductsController::class,
-]);
-
 
 // Verb          Path                        Action  Route Name
 // GET           /users                      index   users.index

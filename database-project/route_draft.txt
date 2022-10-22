@@ -1,0 +1,33 @@
+home 
+- random product
+    - \products\random
+
+login
+- login request
+    - \login
+
+register
+- register request
+    - \register
+
+shop
+- get all products -> apiResoure
+
+cart
+- get cart from username
+    POST - \cart\{username} 
+
+products
+- get product from productid
+    - \products\{productid}
+
+customer (profile)
+- get username profile
+    - \customer\{username}
+
+employee
+- get all employee
+
+payment
+- get all payments from username
+

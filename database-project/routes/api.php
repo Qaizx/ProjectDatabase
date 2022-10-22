@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -57,5 +58,6 @@ Route::group(
     function ($router) {
         Route::post('/users/login' , [UsersController::class,'login']);
         Route::post('/users/register' , [UsersController::class,'store']);
+        Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
     }
 );

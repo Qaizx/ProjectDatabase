@@ -83,4 +83,9 @@ class ProductsController extends Controller
         $products = Products::find($id);
         $products->delete();
     }
+
+    public function getRandomProduct(){
+        $randomProducts = Products::inRandomOrder()->limit(5)->get();
+        return $randomProducts;
+    }
 }

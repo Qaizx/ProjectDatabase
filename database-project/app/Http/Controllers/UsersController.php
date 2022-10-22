@@ -118,4 +118,8 @@ class UsersController extends Controller
         // }
         return ["status" => "ok"];
     }
+
+    public function profile(Request $request) {
+        
+    }
 }
