@@ -1,4 +1,5 @@
 import "./Home.css";
+import ShopTable from "./component/ShopTable";
 
 const Home = () => {
   return (
@@ -7,9 +8,11 @@ const Home = () => {
         Welcome to <span style={{ color: "red" }}>shop</span>
       </h1>
       <div style={{ textAlign: "center" }}>
-        <button class="get_start">
+        <button class="get_start" type="submit">
           <span>
-            Get Started &nbsp;
+            <a href="/shop" style={{ color: "white" }}>
+              Get Started&nbsp;
+            </a>
             <svg
               stroke="currentColor"
               fill="currentColor"
@@ -31,9 +34,9 @@ const Home = () => {
           </a>
         </button>
       </div>
-      
+
       <div id="down">
-        <h1>You are down!</h1>
+        <ShopTable/>
       </div>
 
       <button class="myBtn">
@@ -41,7 +44,6 @@ const Home = () => {
           Top
         </a>
       </button>
-      
     </>
   );
 };
