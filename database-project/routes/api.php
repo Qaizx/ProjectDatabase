@@ -43,7 +43,7 @@ Route::group(
         Route::resource('offices' , 'OfficesController');
         Route::resource('orderdetails' , 'OrderdetailsController');
         Route::resource('orders' , 'OrdersController');
-        Route::resource('payments' , 'PaymentssController');
+        Route::resource('payments' , 'PaymentsController');
         Route::resource('productlines' , 'ProductlinesController');
         Route::resource('users' , 'UsersController');
     }
