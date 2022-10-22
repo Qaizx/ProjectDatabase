@@ -9,8 +9,8 @@ class Users extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'customerNumber';
-
+    protected $primaryKey = 'username';
+    public $incrementing = false;
     // protected $table = 'users';
 
     protected $fillable = [

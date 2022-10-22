@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('productlines');
         Schema::create('productlines', function (Blueprint $table) {
             $table->string('productLine')->primary();
             $table->string('textDescription',4000)->nullable();

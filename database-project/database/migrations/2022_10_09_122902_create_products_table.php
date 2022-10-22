@@ -13,10 +13,12 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('products');
         Schema::create('products', function (Blueprint $table) {
             $table->string('productCode',15)->primary();
             $table->string('productName',70);
             $table->string('productLine',50);
+            $table->foreign('productLine')->references('productLine')->on('productlines');
             $table->string('productScale',10);
             $table->string('productVendor',50);
             $table->string('productDescription',5000);

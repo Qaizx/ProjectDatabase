@@ -13,6 +13,7 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('employees');
         Schema::create('employees', function (Blueprint $table) {
             $table->increments('employeeNumber');
             $table->string('lastName',50);
@@ -20,6 +21,7 @@ return new class extends Migration
             $table->string('extension');
             $table->string('email');
             $table->string('officeCode');
+            $table->foreign('officeCode')->references('officeCode')->on('offices');
             $table->integer('reportsTo')->nullable();
             $table->string('jobTitle');
             $table->nullableTimestamps();

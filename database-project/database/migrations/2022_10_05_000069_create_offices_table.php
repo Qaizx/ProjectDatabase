@@ -13,8 +13,9 @@ return new class extends Migration
      */
     public function up()
     {
+        Schema::dropIfExists('offices');
         Schema::create('offices', function (Blueprint $table) {
-            $table->increments('officeCode');
+            $table->string('officeCode')->primary();
             $table->string('city');
             $table->string('phone');
             $table->string('addressLine1');
