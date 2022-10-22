@@ -109,9 +109,13 @@ class UsersController extends Controller
             ['email' , '=' ,  $email],
         ])->first();
 
-        if(!$user || !Hash::check($password , $user->password)) {
+        if(!$user || !Hash::check($password, $user->password) ) {
             return ["error" => "Email or password is not matched."];
         }
-        return $user;
+
+        // if(!$user || $password != $user->password) {
+        //     return ["error" => "Email or password is not matched."];
+        // }
+        return ["status" => "ok"];
     }
 }
