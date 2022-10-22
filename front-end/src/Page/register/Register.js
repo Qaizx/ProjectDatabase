@@ -8,7 +8,7 @@ const Register = () => {
   const [disabled, setDisable] = useState(true);
   const [inputs, setInputs] = useState({});
 
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -35,14 +35,15 @@ const Register = () => {
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Cookie",
+      "XSRF-TOKEN=eyJpdiI6IkZackszTFlGUVRHNHFVbE5ENmc5dWc9PSIsInZhbHVlIjoiYnFmTXJYM2JVaHoyTlhHM3EyL204WkxQemtlTkxYU00zQ0owSzlzL3diblJ3K1lodlVpNjc0ZmRXWEpZNmtQV0o4RFZ0Vk9JYUFyRGJGSFZneWVyamtzampQUXdWeUxuNFB6Zlp6VUI0RWZ6cnlHMkd6eDJPRmQ1NC94YlhnN3MiLCJtYWMiOiJlMTIwOGIxMjFiZjFlZjI2NGQ3ZTAwY2I0N2Y4YjIzNjllYzVjMDZkZTU3OGQ3Yzg2MTU1N2U3YzQxNzUwZTY3IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IjA3RUIxRmR6bEdYSHA4WVd5Q1d0NWc9PSIsInZhbHVlIjoiRGFVVTBuY0tXbEttR0dIcWF0YVpIcUlTR0xhbncwUG1OT3d0RE9uMFErVSs2QVdCYjB1MHV5dGx6cFNQd1Y1MzE0TmpIdHROSGNra2I2RHlmcVU3T1JtZDFjdGNLMlVaN1ZmZDJVSG9qSGF2OVdWak04Rk40anNhSlBLTWdxZHMiLCJtYWMiOiIxOWNlOWViMTk1NTFjZWVjZjI5YmUwMTY5Y2U2ZjUzMGNlMmFiNDFmYjI3MGZiMGVmNmNmNWIzM2RmODExZDQyIiwidGFnIjoiIn0%3D"
+    );
 
     var raw = JSON.stringify({
-      fname: inputs.fname,
-      lname: inputs.lname,
       username: inputs.username,
-      password: inputs.password,
       email: inputs.email,
-      avatar: inputs.avatar,
+      password: inputs.password,
     });
 
     var requestOptions = {
@@ -52,14 +53,10 @@ const Register = () => {
       redirect: "follow",
     };
 
-    fetch("https://www.melivecode.com/api/users/create", requestOptions)
+    fetch("http://127.0.0.1:8000/users/register", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        if(result.status === 'ok'){
-          navigate('/login')
-        }else{
-          console.log(result.message);
-        }
+        window.location.href = '/login'
       })
       .catch((error) => console.log("error", error));
   };
@@ -76,7 +73,7 @@ const Register = () => {
               column
               sm="2"
             >
-              fname
+              username
             </Form.Label>
             <Col sm="5">
               <Form.Control
@@ -84,8 +81,8 @@ const Register = () => {
                 style={{ margin: "0px -290px", fontSize: "30px" }}
                 type="text"
                 placeholder="name"
-                name="fname"
-                value={inputs.fname || ""}
+                name="username"
+                value={inputs.username || ""}
                 onChange={handleChange}
               />
             </Col>
@@ -97,41 +94,16 @@ const Register = () => {
               column
               sm="2"
             >
-              lname
+              email
             </Form.Label>
             <Col sm="5">
               <Form.Control
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
-                type="text"
-                placeholder="email"
-                name="lname"
-                value={inputs.lname || ""}
-                onChange={handleChange}
-              />
-            </Col>
-          </Form.Group>
-
-          <Form.Group
-            as={Row}
-            className="mt-4"
-            controlId="formPlaintextPassword"
-          >
-            <Form.Label
-              style={{ margin: "0px 350px", fontSize: "30px" }}
-              column
-              sm="2"
-            >
-              username
-            </Form.Label>
-            <Col sm="5">
-              <Form.Control
-                required
-                style={{ margin: "0px -290px", fontSize: "30px" }}
-                type="text"
-                placeholder="Name"
-                name="username"
-                value={inputs.username || ""}
+                type="email"
+                placeholder="example@gmail.com"
+                name="email"
+                value={inputs.email || ""}
                 onChange={handleChange}
               />
             </Col>
@@ -153,48 +125,6 @@ const Register = () => {
                 placeholder="Password"
                 name="password"
                 value={inputs.password || ""}
-                onChange={handleChange}
-              />
-            </Col>
-          </Form.Group>
-
-          <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
-            <Form.Label
-              style={{ margin: "0px 350px", fontSize: "30px" }}
-              column
-              sm="2"
-            >
-              email
-            </Form.Label>
-            <Col sm="5">
-              <Form.Control
-                required
-                style={{ margin: "0px -290px", fontSize: "30px" }}
-                type="email"
-                placeholder="Confirm Password"
-                name="email"
-                value={inputs.email || ""}
-                onChange={handleChange}
-              />
-            </Col>
-          </Form.Group>
-
-          <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
-            <Form.Label
-              style={{ margin: "0px 350px", fontSize: "30px" }}
-              column
-              sm="2"
-            >
-              avatar
-            </Form.Label>
-            <Col sm="5">
-              <Form.Control
-                required
-                style={{ margin: "0px -290px", fontSize: "30px" }}
-                type="text"
-                placeholder="Confirm Password"
-                name="avatar"
-                value={inputs.avatar || ""}
                 onChange={handleChange}
               />
             </Col>

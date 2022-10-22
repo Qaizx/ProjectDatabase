@@ -1,0 +1,24 @@
+@import url("https://fonts.googleapis.com/css?family=Montserrat");
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+}
+
+p {
+  font-family: "Open Sans", sans-serif;
+  text-align: justify;
+}
+
+.size {
+  width: 400px;
+  
+}
+
+.product {
+    color: red;
+    text-align: center;
+    margin-top: 50px;
+    font-size: 100px;
+    font-family: "Times New Roman", Times, serif;
+  }
