@@ -65,6 +65,6 @@ Route::group(
         Route::post('/getOffice', [EmployeesController::class, 'office']);
         Route::get('/randomproduct', [ProductsController::class, 'getRandomProduct']);
         Route::post('/getOrders', [UsersController::class, 'orderFetch']);
-        Route::post('/getProductLine', [ProductsController::class, 'getProductLine']);
+        Route::post('/getProductInfo', [ProductsController::class, 'getProductInfo']);
     }
 );

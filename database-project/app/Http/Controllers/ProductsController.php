@@ -92,18 +92,12 @@ class ProductsController extends Controller
         return $randomProducts;
     }
 
-    public function getProductLine(Request $request)
+    public function getProductInfo(Request $request)
     {
         $productCode = $request->productCode;
 
         $productLine = DB::table('products')
             ->join('productlines', 'products.productLine', '=', 'productlines.productLine')
-            ->select(
-                'productlines.productLine',
-                'textDescription',
-                'htmlDescription',
-                'image'
-            )
             ->where('products.productCode', '=', $productCode)->get()->first();
 
         if ($productLine == NULL)
