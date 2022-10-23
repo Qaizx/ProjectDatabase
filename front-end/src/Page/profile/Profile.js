@@ -1,14 +1,21 @@
 import "./Profile.css"
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
 import React from "react"
+import { Link, useNavigate } from "react-router-dom";
 
 const Profile = () => {
+    const navigate = useNavigate();
+
+
+    const handleSubmit = () =>{
+        console.log("1");
+    }
     return (
         <div>
             <div>
                 <h1> This is product page</h1>
             </div>
-            <div>
+            <div onSubmit={handleSubmit}>
                 <div class="container py-5">
                     <div class="row d-flex justify-content-center my-4">
                         <div class="col-md-10">
@@ -24,9 +31,12 @@ const Profile = () => {
                                         <div class="mx-2    ">
                                             <button class="">History</button>
                                         </div>
-                                        <div class="mx-2    ">
-                                            <button class="">Edit Profile</button>
-                                        </div>
+                                        <Link to="/info">
+                                        <div class="mx-2">
+                                            <button type="button">Edit Profile</button>
+                                        </div>  
+                                        </Link>
+                                        
                                     </div>
 
                                 </div>
