@@ -75,7 +75,7 @@ const Register = () => {
             >
               username
             </Form.Label>
-            <Col sm="5">
+            <Col sm="4">
               <Form.Control
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
@@ -96,7 +96,7 @@ const Register = () => {
             >
               email
             </Form.Label>
-            <Col sm="5">
+            <Col sm="4">
               <Form.Control
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
@@ -117,7 +117,7 @@ const Register = () => {
             >
               password
             </Form.Label>
-            <Col sm="5">
+            <Col sm="4">
               <Form.Control
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
