@@ -26,7 +26,7 @@ const NavbarLogin = () => {
                 align="end"
               >
                 <div style={{ textAlign: "right" }}>
-                  <NavDropdown.Item href="/info" >info</NavDropdown.Item>
+                  <NavDropdown.Item href="/profile" >profile</NavDropdown.Item>
                   <NavDropdown.Item onClick={handleLogout}>logout</NavDropdown.Item>
                 </div>
 
