@@ -27,16 +27,17 @@ const ShopTable = () => {
     initProducts();
   }, []);
 
-  const handleClick = (names) => {
-    console.log(names);
+  const handleClick = (IDProduct) => {
+    console.log(IDProduct);
+    localStorage.setItem("picture", IDProduct);
+    window.location.href = "/product";
   };
 
   const render = () => {
     if (check)
       return (
-        <div className="text-center space-y-3">
-          <p className="text-2xl font-semibold">Historical price</p>
-          <p className="text-2xl">Loading ...</p>
+        <div>
+          <h1 className="headerText"> User Information</h1>
         </div>
       );
     else {
@@ -58,6 +59,8 @@ const ShopTable = () => {
 
           <Card
             style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
+            onClick={() => handleClick(tasks.productCode)}
+            type="submit"
           >
             <Card.Img variant="top" src={tasks.url} />
             <Card.Body>
