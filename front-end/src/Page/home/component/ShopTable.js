@@ -4,11 +4,8 @@ import "./ShopTable.css";
 
 
 const ShopTable = () => {
-  let numbers = [];
-  let sss;
   const [products, setProducts] = useState([]);
   const [check, setChecked] = useState(true);
-  const [tasks, setTasks] = useState([])
 
   const initProducts = async() => {
     var requestOptions = {
@@ -20,7 +17,7 @@ const ShopTable = () => {
       .then((response) => response.json())
       .then((result) => {
         setChecked(false);
-        setTasks(result)
+        setProducts(result)
       })
       .catch((error) => console.log("error", error));
   }
@@ -38,8 +35,8 @@ const ShopTable = () => {
         </div>
       );
     else {
-      console.log(1);
-      const listItems = tasks.map((tasks) => (
+      // console.log(1);
+      const listItems = products.map((tasks) => (
         <div class="col-4" style={{ padding: "20px"}}>
           <div class="" className="size">
             <img
