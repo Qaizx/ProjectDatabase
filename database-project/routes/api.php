@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
+use App\Http\Controllers\EmployeesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -59,7 +60,9 @@ Route::group(
     function ($router) {
         Route::post('/users/login' , [UsersController::class,'login']);
         Route::post('/users/register' , [UsersController::class,'store']);
-        Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
         Route::post('/getProfile' , [UsersController::class,'profile']);
+        Route::post('/getEmployee' , [UsersController::class, 'employee']);
+        Route::post('/getOffice' , [EmployeesController::class, 'office']);
+        Route::get('/randomproduct' , [ProductsController::class,'getRandomProduct']);
     }
 );

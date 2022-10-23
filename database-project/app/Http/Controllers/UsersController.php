@@ -120,17 +120,26 @@ class UsersController extends Controller
         $email = $request->email;
         $password = $request->password;
 
-        $user = Users::where([
-            ['username' , '=' ,  $username],
-            ['email' , '=' ,  $email],
-        ])->first();
+        $user = NULL;
+
+        if($email) {
+            $user = Users::where([
+                ['email' , '=' ,  $email],
+            ])->first();
+        } else if($username) {
+            $user = Users::where([
+                ['username' , '=' ,  $username],
+            ])->first();
+        } else {
+            return ["error" => "Email or Username is not matched."];
+        }
 
         // if(!$user || !Hash::check($password, $user->password) ) {
         //     return ["error" => "Email or password is not matched."];
         // }
 
-        if(!$user || $password != $user->password || !Hash::check($password, $user->password)) {
-            return ["error" => "Email or password is not matched."];
+        if($password != $user->password && !Hash::check($password, $user->password)) {
+            return ["error" => "Password is not matched."];
         }
         return ["status" => "ok"];
     }
@@ -163,5 +172,30 @@ class UsersController extends Controller
             ->where('username' , '=' , $username)->get()->first();
 
         return $targetCustomer;
+    }
+
+    public function employee(Request $request) {
+        $username = $request->username;
+
+        $targetCustomer = DB::table('users')
+        ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+        ->join('employees', 'customers.salesRepEmployeeNumber' , '=' ,'employees.employeeNumber')
+        ->select(        
+            'employees.employeeNumber',
+            'lastName',
+            'firstName',
+            'extension',
+            'phone',
+            'employees.email',
+            'officeCode',
+            'reportsTo',
+            'jobTitle',
+        )
+        ->where('username' , '=' , $username)->get()->first();
+
+        if($targetCustomer == NULL)
+            return ["error" => "Username not found"];
+        return $targetCustomer;
+
     }
 }
