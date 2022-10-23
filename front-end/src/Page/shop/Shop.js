@@ -25,72 +25,73 @@ const Shop = () => {
       .then((result) => {
         setChecked(false);
         console.log(result);
-        setProducts(result)
+        setProducts(result);
       })
+      .catch((error) => console.log("error", error));
+  };
+
+  const getDesOfType = () => {
+    var requestOptions = {
+      method: "GET",
+      redirect: "follow",
+    };
+
+    fetch("http://127.0.0.1:8000/api/productlines", requestOptions)
+      .then((response) => response.text())
+      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
 
   useEffect(() => {
     initProducts();
   }, []);
+
+  const handleClick = (IDProduct) => {
+    console.log(IDProduct);
+    localStorage.setItem("IDProduct", IDProduct);
+    window.location.href = "/product";
+  };
+
   const render = () => {
     if (check)
       return (
-        <div style={{textAlign: "center", margin: "100px 0px"}}>
+        <div style={{ textAlign: "center", margin: "100px 0px" }}>
           <h1>Loading . . .</h1>
         </div>
       );
     else {
       // console.log(1);
       const listItems = products.map((tasks) => (
-        // <div class="col-4" style={{ padding: "20px" }}>
-        //   <div class="" className="size">
-        //     <img class="card-img-top" src={tasks.url} alt="Card img" />
-        //     <div class="card-body">
-        //       <h4 class="card-title">{tasks.productName}</h4>
-        //       <p class="card-text">Type : {tasks.productLine}</p>
-        //       <p class="card-text">Scale : {tasks.productScale}</p>
-        //       <p class="card-text">Vendor : {tasks.productVendor}</p>
-        //       <p class="card-text">Description : {tasks.productDescription}</p>
-        //       <p class="card-text">Stock : {tasks.quantityInStock}</p>
-        //       <p class="card-text">Price : {tasks.buyPrice}</p>
-        //       <p class="card-text">MSRP : {tasks.MSRP}</p>
-        //       <a href="" class="btn btn-primary">
-        //         Add to cart
-        //       </a>
-        //     </div>
-        //   </div>
-        // </div>
-
         <Card
-            style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
-          >
-            <Card.Img variant="top" src={tasks.url} />
-            <Card.Body>
-              <Card.Title>{tasks.productName}</Card.Title>
-              <Card.Text>
-                <b>Type :</b> {tasks.productLine}
-              </Card.Text>
-              <Card.Text>
-                <b>Scale :</b> {tasks.productScale}
-              </Card.Text>
+          style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
+          onClick={() => handleClick(tasks.productCode)}
+          type="submit"
+        >
+          <Card.Img variant="top" src={tasks.url} />
+          <Card.Body>
+            <Card.Title>{tasks.productName}</Card.Title>
+            <Card.Text>
+              <b>Type :</b> {tasks.productLine}
+            </Card.Text>
+            <Card.Text>
+              <b>Scale :</b> {tasks.productScale}
+            </Card.Text>
 
-              <Card.Text>
-                <b>Stock :</b> {tasks.quantityInStock}
-              </Card.Text>
-              <Card.Text>
-                <b>Price :</b> {tasks.buyPrice}
-              </Card.Text>
+            <Card.Text>
+              <b>Stock :</b> {tasks.quantityInStock}
+            </Card.Text>
+            <Card.Text>
+              <b>Price :</b> {tasks.buyPrice}
+            </Card.Text>
 
-              <Button variant="primary">Go somewhere</Button>
-            </Card.Body>
-          </Card>
+            <Button variant="primary">Go somewhere</Button>
+          </Card.Body>
+        </Card>
       ));
 
       return <div class="row justify-content-start">{listItems}</div>;
     }
   };
-
 
   return (
     <div class="">
@@ -99,7 +100,6 @@ const Shop = () => {
       </h1>
       <div class="container">{render()}</div>
     </div>
-    
   );
 };
 
