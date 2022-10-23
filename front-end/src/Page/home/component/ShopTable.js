@@ -10,11 +10,11 @@ const ShopTable = () => {
 
   const initProducts = async () => {
     var requestOptions = {
-      method: "POST",
+      method: "GET",
       redirect: "follow",
     };
 
-    await fetch("http://127.0.0.1:8000/api/products/random", requestOptions)
+    await fetch("http://127.0.0.1:8000/api/randomproduct", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         setChecked(false);
@@ -29,7 +29,7 @@ const ShopTable = () => {
 
   const handleClick = (IDProduct) => {
     console.log(IDProduct);
-    localStorage.setItem("picture", IDProduct);
+    localStorage.setItem("IDProduct", IDProduct);
     window.location.href = "/product";
   };
 
@@ -44,19 +44,7 @@ const ShopTable = () => {
       // console.log(1);
       const listItems = products.map((tasks) => {
         return (
-          // <div class="col-4" className="background_product" style={{ padding: "20px" }}>
-          //   <div class="" className="size">
-          //     <img class="card-img-top" src={tasks.url} alt="Card img" type="submit" onClick={() => handleClick(tasks.productCode)} />
-          //     <div class="card-body">
-          //       <h4 class="card-title">{tasks.productName}</h4>
-          //       <p class="card-text">{tasks.productDescription}</p>
-          //       <a href="" class="btn btn-primary">
-          //         Add to cart
-          //       </a>
-          //     </div>
-          //   </div>
-          // </div>
-
+         
           <Card
             style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
             onClick={() => handleClick(tasks.productCode)}
@@ -79,7 +67,7 @@ const ShopTable = () => {
                 <b>Price :</b> {tasks.buyPrice}
               </Card.Text>
 
-              <Button variant="primary">Go somewhere</Button>
+              <Button variant="primary" href="/">Go somewhere</Button>
             </Card.Body>
           </Card>
         );
