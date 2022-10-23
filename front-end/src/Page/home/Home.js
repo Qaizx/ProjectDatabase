@@ -5,7 +5,10 @@ const Home = () => {
   return (
     <>
       <h1 class="welcomeText" id="head">
-        Welcome to <span style={{ color: "red" }}>shop</span>
+        Welcome to 
+      </h1>
+      <h1 class="shopText" id="head">
+       shop
       </h1>
       <div style={{ textAlign: "center" }}>
         <button class="get_start" type="submit">
