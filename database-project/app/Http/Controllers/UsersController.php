@@ -216,7 +216,9 @@ class UsersController extends Controller
                 'comments',
                 'orders.customerNumber'
             )
-            ->where('username', '=', $username)->get();
+            ->where('username', '=', $username)->get()->first();
+        if ($target == NULL)
+            return ["error" => "Username not found"];
         return $target;
     }
 }

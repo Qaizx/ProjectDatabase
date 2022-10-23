@@ -35,35 +35,36 @@ Route::group([
 
 Route::group(
     [
-        'middleware' => 'api' ,
-        'namespace' => 'App\Http\Controllers' ,
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
     ],
     function ($router) {
-        Route::resource('products' , 'ProductsController');
-        Route::resource('customers' , 'CustomersController');
-        Route::resource('employees' , 'EmployeesController');
-        Route::resource('offices' , 'OfficesController');
-        Route::resource('orderdetails' , 'OrderdetailsController');
-        Route::resource('orders' , 'OrdersController');
-        Route::resource('payments' , 'PaymentsController');
-        Route::resource('productlines' , 'ProductlinesController');
-        Route::resource('users' , 'UsersController');
+        Route::resource('products', 'ProductsController');
+        Route::resource('customers', 'CustomersController');
+        Route::resource('employees', 'EmployeesController');
+        Route::resource('offices', 'OfficesController');
+        Route::resource('orderdetails', 'OrderdetailsController');
+        Route::resource('orders', 'OrdersController');
+        Route::resource('payments', 'PaymentsController');
+        Route::resource('productlines', 'ProductlinesController');
+        Route::resource('users', 'UsersController');
         Route::resource('carts', 'CartsController');
     }
 );
 
 Route::group(
     [
-        'middleware' => 'api' ,
-        'namespace' => 'App\Http\Controllers' ,
+        'middleware' => 'api',
+        'namespace' => 'App\Http\Controllers',
     ],
     function ($router) {
-        Route::post('/users/login' , [UsersController::class,'login']);
-        Route::post('/users/register' , [UsersController::class,'store']);
-        Route::post('/getProfile' , [UsersController::class,'profile']);
-        Route::post('/getEmployee' , [UsersController::class, 'employee']);
-        Route::post('/getOffice' , [EmployeesController::class, 'office']);
-        Route::get('/randomproduct' , [ProductsController::class,'getRandomProduct']);
-        Route::post('/getOrders' , [UsersController::class,'orderFetch']);
+        Route::post('/users/login', [UsersController::class, 'login']);
+        Route::post('/users/register', [UsersController::class, 'store']);
+        Route::post('/getProfile', [UsersController::class, 'profile']);
+        Route::post('/getEmployee', [UsersController::class, 'employee']);
+        Route::post('/getOffice', [EmployeesController::class, 'office']);
+        Route::get('/randomproduct', [ProductsController::class, 'getRandomProduct']);
+        Route::post('/getOrders', [UsersController::class, 'orderFetch']);
+        Route::post('/getProductLine', [ProductsController::class, 'getProductLine']);
     }
 );

@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Products;
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class ProductsController extends Controller
 {
@@ -54,7 +56,7 @@ class ProductsController extends Controller
         //     'MSRP' => $request->MSRP,
         //     'url' => $request->url
         //  ]);
-         Products::create($request->all());
+        Products::create($request->all());
     }
 
     /**
@@ -84,8 +86,28 @@ class ProductsController extends Controller
         $products->delete();
     }
 
-    public function getRandomProduct(){
+    public function getRandomProduct()
+    {
         $randomProducts = Products::inRandomOrder()->limit(5)->get();
         return $randomProducts;
+    }
+
+    public function getProductLine(Request $request)
+    {
+        $productCode = $request->productCode;
+
+        $productLine = DB::table('products')
+            ->join('productlines', 'products.productLine', '=', 'productlines.productLine')
+            ->select(
+                'productlines.productLine',
+                'textDescription',
+                'htmlDescription',
+                'image'
+            )
+            ->where('products.productCode', '=', $productCode)->get()->first();
+
+        if ($productLine == NULL)
+            return ["error" => "Product not found"];
+        return $productLine;
     }
 }
