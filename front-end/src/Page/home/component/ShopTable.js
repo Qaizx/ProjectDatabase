@@ -1,13 +1,11 @@
 import { useEffect, useState } from "react";
 import "./ShopTable.css";
 
-
-
 const ShopTable = () => {
   const [products, setProducts] = useState([]);
   const [check, setChecked] = useState(true);
 
-  const initProducts = async() => {
+  const initProducts = async () => {
     var requestOptions = {
       method: "POST",
       redirect: "follow",
@@ -17,17 +15,23 @@ const ShopTable = () => {
       .then((response) => response.json())
       .then((result) => {
         setChecked(false);
-        setProducts(result)
+        setProducts(result);
       })
       .catch((error) => console.log("error", error));
-  }
+  };
 
   useEffect(() => {
     initProducts();
   }, []);
 
+
+  const handleClick = (names) => {
+    
+    console.log(names);
+  }
+
   const render = () => {
-    if (check) 
+    if (check)
       return (
         <div className="text-center space-y-3">
           <p className="text-2xl font-semibold">Historical price</p>
@@ -37,13 +41,9 @@ const ShopTable = () => {
     else {
       // console.log(1);
       const listItems = products.map((tasks) => (
-        <div class="col-4" style={{ padding: "20px"}}>
+        <div class="col-4" style={{ padding: "20px" }}>
           <div class="" className="size">
-            <img
-              class="card-img-top"
-              src={tasks.url}
-              alt="Card img"
-            />
+            <img class="card-img-top" src={tasks.url} alt="Card img" onClick={handleClick(tasks.productCode)}/>
             <div class="card-body">
               <h4 class="card-title">{tasks.productName}</h4>
               <p class="card-text">{tasks.productDescription}</p>
@@ -61,12 +61,11 @@ const ShopTable = () => {
 
   return (
     <div class="">
-      <h1 className="product">
+      <h1 className="product" onClick={handleClick('name')}>
         Shop <span style={{ color: "white" }}>Today</span>
       </h1>
       <div class="container">{render()}</div>
     </div>
-    
   );
 };
 
