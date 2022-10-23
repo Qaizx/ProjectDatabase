@@ -10,6 +10,13 @@
   font-family: "Times New Roman", Times, serif;
 }
 
+.shopText {
+  color:red;
+  text-align: center;
+  font-size: 150px;
+  font-family: "Times New Roman", Times, serif;
+}
+
 #down {
   margin-top: 100%;
   padding-bottom: 25%;
