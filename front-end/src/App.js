@@ -38,6 +38,7 @@ function App() {
           <Route index element={<Home />} />
           <Route path="profile" element={<Profile />}/>
           <Route path="info" element={<Info />}/>
+          <Route path="shop" element={<Shop />}/>
         </Route>
       );
     } else {
