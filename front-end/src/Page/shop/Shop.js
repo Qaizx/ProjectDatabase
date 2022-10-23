@@ -36,9 +36,8 @@ const Shop = () => {
   const render = () => {
     if (check)
       return (
-        <div className="text-center space-y-3">
-          <p className="text-2xl font-semibold">Historical price</p>
-          <p className="text-2xl">Loading ...</p>
+        <div style={{textAlign: "center", margin: "100px 0px"}}>
+          <h1>Loading . . .</h1>
         </div>
       );
     else {
