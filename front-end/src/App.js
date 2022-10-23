@@ -8,7 +8,7 @@ import Login from "./Page/login/Login";
 import Register from "./Page/register/Register";
 import Info from "./Page/info/Info";
 import Shop from "./Page/shop/Shop";
-import Cart from "./Page/cart/Cart";
+import Cart from "./Page/cart/cart"; 
 import Product from "./Page/product/Product";
 import Payment from "./Page/payment/Payment";
 import Profile from "./Page/profile/Profile";
@@ -36,7 +36,8 @@ function App() {
       return (
         <Route path="/" element={<NavbarLogin />}>
           <Route index element={<Home />} />
-          <Route path="info" element={<Info />} />
+          <Route path="profile" element={<Profile />}/>
+          <Route path="info" element={<Info />}/>
         </Route>
       );
     } else {
@@ -49,7 +50,6 @@ function App() {
           <Route path="cart" element={<Cart />}/>
           <Route path="product" element={<Product />}/>
           <Route path="payment" element={<Payment />}/>
-          <Route path="profile" element={<Profile />}/>
         </Route>
       );
     }
