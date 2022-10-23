@@ -14,6 +14,7 @@ const NavbarLogin = () => {
       <Navbar variant="dark" bg="dark" expand="lg">
         <Container fluid>
           <Navbar.Brand href="/">Home</Navbar.Brand>
+          <Navbar.Brand href="/shop">shop</Navbar.Brand>
           <Navbar.Toggle aria-controls="navbar-dark-example" />
           <Navbar.Collapse id="navbar-dark-example">
             <div className="me-auto"></div>
