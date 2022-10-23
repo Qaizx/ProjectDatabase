@@ -61,5 +61,6 @@ Route::group(
         Route::post('/users/register' , [UsersController::class,'store']);
         Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
         Route::post('/getProfile' , [UsersController::class,'profile']);
+        Route::post('/getOrders' , [UsersController::class,'orderFetch']);
     }
 );

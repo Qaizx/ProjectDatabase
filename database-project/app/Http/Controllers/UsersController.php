@@ -164,4 +164,21 @@ class UsersController extends Controller
 
         return $targetCustomer;
     }
+    public function orderFetch(Request $request){
+        $username = $request -> username;
+        $target = DB::table('users')
+        ->join('orders','orders.customerNumber','=','users.customerNumber')
+        ->select(
+            'orderNumber' ,
+            'orderDate' ,
+            'requiredDate' ,
+            'shippedDate',
+            'status' ,
+            'comments',
+            'orders.customerNumber'
+        )
+        ->where('username','=',$username)->get();
+        return $target;
+            
+    }
 }
