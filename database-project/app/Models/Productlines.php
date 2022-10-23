@@ -10,6 +10,7 @@ class Productlines extends Model
     use HasFactory;
 
     protected $primaryKey = 'productLine';
+    public $incrementing = false;
 
     protected $fillable = [
         'productLine',
