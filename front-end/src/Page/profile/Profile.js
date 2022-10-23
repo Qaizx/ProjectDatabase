@@ -8,6 +8,7 @@ const Profile = () => {
   const [profile, setProfile] = useState();
   const [picture, setPicture] = useState();
   const [check, setChecked] = useState(true);
+  const [checkPic, setCheckPic] = useState(true);
   const CryptoJS = require("crypto-js");
 
   const getProfile = async () => {
@@ -53,14 +54,44 @@ const Profile = () => {
     };
 
     fetch(
-      "https://api.unsplash.com/photos/random/?client_id=xpNXT57X0GEI_BNldxm4J4wbD6qTpR_0pVb2Gyqey9E",
+      "https://api.unsplash.com/photos/random/?client_id=jQ6hAqjRKnrpBau5FEmUfJwYTRnc6RxZSab-P7PdTwA",
       requestOptions
     )
       .then((response) => response.json())
       .then((result) => {
-        setPicture(result.urls.raw)
-        // cons ole.log(result.urls.raw);
+        setPicture(result.urls.raw);
+        setCheckPic(false);
+      })
+      .catch((error) => console.log("error", error));
+  };
 
+
+  const getProfileRep = async () => {
+    const token = localStorage.getItem("token");
+    const username = CryptoJS.enc.Base64.parse(token).toString(
+      CryptoJS.enc.Utf8
+    );
+
+    // console.log(username);
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      username: username,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    await fetch("http://127.0.0.1:8000/api/getEmployee", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        localStorage.setItem("IDSaleRep", result.employeeNumber);
       })
       .catch((error) => console.log("error", error));
   };
@@ -68,6 +99,7 @@ const Profile = () => {
   useEffect(() => {
     getProfile();
     getPicture();
+    getProfileRep()
   }, []);
 
   const render = () => {
@@ -89,10 +121,14 @@ const Profile = () => {
                       <div class="">
                         <h3 class="mb-0">{profile.customerName}</h3>
                       </div>
+
                       <div class="eiei d-flex">
-                        <div class="mx-2">
-                          <button class="">SalesRep</button>
-                        </div>
+                        <Link to="/salesrep">
+                          <div class="mx-2">
+                            <button class="">SalesRep</button>
+                          </div>
+                        </Link>
+
                         <div class="mx-2    ">
                           <button class="">History</button>
                         </div>
@@ -106,11 +142,7 @@ const Profile = () => {
                     <div class="card-body">
                       <div class="row">
                         <div class="col-md-5">
-                          <img
-                            src={picture}
-                            class="w-100"
-                            alt="Profile Pic"
-                          />
+                          <img src={picture} class="w-100" alt="Profile Pic" />
                         </div>
                         <div class="col mt-2">
                           <h2 class="mb-3">Name : {profile.customerName}</h2>
