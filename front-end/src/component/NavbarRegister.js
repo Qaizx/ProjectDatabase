@@ -18,7 +18,7 @@ const NavbarRegister = () => {
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"
-                title="User"
+                title="Login/Reg"
                 menuVariant="dark"
                 style={{ margin: "0px 10px" }}
                 align="end"

@@ -19,15 +19,15 @@ function App() {
 
   useEffect(() => {
     const token = localStorage.getItem("token");
-    // console.log(token);
+    console.log(token);
     if (token == null) {
       setLogin(false);
     } else {
       setLogin(true);
-      const username = CryptoJS.enc.Base64.parse(token).toString(
+      const username = CryptoJS.enc.Base64.parse("aW5zZWN1cmVCb2JvbGluazY=").toString(
         CryptoJS.enc.Utf8
       );
-      // console.log(username);
+      console.log(username);
     }
   }, []);
 

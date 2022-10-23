@@ -20,7 +20,7 @@ const NavbarLogin = () => {
             <Nav>
               <NavDropdown
                 id="nav-dropdown-dark-example"
-                title="user before login"
+                title="User"
                 menuVariant="dark"
                 style={{ margin: "0px 10px" }}
                 align="end"
