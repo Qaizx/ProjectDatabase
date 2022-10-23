@@ -56,7 +56,7 @@ const Login = () => {
     //insecureBobolink6
     //Qo196EqODjjreL4C3STk
 
-    fetch("http://127.0.0.1:8000/users/login", requestOptions)
+    fetch("http://127.0.0.1:8000/api/users/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         let text = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(result.username));
@@ -81,7 +81,7 @@ const Login = () => {
           >
             Username / Email
           </Form.Label>
-          <Col sm="5">
+          <Col sm="4">
             <Form.Control
               required
               style={{ margin: "0px -290px", fontSize: "30px" }}
@@ -106,7 +106,7 @@ const Login = () => {
           >
             Password
           </Form.Label>
-          <Col sm="5">
+          <Col sm="4">
             <Form.Control
               required
               style={{ margin: "0px -290px", fontSize: "30px" }}
