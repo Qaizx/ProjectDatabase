@@ -64,5 +64,6 @@ Route::group(
         Route::post('/getEmployee' , [UsersController::class, 'employee']);
         Route::post('/getOffice' , [EmployeesController::class, 'office']);
         Route::get('/randomproduct' , [ProductsController::class,'getRandomProduct']);
+        Route::post('/getOrders' , [UsersController::class,'orderFetch']);
     }
 );

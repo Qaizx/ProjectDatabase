@@ -39,6 +39,8 @@ function App() {
           <Route path="profile" element={<Profile />}/>
           <Route path="info" element={<Info />}/>
           <Route path="shop" element={<Shop />}/>
+          <Route path="payment" element={<Payment />}/>
+          <Route path="product" element={<Product />}/>
         </Route>
       );
     } else {
@@ -50,7 +52,6 @@ function App() {
           <Route path="shop" element={<Shop />}/>
           <Route path="cart" element={<Cart />}/>
           <Route path="product" element={<Product />}/>
-          <Route path="payment" element={<Payment />}/>
         </Route>
       );
     }

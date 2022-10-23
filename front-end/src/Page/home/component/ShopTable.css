@@ -22,3 +22,15 @@ p {
     font-size: 100px;
     font-family: "Times New Roman", Times, serif;
   }
+
+
+.background {
+  background-color:grey;
+  margin-left: 60px;
+  margin-right: 60px;
+  padding-top: 10px;
+  padding-bottom: 30px;
+  border-radius: 20px;
+}
+
+

@@ -1,0 +1,13 @@
+.pad{
+    padding: 50px 30px;
+    
+    /* margin-top: 10px; */
+}
+
+.headerText_info {
+    color: black;
+    text-align: center;
+    margin-top: 30px;
+    font-size: 50px;
+    font-family: "Times New Roman", Times, serif;
+  }

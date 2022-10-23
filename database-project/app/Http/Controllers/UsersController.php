@@ -32,19 +32,19 @@ class UsersController extends Controller
     public function store(StoreUsersRequest $request)
     {
         //
-        $result = DB::transaction(function() use ($request) {
+        $result = DB::transaction(function () use ($request) {
             $username = $request->username;
             $email = $request->email;
             $password = $request->password;
-    
-            $duplicateUsername = Users::where('username' , $username)->first();
-            $duplicateEmail = Users::where('email' , $email)->first();
 
-            if($duplicateEmail != NULL)
-                return 1; 
-            if($duplicateUsername != NULL)
+            $duplicateUsername = Users::where('username', $username)->first();
+            $duplicateEmail = Users::where('email', $email)->first();
+
+            if ($duplicateEmail != NULL)
+                return 1;
+            if ($duplicateUsername != NULL)
                 return 2;
-            
+
             $user = new Users();
             $user->username = $username;
             $user->email = $email;
@@ -52,17 +52,17 @@ class UsersController extends Controller
             $user->save();
 
             $findUser = Users::where([
-                ['username' , '=' ,  $username],
-                ['email' , '=' ,  $email],
+                ['username', '=',  $username],
+                ['email', '=',  $email],
             ])->first();
 
             app('App\Http\Controllers\CustomersController')->createCustomer($findUser->customerNumber);
             return 3;
         });
 
-        if($result == 1) {
+        if ($result == 1) {
             return ["error" => "This Email is already taken."];
-        } else if($result == 2) {
+        } else if ($result == 2) {
             return ["error" => "This Username is already taken."];
         } else {
             return ["status" => "ok"];
@@ -109,12 +109,14 @@ class UsersController extends Controller
         $user->delete();
     }
 
-    public function getCustomer($id) {
-        $customer = \DB::table('customers')->where('customerNumber','=' , $id)->get();
+    public function getCustomer($id)
+    {
+        $customer = \DB::table('customers')->where('customerNumber', '=', $id)->get();
         return $customer;
     }
 
-    public function login(Request $request){
+    public function login(Request $request)
+    {
 
         $username = $request->username;
         $email = $request->email;
@@ -122,13 +124,13 @@ class UsersController extends Controller
 
         $user = NULL;
 
-        if($email) {
+        if ($email) {
             $user = Users::where([
-                ['email' , '=' ,  $email],
+                ['email', '=',  $email],
             ])->first();
-        } else if($username) {
+        } else if ($username) {
             $user = Users::where([
-                ['username' , '=' ,  $username],
+                ['username', '=',  $username],
             ])->first();
         } else {
             return ["error" => "Email or Username is not matched."];
@@ -138,13 +140,14 @@ class UsersController extends Controller
         //     return ["error" => "Email or password is not matched."];
         // }
 
-        if($password != $user->password && !Hash::check($password, $user->password)) {
+        if ($password != $user->password && !Hash::check($password, $user->password)) {
             return ["error" => "Password is not matched."];
         }
         return ["status" => "ok"];
     }
 
-    public function profile(Request $request) {
+    public function profile(Request $request)
+    {
         $username = $request->username;
 
         // $customerNumber = Users::where([
@@ -154,7 +157,7 @@ class UsersController extends Controller
         // $customer = Customers::where
         $targetCustomer = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
-            ->select(        
+            ->select(
                 'customers.customerNumber',
                 'customerName',
                 'contactLastName',
@@ -169,33 +172,51 @@ class UsersController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username' , '=' , $username)->get()->first();
+            ->where('username', '=', $username)->get()->first();
 
         return $targetCustomer;
     }
 
-    public function employee(Request $request) {
+    public function employee(Request $request)
+    {
         $username = $request->username;
 
         $targetCustomer = DB::table('users')
-        ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
-        ->join('employees', 'customers.salesRepEmployeeNumber' , '=' ,'employees.employeeNumber')
-        ->select(        
-            'employees.employeeNumber',
-            'lastName',
-            'firstName',
-            'extension',
-            'phone',
-            'employees.email',
-            'officeCode',
-            'reportsTo',
-            'jobTitle',
-        )
-        ->where('username' , '=' , $username)->get()->first();
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->join('employees', 'customers.salesRepEmployeeNumber', '=', 'employees.employeeNumber')
+            ->select(
+                'employees.employeeNumber',
+                'lastName',
+                'firstName',
+                'extension',
+                'phone',
+                'employees.email',
+                'officeCode',
+                'reportsTo',
+                'jobTitle',
+            )
+            ->where('username', '=', $username)->get()->first();
 
-        if($targetCustomer == NULL)
+        if ($targetCustomer == NULL)
             return ["error" => "Username not found"];
         return $targetCustomer;
+    }
 
+    public function orderFetch(Request $request)
+    {
+        $username = $request->username;
+        $target = DB::table('users')
+            ->join('orders', 'orders.customerNumber', '=', 'users.customerNumber')
+            ->select(
+                'orderNumber',
+                'orderDate',
+                'requiredDate',
+                'shippedDate',
+                'status',
+                'comments',
+                'orders.customerNumber'
+            )
+            ->where('username', '=', $username)->get();
+        return $target;
     }
 }

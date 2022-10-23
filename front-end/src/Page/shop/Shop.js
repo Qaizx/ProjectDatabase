@@ -36,32 +36,55 @@ const Shop = () => {
   const render = () => {
     if (check)
       return (
-        <div className="text-center space-y-3">
-          <p className="text-2xl font-semibold">Historical price</p>
-          <p className="text-2xl">Loading ...</p>
+        <div style={{textAlign: "center", margin: "100px 0px"}}>
+          <h1>Loading . . .</h1>
         </div>
       );
     else {
       // console.log(1);
       const listItems = products.map((tasks) => (
-        <div class="col-4" style={{ padding: "20px" }}>
-          <div class="" className="size">
-            <img class="card-img-top" src={tasks.url} alt="Card img" />
-            <div class="card-body">
-              <h4 class="card-title">{tasks.productName}</h4>
-              <p class="card-text">Type : {tasks.productLine}</p>
-              <p class="card-text">Scale : {tasks.productScale}</p>
-              <p class="card-text">Vendor : {tasks.productVendor}</p>
-              <p class="card-text">Description : {tasks.productDescription}</p>
-              <p class="card-text">Stock : {tasks.quantityInStock}</p>
-              <p class="card-text">Price : {tasks.buyPrice}</p>
-              <p class="card-text">MSRP : {tasks.MSRP}</p>
-              <a href="" class="btn btn-primary">
-                Add to cart
-              </a>
-            </div>
-          </div>
-        </div>
+        // <div class="col-4" style={{ padding: "20px" }}>
+        //   <div class="" className="size">
+        //     <img class="card-img-top" src={tasks.url} alt="Card img" />
+        //     <div class="card-body">
+        //       <h4 class="card-title">{tasks.productName}</h4>
+        //       <p class="card-text">Type : {tasks.productLine}</p>
+        //       <p class="card-text">Scale : {tasks.productScale}</p>
+        //       <p class="card-text">Vendor : {tasks.productVendor}</p>
+        //       <p class="card-text">Description : {tasks.productDescription}</p>
+        //       <p class="card-text">Stock : {tasks.quantityInStock}</p>
+        //       <p class="card-text">Price : {tasks.buyPrice}</p>
+        //       <p class="card-text">MSRP : {tasks.MSRP}</p>
+        //       <a href="" class="btn btn-primary">
+        //         Add to cart
+        //       </a>
+        //     </div>
+        //   </div>
+        // </div>
+
+        <Card
+            style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
+          >
+            <Card.Img variant="top" src={tasks.url} />
+            <Card.Body>
+              <Card.Title>{tasks.productName}</Card.Title>
+              <Card.Text>
+                <b>Type :</b> {tasks.productLine}
+              </Card.Text>
+              <Card.Text>
+                <b>Scale :</b> {tasks.productScale}
+              </Card.Text>
+
+              <Card.Text>
+                <b>Stock :</b> {tasks.quantityInStock}
+              </Card.Text>
+              <Card.Text>
+                <b>Price :</b> {tasks.buyPrice}
+              </Card.Text>
+
+              <Button variant="primary">Go somewhere</Button>
+            </Card.Body>
+          </Card>
       ));
 
       return <div class="row justify-content-start">{listItems}</div>;
@@ -72,7 +95,7 @@ const Shop = () => {
   return (
     <div class="">
       <h1 className="product">
-        Shop <span style={{ color: "white" }}>Today</span>
+        Shop <span style={{ color: "blue" }}>Page</span>
       </h1>
       <div class="container">{render()}</div>
     </div>
