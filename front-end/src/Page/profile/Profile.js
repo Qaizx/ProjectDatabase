@@ -1,84 +1,129 @@
-import "./Profile.css"
+import "./Profile.css";
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
-import React from "react"
+import React, { useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useState } from "react";
 
 const Profile = () => {
-    const navigate = useNavigate();
+  const [profile, setProfile] = useState();
+  const [check, setChecked] = useState(true);
+  const CryptoJS = require("crypto-js");
 
+  const getProfile = async () => {
+    const token = localStorage.getItem("token");
+    const username = CryptoJS.enc.Base64.parse(token).toString(
+      CryptoJS.enc.Utf8
+    );
 
-    const handleSubmit = () =>{
-        console.log("1");
-    }
-    return (
+    // console.log(username);
+
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Cookie",
+      "XSRF-TOKEN=eyJpdiI6IlJJOFBKQ20xRjRUR0NhUCtTUEdyMHc9PSIsInZhbHVlIjoidnJySzRYMktmYVpUZkVzRDcrR0dQZjBBRDdkc0NpbmJ5cUdVdEc4T0p5Y0V5L1h3REVvUko2cWVvTUdaTFR4bm1lM3Arcmg1QklTTDBQMWM1RlRiVGdvN2l6RWt1MzNPUURnZ1hWSVhwL3VLYWlBTmFmc1ZYc1RkNFgrM2pBRUkiLCJtYWMiOiJjODQ2ZjBkNDI3ZTEwMTQyMjNiNmQ5NTJiZWIyYmI1NzViZTg0OWI1Y2E3OTdkNTE1NDIxNTY1ZDdhNWZjY2M5IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IjhHUUk5cW91blA0YkZQVTFiVjl2dFE9PSIsInZhbHVlIjoiTVJJa3lzUjk5V3kwdFRmVkNjMDN3QXAxQjhhM2JFN0FabDZpT2VFbWtaWTMrT0tIRUZqQ2I0VTB4VlpFYVNiMXZiZElUZWd6c0N1RHhFR0Y3YlBmNHVjQmN2TnM3eWRQNmJ6NjJSU1psdFFNVDZvcExwT2pwWjgvY2dxMnA0SjIiLCJtYWMiOiIzYjE5ZTZlOTU4OWI1ODE3ZmY2MDZkOGM0OTBjMGM2NTI5MmY4MDAyYzdhZmYwMjI3NGZmYTg0YjM4ODAyMWU0IiwidGFnIjoiIn0%3D"
+    );
+
+    var raw = JSON.stringify({
+      username: username,
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://127.0.0.1:8000/api/getProfile", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        setProfile(result);
+        console.log(profile);
+        setChecked(false);
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  useEffect(() => {
+    getProfile();
+  }, []);
+
+  // console.log(profile);
+
+  const render = () => {
+    if (check) {
+      return (
         <div>
-            <div>
-                <h1> This is product page</h1>
-            </div>
-            <div onSubmit={handleSubmit}>
-                <div class="container py-5">
-                    <div class="row d-flex justify-content-center my-4">
-                        <div class="col-md-10">
-                            <div class="card " >
-                                <div class="card-header py-3 d-flex ">
-                                    <div class="">
-                                        <h3 class="mb-0">GIGACHADRCN</h3>
-                                    </div>
-                                    <div class="eiei d-flex">
-                                        <div class="mx-2">
-                                            <button class="">SalesRep</button>
-                                        </div>
-                                        <div class="mx-2    ">
-                                            <button class="">History</button>
-                                        </div>
-                                        <Link to="/info">
-                                        <div class="mx-2">
-                                            <button type="button">Edit Profile</button>
-                                        </div>  
-                                        </Link>
-                                        
-                                    </div>
-
-                                </div>
-                                <div class="card-body">
-                                    <div class="row">
-                                        <div class="col-md-5">
-                                            <img src="https://scontent.fcnx3-1.fna.fbcdn.net/v/t1.15752-9/285106686_554608796243278_4789117999661605040_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Nhj1ZDwm9E8AX9_KnF0&_nc_ht=scontent.fcnx3-1.fna&oh=03_AdR-3ljZx_yBBDzWJyoH0TnKRQu-yHgJcpUr1V1CW4B-Vw&oe=637887B6"
-                                                class="w-100" alt="Profile Pic" />
-                                        </div>
-                                        <div class="col mt-2">
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                            <h2 class="mb-3">CustomerDetail : NAN</h2>
-                                        </div>
-
-                                    </div>
-
-
-
-                                </div>
-                            </div>
-                        </div>
-
-
-                    </div>
-                </div>
-
-            </div>
+          <h1>Loading . . .</h1>
         </div>
-    )
-}
+      );
+    } else {
+      return (
+        <div>
+          <div>
+            <h1 className="headerText"> User Information</h1>
+          </div>
+          <div>
+            <div class="container py-5">
+              <div class="row d-flex justify-content-center my-4">
+                <div class="col-md-10">
+                  <div class="card ">
+                    <div class="card-header py-3 d-flex ">
+                      <div class="">
+                        <h3 class="mb-0">{profile.customerName}</h3>
+                      </div>
+                      <div class="eiei d-flex">
+                        <div class="mx-2">
+                          <button class="">SalesRep</button>
+                        </div>
+                        <div class="mx-2    ">
+                          <button class="">History</button>
+                        </div>
+                        <Link to="/info">
+                          <div class="mx-2">
+                            <button type="button">Edit Profile</button>
+                          </div>
+                        </Link>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                      <div class="row">
+                        <div class="col-md-5">
+                          <img
+                            src="https://scontent.fcnx3-1.fna.fbcdn.net/v/t1.15752-9/285106686_554608796243278_4789117999661605040_n.jpg?_nc_cat=105&ccb=1-7&_nc_sid=ae9488&_nc_ohc=Nhj1ZDwm9E8AX9_KnF0&_nc_ht=scontent.fcnx3-1.fna&oh=03_AdR-3ljZx_yBBDzWJyoH0TnKRQu-yHgJcpUr1V1CW4B-Vw&oe=637887B6"
+                            class="w-100"
+                            alt="Profile Pic"
+                          />
+                        </div>
+                        <div class="col mt-2">
+                          <h2 class="mb-3">Name : {profile.customerName}</h2>
+                          <h2 class="mb-3">Contact : {profile.contactFirstName} {profile.contactLastName}</h2>
+                          <h2 class="mb-3">Phone : {profile.phone}</h2>
+                          <h2 class="mb-3">Address 1 : {profile.addressLine1}</h2>
+                          <h2 class="mb-3">Address 2 : {profile.addressLine2}</h2>
+                          <h2 class="mb-3">City : {profile.city}</h2>
+                          <h2 class="mb-3">State : {profile.state}</h2>
+                          <h2 class="mb-3">Postal Code : {profile.postalCode}</h2>
+                          <h2 class="mb-3">Country : {profile.Country}</h2>
+                          <h2 class="mb-3">Credit Limit : {profile.creditLimit  }</h2>
 
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    }
+  };
+
+  return <div>
+    {render()}
+  </div>;
+};
 
 export default Profile;
