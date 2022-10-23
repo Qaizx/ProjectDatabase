@@ -26,7 +26,7 @@ const ShopTable = () => {
 
 
   const handleClick = (names) => {
-    
+
     console.log(names);
   }
 
@@ -40,20 +40,22 @@ const ShopTable = () => {
       );
     else {
       // console.log(1);
-      const listItems = products.map((tasks) => (
-        <div class="col-4" style={{ padding: "20px" }}>
-          <div class="" className="size">
-            <img class="card-img-top" src={tasks.url} alt="Card img" onClick={handleClick(tasks.productCode)}/>
-            <div class="card-body">
-              <h4 class="card-title">{tasks.productName}</h4>
-              <p class="card-text">{tasks.productDescription}</p>
-              <a href="" class="btn btn-primary">
-                Add to cart
-              </a>
+      const listItems = products.map((tasks) => {
+        return (
+          <div class="col-4" style={{ padding: "20px" }}>
+            <div class="" className="size">
+              <img class="card-img-top" src={tasks.url} alt="Card img" onClick={() => handleClick(tasks.productCode)} />
+              <div class="card-body">
+                <h4 class="card-title">{tasks.productName}</h4>
+                <p class="card-text">{tasks.productDescription}</p>
+                <a href="" class="btn btn-primary">
+                  Add to cart
+                </a>
+              </div>
             </div>
           </div>
-        </div>
-      ));
+        )
+      });
 
       return <div class="row justify-content-start">{listItems}</div>;
     }
