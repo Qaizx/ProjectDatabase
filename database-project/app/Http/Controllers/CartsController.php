@@ -58,6 +58,31 @@ class CartsController extends Controller
     }
 
     /**
+     * Decrease product in cart 
+     *
+     * @param  \App\Http\Requests\StoreCartsRequest  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function decrease(UpdateCartsRequest $request)
+    {
+        //
+
+        $v1 = $request->customerNumber;
+        $v2 = $request->productCode;
+        $target = Carts::where([
+            ['customerNumber', '=', $v1],
+            ['productCode', '=', $v2],
+        ])->get()->first();
+
+        $carts = $target;
+        if ($target->quantityInCart == 1) {
+            $carts->delete();
+        } else {
+            $carts->update(['quantityInCart' => $carts->quantityInCart - 1]);
+        }
+    }
+
+    /**
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateCartsRequest  $request
