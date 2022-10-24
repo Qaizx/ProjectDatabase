@@ -35,10 +35,6 @@ const Register = () => {
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Cookie",
-      "XSRF-TOKEN=eyJpdiI6IkZackszTFlGUVRHNHFVbE5ENmc5dWc9PSIsInZhbHVlIjoiYnFmTXJYM2JVaHoyTlhHM3EyL204WkxQemtlTkxYU00zQ0owSzlzL3diblJ3K1lodlVpNjc0ZmRXWEpZNmtQV0o4RFZ0Vk9JYUFyRGJGSFZneWVyamtzampQUXdWeUxuNFB6Zlp6VUI0RWZ6cnlHMkd6eDJPRmQ1NC94YlhnN3MiLCJtYWMiOiJlMTIwOGIxMjFiZjFlZjI2NGQ3ZTAwY2I0N2Y4YjIzNjllYzVjMDZkZTU3OGQ3Yzg2MTU1N2U3YzQxNzUwZTY3IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IjA3RUIxRmR6bEdYSHA4WVd5Q1d0NWc9PSIsInZhbHVlIjoiRGFVVTBuY0tXbEttR0dIcWF0YVpIcUlTR0xhbncwUG1OT3d0RE9uMFErVSs2QVdCYjB1MHV5dGx6cFNQd1Y1MzE0TmpIdHROSGNra2I2RHlmcVU3T1JtZDFjdGNLMlVaN1ZmZDJVSG9qSGF2OVdWak04Rk40anNhSlBLTWdxZHMiLCJtYWMiOiIxOWNlOWViMTk1NTFjZWVjZjI5YmUwMTY5Y2U2ZjUzMGNlMmFiNDFmYjI3MGZiMGVmNmNmNWIzM2RmODExZDQyIiwidGFnIjoiIn0%3D"
-    );
 
     var raw = JSON.stringify({
       username: inputs.username,
@@ -53,10 +49,10 @@ const Register = () => {
       redirect: "follow",
     };
 
-    fetch("http://127.0.0.1:8000/users/register", requestOptions)
+    fetch("http://127.0.0.1:8000/api/users/register", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        window.location.href = '/login'
+        window.location.href = "/login";
       })
       .catch((error) => console.log("error", error));
   };
