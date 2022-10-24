@@ -6,6 +6,17 @@ import { useState, useEffect } from "react";
 const Shop = () => {
   const [products, setProducts] = useState([]);
   const [check, setChecked] = useState(true);
+  const typeProduct = localStorage.getItem("type");
+  const [typeItem, setTypeItem] = useState([
+    "Show all",
+    "Classic Cars",
+    "Motorcycles",
+    "Planes",
+    "Ships",
+    "Trains",
+    "Trucks and Buses",
+    "Vintage Cars",
+  ]);
 
   const initProducts = async () => {
     var myHeaders = new Headers();
@@ -24,21 +35,9 @@ const Shop = () => {
       .then((response) => response.json())
       .then((result) => {
         setChecked(false);
-        console.log(result);
+        // console.log(result);
         setProducts(result);
       })
-      .catch((error) => console.log("error", error));
-  };
-
-  const getDesOfType = () => {
-    var requestOptions = {
-      method: "GET",
-      redirect: "follow",
-    };
-
-    fetch("http://127.0.0.1:8000/api/productlines", requestOptions)
-      .then((response) => response.text())
-      .then((result) => console.log(result))
       .catch((error) => console.log("error", error));
   };
 
@@ -46,10 +45,37 @@ const Shop = () => {
     initProducts();
   }, []);
 
+  const barType = () => {
+    const Item = typeItem.map(function (tasks) {
+      if (typeProduct === tasks) {
+        return (
+          <button class="select active" onClick={() => typeFilter(tasks)}>
+            {" "}
+            {tasks}
+          </button>
+        );
+      } else {
+        return (
+          <button class="select" onClick={() => typeFilter(tasks)}>
+            {" "}
+            {tasks}
+          </button>
+        );
+      }
+    });
+    return Item;
+  };
+
   const handleClick = (IDProduct) => {
     console.log(IDProduct);
     localStorage.setItem("IDProduct", IDProduct);
     window.location.href = "/product";
+  };
+
+  const typeFilter = (type) => {
+    console.log(type);
+    localStorage.setItem("type", type);
+    window.location.href = "/shop";
   };
 
   const render = () => {
@@ -61,34 +87,74 @@ const Shop = () => {
       );
     else {
       // console.log(1);
-      const listItems = products.map((tasks) => (
-        <Card
-          style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
-          onClick={() => handleClick(tasks.productCode)}
-          type="submit"
-        >
-          <Card.Img variant="top" src={tasks.url} />
-          <Card.Body>
-            <Card.Title>{tasks.productName}</Card.Title>
-            <Card.Text>
-              <b>Type :</b> {tasks.productLine}
-            </Card.Text>
-            <Card.Text>
-              <b>Scale :</b> {tasks.productScale}
-            </Card.Text>
 
-            <Card.Text>
-              <b>Stock :</b> {tasks.quantityInStock}
-            </Card.Text>
-            <Card.Text>
-              <b>Price :</b> {tasks.buyPrice}
-            </Card.Text>
+      const listItems = products.map(function (tasks) {
+        if (tasks.productLine === typeProduct) {
+          return (
+            <Card
+              style={{
+                width: "25rem",
+                margin: "30px 20px ",
+                paddingTop: "10px",
+              }}
+              onClick={() => handleClick(tasks.productCode)}
+              type="submit"
+            >
+              <Card.Img variant="top" src={tasks.url} />
+              <Card.Body>
+                <Card.Title>{tasks.productName}</Card.Title>
+                <Card.Text>
+                  <b>Type :</b> {tasks.productLine}
+                </Card.Text>
+                <Card.Text>
+                  <b>Scale :</b> {tasks.productScale}
+                </Card.Text>
 
-            <Button variant="primary">Go somewhere</Button>
-          </Card.Body>
-        </Card>
-      ));
+                <Card.Text>
+                  <b>Stock :</b> {tasks.quantityInStock}
+                </Card.Text>
+                <Card.Text>
+                  <b>Price :</b> {tasks.buyPrice}
+                </Card.Text>
 
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          );
+        } else if (typeProduct === "Show all") {
+          return (
+            <Card
+              style={{
+                width: "25rem",
+                margin: "30px 20px ",
+                paddingTop: "10px",
+              }}
+              onClick={() => handleClick(tasks.productCode)}
+              type="submit"
+            >
+              <Card.Img variant="top" src={tasks.url} />
+              <Card.Body>
+                <Card.Title>{tasks.productName}</Card.Title>
+                <Card.Text>
+                  <b>Type :</b> {tasks.productLine}
+                </Card.Text>
+                <Card.Text>
+                  <b>Scale :</b> {tasks.productScale}
+                </Card.Text>
+
+                <Card.Text>
+                  <b>Stock :</b> {tasks.quantityInStock}
+                </Card.Text>
+                <Card.Text>
+                  <b>Price :</b> {tasks.buyPrice}
+                </Card.Text>
+
+                <Button variant="primary">Go somewhere</Button>
+              </Card.Body>
+            </Card>
+          );
+        }
+      });
       return <div class="row justify-content-start">{listItems}</div>;
     }
   };
@@ -98,7 +164,12 @@ const Shop = () => {
       <h1 className="product">
         Shop <span style={{ color: "blue" }}>Page</span>
       </h1>
-      <div class="container">{render()}</div>
+      <div class="container">
+        <div>
+          <div id="myBtnContainer">{barType()}</div>
+          {render()}
+        </div>
+      </div>
     </div>
   );
 };
