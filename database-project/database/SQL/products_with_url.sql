@@ -34,7 +34,7 @@ VALUES
         7305,
         98.58,
         214.3,
-        'https://ddclassics.com/wp-content/uploads/legacy/dsc_0148_10142.jpg'
+        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Renault_Alpine_A_110_%28Sp%29.JPG/1920px-Renault_Alpine_A_110_%28Sp%29.JPG'
     ),
 (
         'S10_2016',
@@ -311,7 +311,7 @@ VALUES
         9772,
         93.89,
         142.25,
-        'https://img3.icarcdn.com/5622952/gallery_used-car-one2car-honda-civic-lx-sedan-thailand_5622952_cd5702486453864071990_v1sm.jpg?smia=xTM'
+        'https://upload.wikimedia.org/wikipedia/commons/7/7c/1993-1995_Honda_Civic_GLi_3-door_hatchback_01.jpg'
     ),
 (
         'S18_2238',
