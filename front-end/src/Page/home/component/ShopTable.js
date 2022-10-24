@@ -83,8 +83,8 @@ const ShopTable = () => {
                 </Card.Text>
               </div>
 
-              <Button variant="primary"  style={{marginTop: "10px"}} disabled={disabled} >
-                Go somewhere
+              <Button variant="primary" href="/cart"  style={{marginTop: "10px"}} disabled={disabled} >
+                Add product
               </Button>
             </Card.Body>
           </Card>

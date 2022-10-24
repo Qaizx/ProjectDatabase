@@ -168,8 +168,9 @@ const Shop = () => {
                     variant="primary"
                     style={{ marginTop: "10px" }}
                     disabled={disabled}
+                    href="/cart"
                   >
-                    Go somewhere
+                    Add product
                   </Button>
                 </Card.Body>
               </Card>
@@ -214,8 +215,9 @@ const Shop = () => {
                     variant="primary"
                     style={{ marginTop: "10px" }}
                     disabled={disabled}
+                    href="/cart"
                   >
-                    Go somewhere
+                    Add product
                   </Button>
                 </Card.Body>
               </Card>
@@ -263,8 +265,9 @@ const Shop = () => {
                     variant="primary"
                     style={{ marginTop: "10px" }}
                     disabled={disabled}
+                    href="/cart"
                   >
-                    Go somewhere
+                    Add product
                   </Button>
                 </Card.Body>
               </Card>
@@ -309,8 +312,9 @@ const Shop = () => {
                     variant="primary"
                     style={{ marginTop: "10px" }}
                     disabled={disabled}
+                    href="/cart"
                   >
-                    Go somewhere
+                    Add product
                   </Button>
                 </Card.Body>
               </Card>
