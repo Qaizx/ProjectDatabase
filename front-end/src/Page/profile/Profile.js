@@ -145,7 +145,7 @@ const Profile = () => {
                           <img src={picture} class="w-100" alt="Profile Pic" />
                         </div>
                         <div class="col mt-2">
-                          <h2 class="mb-3">Name : {profile.customerName}</h2>
+                          
                           <h2 class="mb-3">
                             Contact : {profile.contactFirstName}{" "}
                             {profile.contactLastName}
@@ -160,7 +160,7 @@ const Profile = () => {
                           <h2 class="mb-3">City : {profile.city}</h2>
                           <h2 class="mb-3">State : {profile.state}</h2>
 
-                          <h2 class="mb-3">Country : {profile.Country}</h2>
+                          <h2 class="mb-3">Country : {profile.country}</h2>
                           <h2 class="mb-3">
                             Postal Code : {profile.postalCode}
                           </h2>
