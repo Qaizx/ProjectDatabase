@@ -34,3 +34,53 @@ p {
   background-color: #666;
   color: white;
 }
+
+.search-container {
+  float: right;
+}
+
+
+.search-container input[type=text] {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 17px;
+  border: 1px solid #ddd;
+}
+
+ .search-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}
+
+ .search-container button:hover {
+  background: #ccc;
+}
+
+
+.detail-container {
+  float: left;
+}
+
+/* .detail-container i {
+  padding: 6px;
+  margin-top: 8px;
+  font-size: 40px;
+  
+} */
+
+.detail-container button {
+  float: right;
+  padding: 6px 10px;
+  margin-top: 8px;
+  margin-right: 16px;
+  background: #ddd;
+  font-size: 17px;
+  border: none;
+  cursor: pointer;
+}

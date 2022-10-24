@@ -17,6 +17,33 @@ const Shop = () => {
     "Trucks and Buses",
     "Vintage Cars",
   ]);
+  const [inputs, setInputs] = useState({});
+  const nameProduct = localStorage.getItem("nameOfProduct");
+
+  const checkNameProduct = () => {
+    if (nameProduct == null) {
+      return "Search . . .";
+    } else {
+      return nameProduct;
+    }
+  };
+
+  const handleChange = (event) => {
+    const name = event.target.name;
+    const value = event.target.value;
+    setInputs((values) => ({ ...values, [name]: value }));
+    // console.log(inputs.name);
+  };
+
+  const handleSubmit = () => {
+    console.log(inputs);
+    localStorage.setItem("nameOfProduct", inputs.name);
+    window.location.href = "/shop";
+  };
+  const handleClear = () => {
+    localStorage.removeItem("nameOfProduct");
+    window.location.href = "/shop";
+  };
 
   const initProducts = async () => {
     var myHeaders = new Headers();
@@ -89,72 +116,145 @@ const Shop = () => {
       // console.log(1);
 
       const listItems = products.map(function (tasks) {
-        if (tasks.productLine === typeProduct) {
-          return (
-            <Card
-              style={{
-                width: "25rem",
-                margin: "30px 20px ",
-                paddingTop: "10px",
-              }}
-              onClick={() => handleClick(tasks.productCode)}
-              type="submit"
-            >
-              <Card.Img variant="top" src={tasks.url} />
-              <Card.Body>
-                <Card.Title>{tasks.productName}</Card.Title>
-                <Card.Text>
-                  <b>Type :</b> {tasks.productLine}
-                </Card.Text>
-                <Card.Text>
-                  <b>Scale :</b> {tasks.productScale}
-                </Card.Text>
+        if (nameProduct === null) {
+          if (tasks.productLine === typeProduct) {
+            return (
+              <Card
+                style={{
+                  width: "25rem",
+                  margin: "30px 20px ",
+                  paddingTop: "10px",
+                }}
+                onClick={() => handleClick(tasks.productCode)}
+                type="submit"
+              >
+                <Card.Img variant="top" src={tasks.url} />
+                <Card.Body>
+                  <Card.Title>{tasks.productName}</Card.Title>
+                  <Card.Text>
+                    <b>Type :</b> {tasks.productLine}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Scale :</b> {tasks.productScale}
+                  </Card.Text>
 
-                <Card.Text>
-                  <b>Stock :</b> {tasks.quantityInStock}
-                </Card.Text>
-                <Card.Text>
-                  <b>Price :</b> {tasks.buyPrice}
-                </Card.Text>
+                  <Card.Text>
+                    <b>Stock :</b> {tasks.quantityInStock}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Price :</b> {tasks.buyPrice}
+                  </Card.Text>
 
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          );
-        } else if (typeProduct === "Show all") {
-          return (
-            <Card
-              style={{
-                width: "25rem",
-                margin: "30px 20px ",
-                paddingTop: "10px",
-              }}
-              onClick={() => handleClick(tasks.productCode)}
-              type="submit"
-            >
-              <Card.Img variant="top" src={tasks.url} />
-              <Card.Body>
-                <Card.Title>{tasks.productName}</Card.Title>
-                <Card.Text>
-                  <b>Type :</b> {tasks.productLine}
-                </Card.Text>
-                <Card.Text>
-                  <b>Scale :</b> {tasks.productScale}
-                </Card.Text>
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            );
+          } else if (typeProduct === "Show all") {
+            return (
+              <Card
+                style={{
+                  width: "25rem",
+                  margin: "30px 20px ",
+                  paddingTop: "10px",
+                }}
+                onClick={() => handleClick(tasks.productCode)}
+                type="submit"
+              >
+                <Card.Img variant="top" src={tasks.url} />
+                <Card.Body>
+                  <Card.Title>{tasks.productName}</Card.Title>
+                  <Card.Text>
+                    <b>Type :</b> {tasks.productLine}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Scale :</b> {tasks.productScale}
+                  </Card.Text>
 
-                <Card.Text>
-                  <b>Stock :</b> {tasks.quantityInStock}
-                </Card.Text>
-                <Card.Text>
-                  <b>Price :</b> {tasks.buyPrice}
-                </Card.Text>
+                  <Card.Text>
+                    <b>Stock :</b> {tasks.quantityInStock}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Price :</b> {tasks.buyPrice}
+                  </Card.Text>
 
-                <Button variant="primary">Go somewhere</Button>
-              </Card.Body>
-            </Card>
-          );
+                  <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
+              </Card>
+            );
+          }
+        } else {
+          if (tasks.productName.includes(nameProduct)) {
+            if (tasks.productLine === typeProduct) {
+              return (
+                <Card
+                  style={{
+                    width: "25rem",
+                    margin: "30px 20px ",
+                    paddingTop: "10px",
+                  }}
+                  onClick={() => handleClick(tasks.productCode)}
+                  type="submit"
+                >
+                  <Card.Img variant="top" src={tasks.url} />
+                  <Card.Body>
+                    <Card.Title>{tasks.productName}</Card.Title>
+                    <Card.Text>
+                      <b>Type :</b> {tasks.productLine}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Scale :</b> {tasks.productScale}
+                    </Card.Text>
+
+                    <Card.Text>
+                      <b>Stock :</b> {tasks.quantityInStock}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Price :</b> {tasks.buyPrice}
+                    </Card.Text>
+
+                    <Button variant="primary">Go somewhere</Button>
+                  </Card.Body>
+                </Card>
+              );
+            } else if (typeProduct === "Show all") {
+              return (
+                <Card
+                  style={{
+                    width: "25rem",
+                    margin: "30px 20px ",
+                    paddingTop: "10px",
+                  }}
+                  onClick={() => handleClick(tasks.productCode)}
+                  type="submit"
+                >
+                  <Card.Img variant="top" src={tasks.url} />
+                  <Card.Body>
+                    <Card.Title>{tasks.productName}</Card.Title>
+                    <Card.Text>
+                      <b>Type :</b> {tasks.productLine}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Scale :</b> {tasks.productScale}
+                    </Card.Text>
+
+                    <Card.Text>
+                      <b>Stock :</b> {tasks.quantityInStock}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Price :</b> {tasks.buyPrice}
+                    </Card.Text>
+
+                    <Button variant="primary">Go somewhere</Button>
+                  </Card.Body>
+                </Card>
+              );
+            }
+          } else {
+            return <div></div>;
+          }
         }
       });
+      // localStorage.removeItem("nameOfProduct");
       return <div class="row justify-content-start">{listItems}</div>;
     }
   };
@@ -165,8 +265,36 @@ const Shop = () => {
         Shop <span style={{ color: "blue" }}>Page</span>
       </h1>
       <div class="container">
-        <div>
-          <div id="myBtnContainer">{barType()}</div>
+        <div style={{ padding: "20px 0px" }}>
+          <div id="myBtnContainer" class="container">
+            {barType()}
+
+            <div class="search-container">
+              <input
+                type="text"
+                placeholder={checkNameProduct()}
+                name="name"
+                value={inputs.name || ""}
+                onChange={handleChange}
+              />
+              <button type="submit" onClick={handleClear}>
+                clear
+              </button>
+
+              <button type="submit" onClick={handleSubmit}>
+                <img
+                  src=" https://cdn-icons-png.flaticon.com/512/54/54481.png"
+                  width="25"
+                  height="25"
+                  alt=""
+                  title=""
+                  class="img-small"
+                  type="submit"
+                />
+              </button>
+            </div>
+          </div>
+
           {render()}
         </div>
       </div>
