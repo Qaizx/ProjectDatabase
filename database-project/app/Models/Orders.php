@@ -22,7 +22,7 @@ class Orders extends Model
         'orderDate' ,
         'requiredDate' ,
         'shippedDate',
-        'status ' ,
+        'status' ,
         'comments',
         'customerNumber',
     ];

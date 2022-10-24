@@ -42,7 +42,6 @@ class CartsController extends Controller
     public function store(StoreCartsRequest $request)
     {
         //
-
         $v1 = $request->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([

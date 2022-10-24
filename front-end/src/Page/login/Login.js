@@ -32,7 +32,7 @@ const Login = () => {
   const handleSubmit = (event) => {
     event.preventDefault();
     console.log(inputs);
-    const CryptoJS = require('crypto-js');
+    const CryptoJS = require("crypto-js");
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -56,14 +56,20 @@ const Login = () => {
     //insecureBobolink6
     //Qo196EqODjjreL4C3STk
 
-    fetch("http://127.0.0.1:8000/users/login", requestOptions)
+    fetch("http://127.0.0.1:8000/api/users/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        let text = CryptoJS.enc.Base64.stringify(CryptoJS.enc.Utf8.parse(result.username));
-        localStorage.setItem('token', text)
-        window.location.href = '/'
-        // console.log(result.username);
-        // console.log(text);
+        if (result.status === "ok") {
+          let text = CryptoJS.enc.Base64.stringify(
+            CryptoJS.enc.Utf8.parse(inputs.username)
+          );
+          localStorage.setItem("token", text);
+          window.location.href = "/";
+        }else if(result.error === 'Email or password is not matched.'){
+          alert("username or password is not match")
+        }
+        
+        
       })
       .catch((error) => console.log("error", error));
   };
@@ -81,7 +87,7 @@ const Login = () => {
           >
             Username / Email
           </Form.Label>
-          <Col sm="5">
+          <Col sm="4">
             <Form.Control
               required
               style={{ margin: "0px -290px", fontSize: "30px" }}
@@ -106,7 +112,7 @@ const Login = () => {
           >
             Password
           </Form.Label>
-          <Col sm="5">
+          <Col sm="4">
             <Form.Control
               required
               style={{ margin: "0px -290px", fontSize: "30px" }}

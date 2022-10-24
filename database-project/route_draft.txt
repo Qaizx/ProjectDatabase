@@ -14,20 +14,20 @@ shop
 - get all products -> apiResoure
 
 cart
-- get cart from username
+- get cart from username check
     POST - \cart\{username} 
 
 products
-- get product from productid
+- get product from productid check
     - \products\{productid}
 
 customer (profile)
-- get username profile
+- get username profile check
     - \customer\{username}
 
 employee
 - get all employee
 
 payment
-- get all payments from username
+- get all payments from username ?
 

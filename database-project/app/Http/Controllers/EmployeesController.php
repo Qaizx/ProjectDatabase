@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Employees;
 use App\Http\Requests\StoreEmployeesRequest;
 use App\Http\Requests\UpdateEmployeesRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class EmployeesController extends Controller
 {
@@ -75,5 +77,30 @@ class EmployeesController extends Controller
     {
         $employee = Employees::find($id);
         $employee->delete();
+    }
+
+    public function office(Request $request){
+
+        $code = $request->employeeNumber;
+ 
+        $targetOffice = DB::table('employees')
+        ->join('offices', 'employees.officeCode', '=', 'offices.officeCode')
+        ->select(        
+            'offices.officeCode',
+            'city',
+            'phone',
+            'addressLine1',
+            'addressLine2',
+            'state',
+            'country',
+            'postalCode',
+            'territory',
+        )
+        ->where('employees.employeeNumber' , '=' , $code)->get()->first();
+
+        if($targetOffice == NULL)
+            return ["error" => "Employee code not found"];
+        
+        return $targetOffice;
     }
 }

@@ -5,9 +5,19 @@ namespace App\Http\Controllers;
 use App\Models\Products;
 use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api');
+    //     $this->user = $this->guard()->user();        
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -41,20 +51,7 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        //
-        // Products::create( [
-        //     'productCode' => $request->productCode,
-        //     'productName' => $request->productName,
-        //     'productLine' => $request->productLine,
-        //     'productScale' => $request->productScale,
-        //     'productVendor' => $request->producrtVendor,
-        //     'productDescription' => $request->productDescription,
-        //     'quantityInStock' => $request->quantityInStock,
-        //     'buyPrice' => $request->buyPrice,
-        //     'MSRP' => $request->MSRP,
-        //     'url' => $request->url
-        //  ]);
-         Products::create($request->all());
+        Products::create($request->all());
     }
 
     /**
@@ -84,8 +81,26 @@ class ProductsController extends Controller
         $products->delete();
     }
 
-    public function getRandomProduct(){
+    public function getRandomProduct()
+    {
         $randomProducts = Products::inRandomOrder()->limit(5)->get();
         return $randomProducts;
     }
+
+    public function getProductInfo(Request $request)
+    {
+        $productCode = $request->productCode;
+
+        $productLine = DB::table('products')
+            ->join('productlines', 'products.productLine', '=', 'productlines.productLine')
+            ->where('products.productCode', '=', $productCode)->get()->first();
+
+        if ($productLine == NULL)
+            return ["error" => "Product not found"];
+        return $productLine;
+    }
+
+    // protected function guard() {
+    //     return Auth::guard();
+    // }
 }
