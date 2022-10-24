@@ -59,7 +59,7 @@ const NavbarLogin = () => {
           <a href="/">Home</a>
           <a href="/shop">shop</a>
           <div class="drop">
-            <span style={{color : "white"}}>Credit : {profile.creditLimit}$</span>
+            <span style={{color : "white", marginRight: "10px"}}>Credit : {profile.creditLimit}$</span>
             <button class="dropbtn">
               <img
                 src=" https://cdn-icons.flaticon.com/svg/3917/3917035.svg?token=exp=1666540146~hmac=7f424a8d412c79789ebc16dcf4da4c50 "
