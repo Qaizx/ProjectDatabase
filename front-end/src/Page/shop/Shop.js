@@ -20,6 +20,17 @@ const Shop = () => {
   const [inputs, setInputs] = useState({});
   const nameProduct = localStorage.getItem("nameOfProduct");
 
+  const token = localStorage.getItem("token");
+  const [disabled, setDisabled] = useState(true);
+
+  const checkToken = () => {
+    if (token == null) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  };
+
   const checkNameProduct = () => {
     if (nameProduct == null) {
       return "Search . . .";
@@ -125,27 +136,41 @@ const Shop = () => {
                   margin: "30px 20px ",
                   paddingTop: "10px",
                 }}
-                onClick={() => handleClick(tasks.productCode)}
-                type="submit"
               >
-                <Card.Img variant="top" src={tasks.url} />
+                <Card.Img
+                  variant="top"
+                  src={tasks.url}
+                  onClick={() => handleClick(tasks.productCode)}
+                  type="submit"
+                />
                 <Card.Body>
-                  <Card.Title>{tasks.productName}</Card.Title>
-                  <Card.Text>
-                    <b>Type :</b> {tasks.productLine}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Scale :</b> {tasks.productScale}
-                  </Card.Text>
+                  <div
+                    onClick={() => handleClick(tasks.productCode)}
+                    type="submit"
+                  >
+                    <Card.Title>{tasks.productName}</Card.Title>
+                    <Card.Text>
+                      <b>Type :</b> {tasks.productLine}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Scale :</b> {tasks.productScale}
+                    </Card.Text>
 
-                  <Card.Text>
-                    <b>Stock :</b> {tasks.quantityInStock}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Price :</b> {tasks.buyPrice}
-                  </Card.Text>
+                    <Card.Text>
+                      <b>Stock :</b> {tasks.quantityInStock}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Price :</b> {tasks.buyPrice}
+                    </Card.Text>
+                  </div>
 
-                  <Button variant="primary">Go somewhere</Button>
+                  <Button
+                    variant="primary"
+                    style={{ marginTop: "10px" }}
+                    disabled={disabled}
+                  >
+                    Go somewhere
+                  </Button>
                 </Card.Body>
               </Card>
             );
@@ -157,27 +182,41 @@ const Shop = () => {
                   margin: "30px 20px ",
                   paddingTop: "10px",
                 }}
-                onClick={() => handleClick(tasks.productCode)}
-                type="submit"
               >
-                <Card.Img variant="top" src={tasks.url} />
+                <Card.Img
+                  variant="top"
+                  src={tasks.url}
+                  onClick={() => handleClick(tasks.productCode)}
+                  type="submit"
+                />
                 <Card.Body>
-                  <Card.Title>{tasks.productName}</Card.Title>
-                  <Card.Text>
-                    <b>Type :</b> {tasks.productLine}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Scale :</b> {tasks.productScale}
-                  </Card.Text>
+                  <div
+                    onClick={() => handleClick(tasks.productCode)}
+                    type="submit"
+                  >
+                    <Card.Title>{tasks.productName}</Card.Title>
+                    <Card.Text>
+                      <b>Type :</b> {tasks.productLine}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Scale :</b> {tasks.productScale}
+                    </Card.Text>
 
-                  <Card.Text>
-                    <b>Stock :</b> {tasks.quantityInStock}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Price :</b> {tasks.buyPrice}
-                  </Card.Text>
+                    <Card.Text>
+                      <b>Stock :</b> {tasks.quantityInStock}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Price :</b> {tasks.buyPrice}
+                    </Card.Text>
+                  </div>
 
-                  <Button variant="primary">Go somewhere</Button>
+                  <Button
+                    variant="primary"
+                    style={{ marginTop: "10px" }}
+                    disabled={disabled}
+                  >
+                    Go somewhere
+                  </Button>
                 </Card.Body>
               </Card>
             );
@@ -187,16 +226,23 @@ const Shop = () => {
             if (tasks.productLine === typeProduct) {
               return (
                 <Card
-                  style={{
-                    width: "25rem",
-                    margin: "30px 20px ",
-                    paddingTop: "10px",
-                  }}
+                style={{
+                  width: "25rem",
+                  margin: "30px 20px ",
+                  paddingTop: "10px",
+                }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={tasks.url}
                   onClick={() => handleClick(tasks.productCode)}
                   type="submit"
-                >
-                  <Card.Img variant="top" src={tasks.url} />
-                  <Card.Body>
+                />
+                <Card.Body>
+                  <div
+                    onClick={() => handleClick(tasks.productCode)}
+                    type="submit"
+                  >
                     <Card.Title>{tasks.productName}</Card.Title>
                     <Card.Text>
                       <b>Type :</b> {tasks.productLine}
@@ -211,24 +257,38 @@ const Shop = () => {
                     <Card.Text>
                       <b>Price :</b> {tasks.buyPrice}
                     </Card.Text>
+                  </div>
 
-                    <Button variant="primary">Go somewhere</Button>
-                  </Card.Body>
-                </Card>
+                  <Button
+                    variant="primary"
+                    style={{ marginTop: "10px" }}
+                    disabled={disabled}
+                  >
+                    Go somewhere
+                  </Button>
+                </Card.Body>
+              </Card>
               );
             } else if (typeProduct === "Show all") {
               return (
                 <Card
-                  style={{
-                    width: "25rem",
-                    margin: "30px 20px ",
-                    paddingTop: "10px",
-                  }}
+                style={{
+                  width: "25rem",
+                  margin: "30px 20px ",
+                  paddingTop: "10px",
+                }}
+              >
+                <Card.Img
+                  variant="top"
+                  src={tasks.url}
                   onClick={() => handleClick(tasks.productCode)}
                   type="submit"
-                >
-                  <Card.Img variant="top" src={tasks.url} />
-                  <Card.Body>
+                />
+                <Card.Body>
+                  <div
+                    onClick={() => handleClick(tasks.productCode)}
+                    type="submit"
+                  >
                     <Card.Title>{tasks.productName}</Card.Title>
                     <Card.Text>
                       <b>Type :</b> {tasks.productLine}
@@ -243,10 +303,17 @@ const Shop = () => {
                     <Card.Text>
                       <b>Price :</b> {tasks.buyPrice}
                     </Card.Text>
+                  </div>
 
-                    <Button variant="primary">Go somewhere</Button>
-                  </Card.Body>
-                </Card>
+                  <Button
+                    variant="primary"
+                    style={{ marginTop: "10px" }}
+                    disabled={disabled}
+                  >
+                    Go somewhere
+                  </Button>
+                </Card.Body>
+              </Card>
               );
             }
           } else {
@@ -260,7 +327,7 @@ const Shop = () => {
   };
 
   return (
-    <div class="">
+    <div class="" onMouseMove={checkToken}>
       <h1 className="product">
         Shop <span style={{ color: "blue" }}>Page</span>
       </h1>
