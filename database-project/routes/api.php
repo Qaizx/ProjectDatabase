@@ -1,9 +1,11 @@
 <?php
 
+use App\Http\Controllers\CartsController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
+use App\Models\Carts;
 
 /*
 |--------------------------------------------------------------------------
@@ -61,5 +63,7 @@ Route::group(
         Route::post('/users/register' , [UsersController::class,'store']);
         Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
         Route::post('/getProfile' , [UsersController::class,'profile']);
+        Route::post('/addToCart', [CartsController::class, 'store']);
+        Route::post('/decreaseFromCart', [CartsController::class, 'decrease']);
     }
 );
