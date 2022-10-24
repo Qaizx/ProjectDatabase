@@ -60,11 +60,13 @@ Route::group(
     function ($router) {
         Route::post('/users/login', [UsersController::class, 'login']);
         Route::post('/users/register', [UsersController::class, 'store']);
-        Route::post('/getProfile', [UsersController::class, 'profile']);
-        Route::post('/getEmployee', [UsersController::class, 'employee']);
-        Route::post('/getOffice', [EmployeesController::class, 'office']);
+        Route::post('/getProfile', [UsersController::class, 'profile']);                // get customer info by username
+        Route::post('/getEmployee', [UsersController::class, 'employee']);              // get employee by username
+        Route::post('/getOffice', [EmployeesController::class, 'office']);              // get office by employeeNumber
         Route::get('/randomproduct', [ProductsController::class, 'getRandomProduct']);
-        Route::post('/getOrders', [UsersController::class, 'orderFetch']);
-        Route::post('/getProductInfo', [ProductsController::class, 'getProductInfo']);
+        Route::post('/getOrders', [UsersController::class, 'orderFetch']);              // get orders by username
+        Route::post('/getProductInfo', [ProductsController::class, 'getProductInfo']);  // get product info by productCode
+        Route::put('/updateProfile' , [UsersController::class , 'updateProfile']);
+        Route::patch('/updateProfile' , [UsersController::class , 'updateProfile']);
     }
 );

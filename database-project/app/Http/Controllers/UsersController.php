@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Users;
 use App\Http\Requests\StoreUsersRequest;
+use App\Http\Requests\UpdatecustomersRequest;
 use App\Http\Requests\UpdateUsersRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
@@ -150,11 +151,6 @@ class UsersController extends Controller
     {
         $username = $request->username;
 
-        // $customerNumber = Users::where([
-        //     ['username' , '=' , $username]
-        // ]);
-
-        // $customer = Customers::where
         $targetCustomer = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
@@ -220,5 +216,25 @@ class UsersController extends Controller
         if ($target == NULL)
             return ["error" => "Username not found"];
         return $target;
+    }
+
+    public function updateProfile(UpdatecustomersRequest $request) {
+
+        $result = DB::transaction(function () use ($request) {
+            $username = $request->username;
+
+            $targetCustomer = DB::table('users')
+                ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+                ->select(
+                    'customers.customerNumber'
+                )
+                ->where('username', '=', $username)->get()->first();
+    
+            app('App\Http\Controllers\CustomersController')->update($request , $targetCustomer->customerNumber);
+
+        });
+
+        return ["status" => "update successfully"];
+    
     }
 }

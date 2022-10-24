@@ -64,7 +64,7 @@ class CustomersController extends Controller
     {
         //
         $customer = Customers::find($id);
-        $customer->update($request->all());
+        $customer->update($request->except(['username']));
     }
 
     /**

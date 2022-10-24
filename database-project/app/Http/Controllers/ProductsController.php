@@ -7,9 +7,17 @@ use App\Http\Requests\StoreProductsRequest;
 use App\Http\Requests\UpdateProductsRequest;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
+
+    // public function __construct()
+    // {
+    //     $this->middleware('auth:api');
+    //     $this->user = $this->guard()->user();        
+    // }
+
     /**
      * Display a listing of the resource.
      *
@@ -43,19 +51,6 @@ class ProductsController extends Controller
      */
     public function store(StoreProductsRequest $request)
     {
-        //
-        // Products::create( [
-        //     'productCode' => $request->productCode,
-        //     'productName' => $request->productName,
-        //     'productLine' => $request->productLine,
-        //     'productScale' => $request->productScale,
-        //     'productVendor' => $request->producrtVendor,
-        //     'productDescription' => $request->productDescription,
-        //     'quantityInStock' => $request->quantityInStock,
-        //     'buyPrice' => $request->buyPrice,
-        //     'MSRP' => $request->MSRP,
-        //     'url' => $request->url
-        //  ]);
         Products::create($request->all());
     }
 
@@ -104,4 +99,8 @@ class ProductsController extends Controller
             return ["error" => "Product not found"];
         return $productLine;
     }
+
+    // protected function guard() {
+    //     return Auth::guard();
+    // }
 }
