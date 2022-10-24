@@ -28,7 +28,8 @@ class UpdatecustomersRequest extends FormRequest
 
         if($method == 'PUT') {
             return [
-                'customerNumber' => ['required'],
+                'username' => ['required'],
+                'customerNumber' => ['sometimes'],
                 'customerName' => ['required'],
                 'contactLastName' => ['required'],
                 'contactFirstName' => ['required'],
@@ -44,7 +45,8 @@ class UpdatecustomersRequest extends FormRequest
             ];
         } else {
             return [
-                'customerNumber' => ['required'],
+                'username' => ['required'],
+                'customerNumber' => ['sometimes'],
                 'customerName' => ['sometimes','required'],
                 'contactLastName' => ['sometimes','required'],
                 'contactFirstName' => ['sometimes','required'],
