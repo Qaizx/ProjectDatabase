@@ -7,6 +7,17 @@ import Card from "react-bootstrap/Card";
 const ShopTable = () => {
   const [products, setProducts] = useState([]);
   const [check, setChecked] = useState(true);
+  const token = localStorage.getItem("token");
+  const [disabled, setDisabled] = useState(true)
+
+  const checkToken = () => {
+    if (token == null) {
+      setDisabled(true)
+    } else {
+      setDisabled(false)
+    }
+  };
+
 
   const initProducts = async () => {
     var requestOptions = {
@@ -44,30 +55,37 @@ const ShopTable = () => {
       // console.log(1);
       const listItems = products.map((tasks) => {
         return (
-         
           <Card
             style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
-            onClick={() => handleClick(tasks.productCode)}
-            type="submit"
           >
-            <Card.Img variant="top" src={tasks.url} />
+            <Card.Img
+              variant="top"
+              src={tasks.url}
+              onClick={() => handleClick(tasks.productCode)}
+              type="submit"
+            />
+
             <Card.Body>
-              <Card.Title>{tasks.productName}</Card.Title>
-              <Card.Text>
-                <b>Type :</b> {tasks.productLine}
-              </Card.Text>
-              <Card.Text>
-                <b>Scale :</b> {tasks.productScale}
-              </Card.Text>
+              <div onClick={() => handleClick(tasks.productCode)} type="submit" >
+                <Card.Title>{tasks.productName}</Card.Title>
+                <Card.Text>
+                  <b>Type :</b> {tasks.productLine}
+                </Card.Text>
+                <Card.Text>
+                  <b>Scale :</b> {tasks.productScale}
+                </Card.Text>
 
-              <Card.Text>
-                <b>Stock :</b> {tasks.quantityInStock}
-              </Card.Text>
-              <Card.Text>
-                <b>Price :</b> {tasks.buyPrice}
-              </Card.Text>
+                <Card.Text>
+                  <b>Stock :</b> {tasks.quantityInStock}
+                </Card.Text>
+                <Card.Text>
+                  <b>Price :</b> {tasks.buyPrice}
+                </Card.Text>
+              </div>
 
-              <Button variant="primary" href="/">Go somewhere</Button>
+              <Button variant="primary"  style={{marginTop: "10px"}} disabled={disabled} >
+                Go somewhere
+              </Button>
             </Card.Body>
           </Card>
         );
@@ -78,7 +96,7 @@ const ShopTable = () => {
   };
 
   return (
-    <div className="">
+    <div className="" onMouseMove={checkToken}>
       <h1 className="product">
         Shop <span style={{ color: "blue" }}>Today</span>
       </h1>

@@ -6,7 +6,16 @@ import { useState, useEffect } from "react";
 const Product = () => {
   const [product, setProduct] = useState();
   const [check, setChecked] = useState(true);
+  const token = localStorage.getItem("token");
+  const [disabled, setDisabled] = useState(true);
 
+  const checkToken = () => {
+    if (token == null) {
+      setDisabled(true);
+    } else {
+      setDisabled(false);
+    }
+  };
 
   const initProducts = async () => {
     const IDProduct = localStorage.getItem("IDProduct");
@@ -38,17 +47,18 @@ const Product = () => {
 
   useEffect(() => {
     initProducts();
-    
   }, []);
 
   const render = () => {
     if (check) {
+      return (
+        <div style={{ textAlign: "center", margin: "100px 0px" }}>
+          <h1>Loading . . .</h1>
+        </div>
+      );
     } else {
       return (
         <div>
-          <div>
-            <h1> This is product page</h1>
-          </div>
           <div>
             <div class="container py-5">
               <div class="row d-flex justify-content-center my-4">
@@ -67,7 +77,8 @@ const Product = () => {
                             <b>Type :</b> {product.productLine}
                           </p>
                           <p class="card-text">
-                            <b>Description of type :</b> {product.textDescription}
+                            <b>Description of type :</b>{" "}
+                            {product.textDescription}
                           </p>
                           <p class="card-text">
                             <b>Scale :</b> {product.productScale}
@@ -88,7 +99,7 @@ const Product = () => {
                           <p class="card-text">
                             <b>MSRP :</b> {product.MSRP}
                           </p>
-                          <button>Add to cart</button>
+                          <button disabled={disabled}>Add to cart</button>
                         </div>
                       </div>
                     </div>
@@ -102,7 +113,14 @@ const Product = () => {
     }
   };
 
-  return <div>{render()}</div>;
+  return (
+    <div onMouseMove={checkToken}>
+      <div>
+        <h1> This is product page</h1>
+      </div>
+      {render()}
+    </div>
+  );
 };
 
 export default Product;
