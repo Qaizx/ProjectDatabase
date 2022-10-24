@@ -99,7 +99,7 @@ const Product = () => {
                           <p class="card-text">
                             <b>MSRP :</b> {product.MSRP}
                           </p>
-                          <button disabled={disabled}>Add to cart</button>
+                          <button disabled={disabled} href="/cart">Add product</button>
                         </div>
                       </div>
                     </div>
