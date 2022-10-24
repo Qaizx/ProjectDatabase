@@ -17,12 +17,21 @@ import Salesrep from "./Page/salesrep/Salesrep";
 function App() {
   const [checkLogin, setLogin] = useState(false);
   const CryptoJS = require("crypto-js");
-  
-  const pathLinkNotLogin = ['/', '/login', '/register', '/shop', '/product']
-  const pathLinkLogin = ['/', '/profile', '/info', '/shop', '/payment', '/salesrep', '/cart', '/product']
-  
+  const token = localStorage.getItem("token");
+
+  const pathLinkNotLogin = ["/", "/login", "/register", "/shop", "/product"];
+  const pathLinkLogin = [
+    "/",
+    "/profile",
+    "/info",
+    "/shop",
+    "/payment",
+    "/salesrep",
+    "/cart",
+    "/product",
+  ];
+
   useEffect(() => {
-    const token = localStorage.getItem("token");
     // console.log(token);
     if (token == null) {
       setLogin(false);
@@ -37,9 +46,8 @@ function App() {
 
   const ro = () => {
     if (checkLogin) {
-      if(!pathLinkLogin.includes(window.location.pathname)){
-        window.location.assign('/')
-        console.log(1);
+      if (!pathLinkLogin.includes(window.location.pathname)) {
+        window.location.assign("/");
       }
       return (
         <Route path="/" element={<NavbarLogin />}>
@@ -54,10 +62,12 @@ function App() {
         </Route>
       );
     } else {
-      if(!pathLinkNotLogin.includes(window.location.pathname)){
-        window.location.assign('/')
-        console.log(1);
+      if (token == null) {
+        if (!pathLinkNotLogin.includes(window.location.pathname)) {
+          window.location.assign("/");
+        }
       }
+
       return (
         <Route path="/" element={<NavbarRegister />}>
           <Route index element={<Home />} />
@@ -65,6 +75,7 @@ function App() {
           <Route path="register" element={<Register />} />
           <Route path="shop" element={<Shop />} />
           <Route path="product" element={<Product />} />
+          {/* <Route path="profile" element={<Profile />} /> */}
         </Route>
       );
     }
