@@ -65,7 +65,6 @@ const Profile = () => {
       .catch((error) => console.log("error", error));
   };
 
-
   const getProfileRep = async () => {
     const token = localStorage.getItem("token");
     const username = CryptoJS.enc.Base64.parse(token).toString(
@@ -99,7 +98,7 @@ const Profile = () => {
   useEffect(() => {
     getProfile();
     getPicture();
-    getProfileRep()
+    getProfileRep();
   }, []);
 
   const render = () => {
@@ -145,7 +144,6 @@ const Profile = () => {
                           <img src={picture} class="w-100" alt="Profile Pic" />
                         </div>
                         <div class="col mt-2">
-                          
                           <h2 class="mb-3">
                             Contact : {profile.contactFirstName}{" "}
                             {profile.contactLastName}
@@ -168,6 +166,11 @@ const Profile = () => {
                             Credit Limit : {profile.creditLimit}${" "}
                           </h2>
                         </div>
+                      </div>
+                      <div style={{ textAlign: "right" }}>
+                        <Link to="/money">
+                          <button>hack money</button>
+                        </Link>
                       </div>
                     </div>
                   </div>
