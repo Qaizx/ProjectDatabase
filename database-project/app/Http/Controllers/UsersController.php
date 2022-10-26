@@ -150,7 +150,7 @@ class UsersController extends Controller
     public function profile(Request $request)
     {
         $username = $request->username;
-
+        
         $targetCustomer = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
@@ -168,7 +168,7 @@ class UsersController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get()->first();
+            ->where('username', '=', $username)->get();
 
         return $targetCustomer;
     }
@@ -218,7 +218,8 @@ class UsersController extends Controller
         return $target;
     }
 
-    public function updateProfile(UpdatecustomersRequest $request) {
+    public function updateProfile(UpdatecustomersRequest $request)
+    {
 
         $result = DB::transaction(function () use ($request) {
             $username = $request->username;
@@ -229,12 +230,10 @@ class UsersController extends Controller
                     'customers.customerNumber'
                 )
                 ->where('username', '=', $username)->get()->first();
-    
-            app('App\Http\Controllers\CustomersController')->update($request , $targetCustomer->customerNumber);
 
+            app('App\Http\Controllers\CustomersController')->update($request, $targetCustomer->customerNumber);
         });
 
         return ["status" => "update successfully"];
-    
     }
 }

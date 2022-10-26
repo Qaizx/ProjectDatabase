@@ -11,13 +11,6 @@ use Illuminate\Support\Facades\Auth;
 
 class ProductsController extends Controller
 {
-
-    // public function __construct()
-    // {
-    //     $this->middleware('auth:api');
-    //     $this->user = $this->guard()->user();        
-    // }
-
     /**
      * Display a listing of the resource.
      *
@@ -100,7 +93,4 @@ class ProductsController extends Controller
         return $productLine;
     }
 
-    // protected function guard() {
-    //     return Auth::guard();
-    // }
 }

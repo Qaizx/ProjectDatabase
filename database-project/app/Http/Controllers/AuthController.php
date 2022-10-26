@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-
 use Illuminate\Support\Facades\Validator;
 use App\Models\Users;
 use Illuminate\Support\Facades\Hash;
@@ -19,8 +18,8 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $validator = Validator::make($request->all(), [
-            'email' => 'sometimes|email|unique:users',
-            'username' => 'sometimes|unique:users',
+            'email' => 'sometimes|email',
+            'username' => 'sometimes',
             'password' => 'required'
         ]);
 
@@ -29,10 +28,10 @@ class AuthController extends Controller
         }
 
         $token_validity = 24 * 60;
-        
-        $this->guard()->factory()->setTTL($token_validity);
 
-        if (!$token = $this->guard()->attempt($validator->validated())) {
+        auth()->guard()->factory()->setTTL($token_validity);
+
+        if (!$token = auth()->guard()->attempt($validator->validated())) {
             return response()->json(['error' => 'Unauthorized'], 401);
         }
 
@@ -57,37 +56,41 @@ class AuthController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
+        $findUser = Users::where([
+            ['username', '=',  $request->username],
+            ['email', '=',  $request->email],
+        ])->first();
+
+        app('App\Http\Controllers\CustomersController')->createCustomer($findUser->customerNumber);
+
         return response()->json(['msg' => 'User created successfully', 'user' => $user]);
     }
 
     public function logout()
     {
-        $this->guard()->logout();
+        auth()->guard()->logout();
 
         return response()->json(['msg' => 'User logged out successfully']);
     }
 
     public function profile()
     {
-        return response()->json($this->guard()->users());
+        return response()->json(auth()->guard()->user());
     }
 
     public function refresh()
     {
-        return $this->respondWithToken($this->guard()->refresh());
+        return $this->respondWithToken(auth()->guard()->refresh());
     }
 
     protected function respondWithToken($token)
     {
         return response()->json([
+            'status' => 'ok',
             'token' => $token,
             'token_type' => 'bearer',
-            'token_validity' => $this->guard()->factory()->getTTL() * 60
+            'token_validity' => auth()->guard()->factory()->getTTL() * 60
         ]);
     }
 
-    protected function guard()
-    {
-        return Auth::guard();
-    }
 }
