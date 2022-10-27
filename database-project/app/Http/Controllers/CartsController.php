@@ -89,11 +89,16 @@ class CartsController extends Controller
      * @param  \App\Models\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdateCartsRequest $request, $id)
+    public function update(UpdateCartsRequest $request)
     {
         //
-        $carts = Carts::find($id);
-        $carts->update($request->all());
+        $v1 = $request->customerNumber;
+        $v2 = $request->productCode;
+        $target = Carts::where([
+            ['customerNumber', '=', $v1],
+            ['productCode', '=', $v2],
+        ])->get()->first();
+        $target->update($request->all());
     }
 
     /**
@@ -102,10 +107,15 @@ class CartsController extends Controller
      * @param  \App\Models\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UpdateCartsRequest $request)
     {
         //
-        $carts = Carts::find($id);
-        $carts->delete();
+        $v1 = $request->customerNumber;
+        $v2 = $request->productCode;
+        $target = Carts::where([
+            ['customerNumber', '=', $v1],
+            ['productCode', '=', $v2],
+        ])->get()->first();
+        $target->delete();
     }
 }
