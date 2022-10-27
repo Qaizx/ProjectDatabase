@@ -65,6 +65,7 @@ Route::group(
         Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
         Route::post('/addToCart', [CartsController::class, 'store']);
         Route::post('/decreaseFromCart', [CartsController::class, 'decrease']);
+        Route::delete('/deleteFromCart', [CartsController::class, 'destroy']);
         Route::post('/getProfile', [UsersController::class, 'profile']);                // get customer info by username
         Route::post('/getEmployee', [UsersController::class, 'employee']);              // get employee by username
         Route::post('/getOffice', [EmployeesController::class, 'office']);              // get office by employeeNumber
