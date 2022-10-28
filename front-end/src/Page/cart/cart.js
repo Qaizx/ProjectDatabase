@@ -15,6 +15,8 @@ import {
   MDBRow,
   MDBTypography,
 } from "mdb-react-ui-kit";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const Cart = () => {
   const [products, setProducts] = useState([]);
@@ -23,8 +25,9 @@ const Cart = () => {
   const token = localStorage.getItem("token");
   const username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
   const [disabled, setDisabled] = useState(true);
-  const [checkPic, setCheckPic] = useState(true);
+  const [Confirms, setCheckConfirm] = useState(false);
   const [inputs, setInputs] = useState();
+  const MySwal = withReactContent(Swal);
 
   let money = 0;
 
@@ -65,13 +68,7 @@ const Cart = () => {
     initProducts();
   }, []);
 
-  //   const t = "none";
 
-  const handleChange = (event) => {
-    const num = event.target.num;
-
-    setInputs(num);
-  };
 
   const plus = () => {
     const IDProduct = localStorage.getItem("IDProduct");
@@ -148,13 +145,137 @@ const Cart = () => {
     fetch("http://127.0.0.1:8000/api/deleteFromCart", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        window.location.href = "/cart"
+        if(!Confirms){
+            MySwal.fire({
+                title: <strong>Delete Success</strong>,
+                icon: "success",
+              }).then((value) => {
+                window.location.href = "/cart";
+              });
+        }
       })
       .catch((error) => console.log("error", error));
   };
 
   const handleMouseMove = (IDProduct) => {
     localStorage.setItem("IDProduct", IDProduct);
+  };
+
+  const sendOrder = () => {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+    let orderDate = year + "-" + month + "-" + day;
+    let requiredDate = year + "-" + month + "-" + (day + 7);
+
+    var myHeaders = new Headers();
+    myHeaders.append("Accept", "application/json");
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      username: username,
+      order: {
+        orderDate: orderDate,
+        requiredDate: requiredDate,
+        shippedDate: null,
+        status: "In Process",
+        comments: "",
+      },
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://127.0.0.1:8000/api/storeOrders", requestOptions)
+      .then((response) => response.json())
+      .then((result) => console.log(result))
+      .catch((error) => console.log("error", error));
+  };
+
+  const handleSubmit = () => {
+    var dateObj = new Date();
+    var month = dateObj.getUTCMonth() + 1; //months from 1-12
+    var day = dateObj.getUTCDate();
+    var year = dateObj.getUTCFullYear();
+
+    let newDate = year + "-" + month + "-" + day;
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+
+    var raw = JSON.stringify({
+      username: username,
+      payment: {
+        paymentDate: newDate,
+        amount: money,
+      },
+    });
+
+    var requestOptions = {
+      method: "POST",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+
+    fetch("http://127.0.0.1:8000/api/storePayments", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        if (result.status === "store payments ok") {
+
+          MySwal.fire({
+            title: <strong>Pay Success</strong>,
+            icon: "success",
+          }).then((value) => {
+            setCheckConfirm(true)
+            sendOrder();
+            minusCredit();
+            deleteProduct()
+            
+          })
+          
+        }
+      })
+      .catch((error) => console.log("error", error));
+  };
+
+  const minusCredit = () => {
+    const credit = localStorage.getItem("credit");
+    const mon = parseFloat(credit) - money;
+    const r = 5555;
+
+    // console.log(typeof(5555));
+    var myHeaders = new Headers();
+    myHeaders.append("Content-Type", "application/json");
+    myHeaders.append(
+      "Cookie",
+      "XSRF-TOKEN=eyJpdiI6IlJJOFBKQ20xRjRUR0NhUCtTUEdyMHc9PSIsInZhbHVlIjoidnJySzRYMktmYVpUZkVzRDcrR0dQZjBBRDdkc0NpbmJ5cUdVdEc4T0p5Y0V5L1h3REVvUko2cWVvTUdaTFR4bm1lM3Arcmg1QklTTDBQMWM1RlRiVGdvN2l6RWt1MzNPUURnZ1hWSVhwL3VLYWlBTmFmc1ZYc1RkNFgrM2pBRUkiLCJtYWMiOiJjODQ2ZjBkNDI3ZTEwMTQyMjNiNmQ5NTJiZWIyYmI1NzViZTg0OWI1Y2E3OTdkNTE1NDIxNTY1ZDdhNWZjY2M5IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IjhHUUk5cW91blA0YkZQVTFiVjl2dFE9PSIsInZhbHVlIjoiTVJJa3lzUjk5V3kwdFRmVkNjMDN3QXAxQjhhM2JFN0FabDZpT2VFbWtaWTMrT0tIRUZqQ2I0VTB4VlpFYVNiMXZiZElUZWd6c0N1RHhFR0Y3YlBmNHVjQmN2TnM3eWRQNmJ6NjJSU1psdFFNVDZvcExwT2pwWjgvY2dxMnA0SjIiLCJtYWMiOiIzYjE5ZTZlOTU4OWI1ODE3ZmY2MDZkOGM0OTBjMGM2NTI5MmY4MDAyYzdhZmYwMjI3NGZmYTg0YjM4ODAyMWU0IiwidGFnIjoiIn0%3D"
+    );
+    var raw = JSON.stringify({
+      username: username,
+      //   addressLine2: mon
+      //   creditLimit: parseFloat(credit).toFixed(2)
+      creditLimit: parseInt(mon),
+    });
+
+    var requestOptions = {
+      method: "PATCH",
+      headers: myHeaders,
+      body: raw,
+      redirect: "follow",
+    };
+    localStorage.setItem("credit", mon);
+    fetch("http://127.0.0.1:8000/api/updateProfile", requestOptions)
+      .then((response) => response.json())
+      .then((result) => {
+        console.log(result);
+        localStorage.setItem("credit", mon);
+      })
+      .catch((error) => console.log("error", error));
   };
 
   const listOfItem = () => {
@@ -262,7 +383,11 @@ const Cart = () => {
                       {listOfItem()}
                       <div className="pt-5">
                         <MDBTypography tag="h6" className="mb-0">
-                          <MDBCardText tag="a" href="#!" className="text-body">
+                          <MDBCardText
+                            tag="a"
+                            href="/shop"
+                            className="text-body"
+                          >
                             <MDBIcon fas icon="long-arrow-alt-left me-2" /> Back
                             to shop
                           </MDBCardText>
@@ -322,7 +447,12 @@ const Cart = () => {
                       </div>
 
                       <div style={{ float: "right", marginBottom: "30px" }}>
-                        <MDBBtn color="success" block size="lg">
+                        <MDBBtn
+                          color="success"
+                          block
+                          size="lg"
+                          onClick={handleSubmit}
+                        >
                           Confirms
                         </MDBBtn>
                       </div>

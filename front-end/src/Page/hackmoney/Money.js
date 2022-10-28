@@ -33,8 +33,9 @@ const Money = () => {
     };
 
     fetch("http://127.0.0.1:8000/api/updateProfile", requestOptions)
-      .then((response) => response.text())
+      .then((response) => response.json())
       .then((result) => {
+        localStorage.setItem("credit", inputs.money);
         window.location.href = "/profile";
       })
       .catch((error) => console.log("error", error));
