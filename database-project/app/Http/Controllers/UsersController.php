@@ -121,6 +121,30 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
+
+        // $username = $request->username;
+        // $email = $request->email;
+        // $password = $request->password;
+
+        // $user = NULL;
+
+        // if ($email) {
+        //     $user = Users::where([
+        //         ['email', '=',  $email],
+        //     ])->first();
+        // } else if ($username) {
+            // $user = Users::where([
+            //     ['username', '=',  $username],
+            // ])->first();
+        // } else {
+        //     return ["error" => "Email or Username is not matched."];
+        // }
+
+        // if ($password != $user->password && !Hash::check($password, $user->password)) {
+        //     return ["error" => "Password is not matched."];
+        // }
+        // return ["status" => "ok"];
+
         $username = $request->username;
         $password = $request->password;
 
@@ -157,7 +181,7 @@ class UsersController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get()->first();
+            ->where('username', '=', $username)->first();
 
         return $targetCustomer;
     }
@@ -196,7 +220,6 @@ class UsersController extends Controller
             ->join('products', 'orderdetails.productCode', '=', 'products.productCode')
             ->select(
                 'username',
-                'url',
                 'productName',
                 'quantityOrdered',
                 'priceEach',

@@ -24,7 +24,7 @@ class StoreCartsRequest extends FormRequest
     public function rules()
     {
         return [
-            'customerNumber' => ['required'],
+            'customerNumber' => ['sometimes'],
             'productCode' => ['required'],
             // 'quantityInCart' => ['sometimes']
         ];

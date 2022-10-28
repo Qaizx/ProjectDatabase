@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Carts;
 use App\Http\Requests\StoreCartsRequest;
 use App\Http\Requests\UpdateCartsRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CartsController extends Controller
 {
@@ -26,10 +28,33 @@ class CartsController extends Controller
      * @param  \App\Models\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function show(Carts $id)
+    public function show(Request $request)
     {
         //
-        $carts = Carts::find($id);
+        $username = $request->username;
+        $targetCustomers = DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->first();
+
+        $carts = DB::table('carts')
+            ->join('products', 'carts.productCode', '=', 'products.productCode')
+            ->where('carts.customerNumber', '=', $targetCustomers->customerNumber)->get();
+
         return $carts;
     }
 
@@ -39,10 +64,29 @@ class CartsController extends Controller
      * @param  \App\Http\Requests\StoreCartsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCartsRequest $request)
+    public function store(StoreCartsRequest $request) // request = username and productCode
     {
         //
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers =  DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->first();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
@@ -50,11 +94,13 @@ class CartsController extends Controller
         ])->get()->first();
 
         if (!$target) {
-            Carts::create($request->all());
+
+            Carts::create(['customerNumber' => $v1, 'productCode' => $v2]);
         } else {
             $carts = $target;
             $carts->update(['quantityInCart' => $carts->quantityInCart + 1]);
         }
+        return ["message" => "success"];
     }
 
     /**
@@ -63,10 +109,29 @@ class CartsController extends Controller
      * @param  \App\Http\Requests\StoreCartsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function decrease(UpdateCartsRequest $request)
+    public function decrease(StoreCartsRequest $request)
     {
         //
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers = DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->first();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
@@ -79,6 +144,7 @@ class CartsController extends Controller
         } else {
             $carts->update(['quantityInCart' => $carts->quantityInCart - 1]);
         }
+        return ["message" => "success"];
     }
 
     /**
@@ -91,30 +157,76 @@ class CartsController extends Controller
     public function update(UpdateCartsRequest $request)
     {
         //
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers = \DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->first();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
             ['productCode', '=', $v2],
         ])->get()->first();
-        $target->update($request->all());
+        if (!$target) {
+
+            Carts::create(['customerNumber' => $v1, 'productCode' => $v2, 'quantityInCart' => $request->quantityInCart]);
+        } else {
+            $target->update(['quantityInCart' => $request->quantityInCart + $target->quantityInCart]);
+        }
+        // $target->update($request->all());
+        return ["message" => "success"];
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Carts  $carts
+     * @param  \App\Http\Requests\StoreCartsRequest  $carts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UpdateCartsRequest $request)
+    public function destroy(StoreCartsRequest $request)
     {
         //
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers = DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->first();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
             ['productCode', '=', $v2],
         ])->get()->first();
         $target->delete();
+        return ["message" => "success"];
     }
 }
