@@ -5,7 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Carts;
 use App\Http\Requests\StoreCartsRequest;
 use App\Http\Requests\UpdateCartsRequest;
-use Request;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class CartsController extends Controller
@@ -32,7 +32,7 @@ class CartsController extends Controller
     {
         //
         $username = $request->username;
-        $targetCustomers = \DB::table('users')
+        $targetCustomers = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
                 'customers.customerNumber',
@@ -49,7 +49,8 @@ class CartsController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get();
+            ->where('username', '=', $username)->first();
+        
         $carts = \DB::table('carts')->where('carts.customerNumber', '=', $targetCustomers->customerNumber)->get();
         return $carts;
     }

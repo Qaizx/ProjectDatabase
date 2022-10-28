@@ -64,6 +64,7 @@ Route::group(
         Route::post('/users/login' , [UsersController::class,'login']);
         Route::post('/users/register' , [UsersController::class,'store']);
         Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
+        Route::post('/getCarts', [CartsController::class, 'show']);
         Route::post('/addToCart', [CartsController::class, 'store']);
         Route::post('/updateCart', [CartsController::class, 'update']);
         Route::post('/decreaseFromCart', [CartsController::class, 'decrease']);
