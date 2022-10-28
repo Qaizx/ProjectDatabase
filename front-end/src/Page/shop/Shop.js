@@ -2,8 +2,11 @@ import "./Shop.css";
 import { Button, Row, Form, Col, Container, Card } from "react-bootstrap";
 import React from "react";
 import { useState, useEffect } from "react";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const Shop = () => {
+  const MySwal = withReactContent(Swal) 
   const [products, setProducts] = useState([]);
   const [check, setChecked] = useState(true);
   const typeProduct = localStorage.getItem("type");
@@ -116,6 +119,13 @@ const Shop = () => {
     window.location.href = "/shop";
   };
 
+  const showAlert = () => {
+    MySwal.fire({
+      title: <strong>Add Success</strong>,
+      icon: 'success'
+    })
+  }
+
   const render = () => {
     if (check)
       return (
@@ -125,7 +135,7 @@ const Shop = () => {
       );
     else {
       const listItems = products.map(function (tasks) {
-        const test = () => {
+        const CardItem = () => {
           return (
             <Card
               style={{
@@ -165,7 +175,7 @@ const Shop = () => {
                   variant="primary"
                   style={{ marginTop: "10px" }}
                   disabled={disabled}
-                  href="/cart"
+                  onClick={showAlert} 
                 >
                   Add product
                 </Button>
@@ -175,16 +185,16 @@ const Shop = () => {
         };
         if (nameProduct === null) {
           if (tasks.productLine === typeProduct) {
-            return <>{test()}</>;
+            return <>{CardItem()}</>;
           } else if (typeProduct === "Show all") {
-            return <>{test()}</>;
+            return <>{CardItem()}</>;
           }
         } else {
           if (tasks.productName.includes(nameProduct)) {
             if (tasks.productLine === typeProduct) {
-              return <>{test()}</>;
+              return <>{CardItem()}</>;
             } else if (typeProduct === "Show all") {
-              return <>{test()}</>;
+              return <>{CardItem()}</>;
             }
           } else {
             return <div></div>;

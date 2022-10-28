@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
 use App\Models\Carts;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\OrderdetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -64,6 +65,7 @@ Route::group(
         Route::post('/users/register' , [UsersController::class,'store']);
         Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
         Route::post('/addToCart', [CartsController::class, 'store']);
+        Route::post('/updateCart', [CartsController::class, 'update']);
         Route::post('/decreaseFromCart', [CartsController::class, 'decrease']);
         Route::delete('/deleteFromCart', [CartsController::class, 'destroy']);
         Route::post('/getProfile', [UsersController::class, 'profile']);                // get customer info by username
@@ -74,5 +76,7 @@ Route::group(
         Route::post('/getProductInfo', [ProductsController::class, 'getProductInfo']);  // get product info by productCode
         Route::put('/updateProfile' , [UsersController::class , 'updateProfile']);
         Route::patch('/updateProfile' , [UsersController::class , 'updateProfile']);
+        Route::post('/storeOrders' , [UsersController::class , 'storeOrders']);
+        Route::post('/storePayments' , [UsersController::class , 'storePayments']);
     }
 );

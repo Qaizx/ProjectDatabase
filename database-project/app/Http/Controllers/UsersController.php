@@ -10,6 +10,7 @@ use App\Models\Orderdetails;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreOrdersRequest;
 
 class UsersController extends Controller
 {
@@ -119,28 +120,14 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-
         $username = $request->username;
-        $email = $request->email;
         $password = $request->password;
 
-        $user = NULL;
-
-        if ($email) {
-            $user = Users::where([
-                ['email', '=',  $email],
-            ])->first();
-        } else if ($username) {
-            $user = Users::where([
-                ['username', '=',  $username],
-            ])->first();
-        } else {
+        $user = Users::where(['email', '=',  $username])
+        ->orWhere(['username', '=',  $username])
+        ->first();
+        if(!$user)
             return ["error" => "Email or Username is not matched."];
-        }
-
-        // if(!$user || !Hash::check($password, $user->password) ) {
-        //     return ["error" => "Email or password is not matched."];
-        // }
 
         if ($password != $user->password && !Hash::check($password, $user->password)) {
             return ["error" => "Password is not matched."];
@@ -236,5 +223,21 @@ class UsersController extends Controller
         });
 
         return ["status" => "update successfully"];
+    }
+
+    public function storeOrders(Request $request){
+        $username = $request->username;
+        $order = $request->order;
+        $orderdetails = $request->orderdetails;
+
+        $targetCustomer = DB::table('users')->where('username' , '=' , $username)->get()->first();
+
+        app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
+
+        return ['status' => 'ok'];
+    }
+
+    public function storePayments(Request $request){
+        
     }
 }

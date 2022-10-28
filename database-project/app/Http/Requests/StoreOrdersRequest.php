@@ -28,7 +28,7 @@ class StoreOrdersRequest extends FormRequest
             'orderDate'=> ['required','date'] ,                 //might bug
             'requiredDate'=> ['required','date'] ,              //might bug
             'shippedDate'=> ['sometimes','nullable','date'],    //might bug
-            'status '=> ['required'] ,
+            'status'=> ['required'] ,
             'comments'=> ['sometimes','nullable'],
             'customerNumber'=> ['required','integer'],
         ];

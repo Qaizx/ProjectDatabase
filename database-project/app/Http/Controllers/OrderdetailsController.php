@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use DB;
+use Illuminate\Http\Request;
 use App\Models\Orderdetails;
 use App\Http\Requests\StoreOrderdetailsRequest;
 use App\Http\Requests\UpdateOrderdetailsRequest;
@@ -18,16 +18,6 @@ class OrderdetailsController extends Controller
     {
         $orderdetails = Orderdetails::all();
         return $orderdetails;
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
     }
 
     /**
@@ -49,6 +39,21 @@ class OrderdetailsController extends Controller
             Orderdetails::create($request->all());
         } else {
             return ["error" => "This request already existed in db."];
+        }
+    }
+
+    public function storeOrderdetails($orders) {
+        foreach($orders as $order) {
+            $formatOrder = [
+                'orderDate'=> $order['orderDate'] ,                 
+                'requiredDate'=> $order['requiredDate'] ,              
+                'shippedDate'=> $order['shippedDate'],    
+                'status'=> $order['status'] ,
+                'comments'=> $order['comments'],
+                'customerNumber'=> $order['customerNumber']
+            ];
+            $newRequest = new Request($formatOrder);
+            Orderdetails::create($newRequest->all());
         }
     }
 

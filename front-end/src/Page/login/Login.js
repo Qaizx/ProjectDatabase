@@ -2,13 +2,14 @@ import "./Login.css";
 import { Button, Row, Form, Col } from "react-bootstrap";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisable] = useState(true);
   const [inputs, setInputs] = useState({});
-
-  const navigate = useNavigate();
+  const MySwal = withReactContent(Swal) 
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -29,10 +30,17 @@ const Login = () => {
     setValidated(true);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async(event) => {
     event.preventDefault();
     console.log(inputs);
     const CryptoJS = require("crypto-js");
+
+    const alertSweet = async() => {
+      await MySwal.fire({
+        title: <strong>Login Success</strong>,
+        icon: 'success'
+      })
+    }
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -59,14 +67,23 @@ const Login = () => {
     fetch("http://127.0.0.1:8000/api/users/login", requestOptions)
       .then((response) => response.json())
       .then((result) => {
+        console.log(result);
         if (result.status === "ok") {
           let text = CryptoJS.enc.Base64.stringify(
             CryptoJS.enc.Utf8.parse(inputs.username)
           );
+          MySwal.fire({
+            title: <strong>Login Success</strong>,
+            icon: 'success'
+          })
           localStorage.setItem("token", text);
           window.location.href = "/";
-        }else if(result.error === 'Email or password is not matched.'){
-          alert("username or password is not match")
+        }else if(result.error === 'Password is not matched.'){
+          MySwal.fire({
+            title: <strong>Login Fail</strong>,
+            icon: 'error'
+          })
+
         }
         
         
