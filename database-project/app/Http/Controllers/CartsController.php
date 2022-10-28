@@ -178,7 +178,14 @@ class CartsController extends Controller
             ['customerNumber', '=', $v1],
             ['productCode', '=', $v2],
         ])->get()->first();
-        $target->update($request->all());
+        if (!$target) {
+            
+            Carts::create(['customerNumber' => $v1, 'productCode' => $v2, 'quantityInCart' => $request->quantityInCart]);
+        } else {
+            $target->update(['quantityInCart' => $request->quantityInCart + $target->quantityInCart]);
+        }
+        // $target->update($request->all());
+        return ["message" => "success"];
     }
 
     /**
