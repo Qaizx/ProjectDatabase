@@ -1,14 +1,21 @@
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
+import Swal from 'sweetalert2'
+import withReactContent from 'sweetalert2-react-content'
 
 const NavbarLogin = () => {
   const [profile, setProfile] = useState();
   const [check, setChecked] = useState(true);
   const CryptoJS = require("crypto-js");
+  const MySwal = withReactContent(Swal) 
 
-  const handleLogout = () => {
+  const handleLogout = async() => {
     localStorage.removeItem("token");
+    await MySwal.fire({
+      title: <strong>Logout Success</strong>,
+      icon: 'success'
+    })
     window.location.href = "/";
   };
 
@@ -77,6 +84,17 @@ const NavbarLogin = () => {
                   <img
                     style={{ float: "right" }}
                     src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png "
+                    width="30"
+                    height="30"
+                  ></img>
+                </a>
+              </div>
+              <div>
+                <a href="/cart">
+                  Cart{" "}
+                  <img
+                    style={{ float: "right" }} 
+                    src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
                     width="30"
                     height="30"
                   ></img>

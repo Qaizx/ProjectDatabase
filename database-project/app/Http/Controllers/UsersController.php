@@ -6,6 +6,7 @@ use App\Models\Users;
 use App\Http\Requests\StoreUsersRequest;
 use App\Http\Requests\UpdatecustomersRequest;
 use App\Http\Requests\UpdateUsersRequest;
+use App\Models\Orderdetails;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -190,14 +191,13 @@ class UsersController extends Controller
         $username = $request->username;
         $target = DB::table('users')
             ->join('orders', 'orders.customerNumber', '=', 'users.customerNumber')
+            ->join('orderdetails','orderdetails.orderNumber','=','orders.orderNumber')
+            ->join('products','orderdetails.productCode','=','products.productCode')
             ->select(
-                'orderNumber',
-                'orderDate',
-                'requiredDate',
-                'shippedDate',
-                'status',
-                'comments',
-                'orders.customerNumber'
+                'username',
+                'productName',
+                'quantityOrdered',
+                'priceEach',
             )
             ->where('username', '=', $username)->get()->first();
         if ($target == NULL)
