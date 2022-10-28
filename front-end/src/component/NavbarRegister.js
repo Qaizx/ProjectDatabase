@@ -11,8 +11,8 @@ const NavbarRegister = () => {
         <a href="/shop">shop</a>
         <div class="drop">
           <button class="dropbtn">
-            <img
-              src=" https://cdn-icons.flaticon.com/svg/3917/3917035.svg?token=exp=1666540146~hmac=7f424a8d412c79789ebc16dcf4da4c50 "
+            <img 
+              src=" https://cdn-icons-png.flaticon.com/512/2099/2099058.png "
               width="30"
               height="30"
               alt=""
