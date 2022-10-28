@@ -66,7 +66,6 @@ class CartsController extends Controller
     public function decrease(UpdateCartsRequest $request)
     {
         //
-
         $v1 = $request->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([

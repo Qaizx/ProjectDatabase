@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Requests\StoreOrdersRequest;
+use App\Http\Requests\StorePaymentsRequest;
 
 class UsersController extends Controller
 {
@@ -124,9 +125,9 @@ class UsersController extends Controller
         $password = $request->password;
 
         $user = Users::where(['email', '=',  $username])
-        ->orWhere(['username', '=',  $username])
-        ->first();
-        if(!$user)
+            ->orWhere(['username', '=',  $username])
+            ->first();
+        if (!$user)
             return ["error" => "Email or Username is not matched."];
 
         if ($password != $user->password && !Hash::check($password, $user->password)) {
@@ -138,7 +139,7 @@ class UsersController extends Controller
     public function profile(Request $request)
     {
         $username = $request->username;
-        
+
         $targetCustomer = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
@@ -191,8 +192,8 @@ class UsersController extends Controller
         $username = $request->username;
         $target = DB::table('users')
             ->join('orders', 'orders.customerNumber', '=', 'users.customerNumber')
-            ->join('orderdetails','orderdetails.orderNumber','=','orders.orderNumber')
-            ->join('products','orderdetails.productCode','=','products.productCode')
+            ->join('orderdetails', 'orderdetails.orderNumber', '=', 'orders.orderNumber')
+            ->join('products', 'orderdetails.productCode', '=', 'products.productCode')
             ->select(
                 'username',
                 'url',
@@ -208,7 +209,6 @@ class UsersController extends Controller
 
     public function updateProfile(UpdatecustomersRequest $request)
     {
-
         $result = DB::transaction(function () use ($request) {
             $username = $request->username;
 
@@ -220,29 +220,69 @@ class UsersController extends Controller
                 ->where('username', '=', $username)->get()->first();
 
             app('App\Http\Controllers\CustomersController')->update($request, $targetCustomer->customerNumber);
+            return ["status" => "update profile successfully"];
         });
 
-        return ["status" => "update successfully"];
+        return $result;
     }
 
-    public function storeOrders(Request $request){
-        DB::transaction(function () use ($request) {
+    public function storeOrders(Request $request)
+    {
+        $result = DB::transaction(function () use ($request) {
             $username = $request->username;
             $order = $request->order;
             $orderdetails = $request->orderdetails;
-    
-            $targetCustomer = DB::table('users')->select('customerNumber')->where('username' , '=' , $username)->get()->first()->customerNumber;
+
+            $targetCustomer = DB::table('users')->select('customerNumber')->where('username', '=', $username)->get()->first()->customerNumber;
             app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
-    
-            $targerOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber' , '=' , $targetCustomer)->get()->first()->orderNumber;
-    
-            app('App\Http\Controllers\OrderdetailsController')->storeOrderdetails($orderdetails, $targetCustomer , $targerOrderNumber);
+
+            $targetOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber', '=', $targetCustomer)->get()->first()->orderNumber;
+            app('App\Http\Controllers\OrderdetailsController')->storeOrderdetails($orderdetails, $targetCustomer, $targetOrderNumber);
+
+            return ['status' => 'store orders ok'];
         });
-        
-        return ['status' => 'ok'];
+
+        return $result;
     }
 
-    public function storePayments(Request $request){
-        
+    public function storePayments(Request $request)
+    {
+        $result = DB::transaction(function () use ($request) {
+            $username = $request->username;
+            $payment = $request->payment;
+
+            $targetCustomer = DB::table('users')->select('customerNumber')->where('username', '=', $username)->get()->first()->customerNumber;
+            $checkNumber = $this->generateCheckNumber();
+
+            app('App\Http\Controllers\PaymentsController')->store(new StorePaymentsRequest($payment + ['customerNumber' => $targetCustomer, 'checkNumber' => $checkNumber]));
+            return ['status' => 'store payments ok'];
+        });
+
+        return $result;
+    }
+
+    public function quickRandomCharacter($length = 2)
+    {
+        $pool = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
+
+    public function quickRandomNumber($length = 6)
+    {
+        $pool = '0123456789';
+        return substr(str_shuffle(str_repeat($pool, 5)), 0, $length);
+    }
+
+    public function generateCheckNumber()
+    {
+        $checkNumber = $this->quickRandomCharacter() . $this->quickRandomNumber();
+        $dupCheckNumber = DB::table('payments')->select('checkNumber')->where('checkNumber', '=', $checkNumber)->get()->first();
+
+        while ($dupCheckNumber != NULL) {
+            $checkNumber = $this->quickRandomCharacter() . $this->quickRandomNumber();
+            $dupCheckNumber = DB::table('payments')->select('checkNumber')->where('checkNumber', '=', $checkNumber)->get()->first();
+        }
+
+        return $checkNumber;
     }
 }
