@@ -156,7 +156,7 @@ class UsersController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get();
+            ->where('username', '=', $username)->get()->first();
 
         return $targetCustomer;
     }
@@ -225,14 +225,19 @@ class UsersController extends Controller
     }
 
     public function storeOrders(Request $request){
-        $username = $request->username;
-        $order = $request->order;
-        $orderdetails = $request->orderdetails;
-
-        $targetCustomer = DB::table('users')->where('username' , '=' , $username)->get()->first();
-
-        app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
-
+        DB::transaction(function () use ($request) {
+            $username = $request->username;
+            $order = $request->order;
+            $orderdetails = $request->orderdetails;
+    
+            $targetCustomer = DB::table('users')->select('customerNumber')->where('username' , '=' , $username)->get()->first()->customerNumber;
+            app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
+    
+            $targerOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber' , '=' , $targetCustomer)->get()->first()->orderNumber;
+    
+            app('App\Http\Controllers\OrderdetailsController')->storeOrderdetails($orderdetails, $targetCustomer , $targerOrderNumber);
+        });
+        
         return ['status' => 'ok'];
     }
 

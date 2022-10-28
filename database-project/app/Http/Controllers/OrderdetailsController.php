@@ -42,15 +42,15 @@ class OrderdetailsController extends Controller
         }
     }
 
-    public function storeOrderdetails($orders) {
+    public function storeOrderdetails($orders , $customerNumber , $orderNumber) {
         foreach($orders as $order) {
             $formatOrder = [
-                'orderDate'=> $order['orderDate'] ,                 
-                'requiredDate'=> $order['requiredDate'] ,              
-                'shippedDate'=> $order['shippedDate'],    
-                'status'=> $order['status'] ,
-                'comments'=> $order['comments'],
-                'customerNumber'=> $order['customerNumber']
+                'customerNumber' => $customerNumber , 
+                'orderNumber'=> $orderNumber ,                 
+                'productCode'=> $order['productCode'] ,              
+                'quantityOrdered'=> $order['quantityOrdered'],    
+                'priceEach'=> $order['priceEach'] ,
+                'orderLineNumber'=> $order['orderLineNumber'],
             ];
             $newRequest = new Request($formatOrder);
             Orderdetails::create($newRequest->all());
