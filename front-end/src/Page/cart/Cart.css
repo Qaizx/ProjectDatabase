@@ -1,3 +1,13 @@
-divwhite {
-    background-color: rgb(255, 255, 255);
-  }
+.submit_product {
+  background-color: #4caf50; /* Green */
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 15px;
+  cursor: pointer;
+  border-radius: 12px;
+
+}
