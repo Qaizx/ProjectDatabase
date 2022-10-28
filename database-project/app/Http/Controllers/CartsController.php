@@ -6,6 +6,7 @@ use App\Models\Carts;
 use App\Http\Requests\StoreCartsRequest;
 use App\Http\Requests\UpdateCartsRequest;
 use Request;
+use Illuminate\Support\Facades\DB;
 
 class CartsController extends Controller
 {
@@ -49,7 +50,7 @@ class CartsController extends Controller
                 'creditLimit'
             )
             ->where('username', '=', $username)->get();
-        $carts = \DB::table('carts')->where('carts.customerNumber','=',$targetCustomers->customerNumber)->get();
+        $carts = \DB::table('carts')->where('carts.customerNumber', '=', $targetCustomers->customerNumber)->get();
         return $carts;
     }
 
@@ -63,7 +64,7 @@ class CartsController extends Controller
     {
         //
         $username = $request->username;
-        $targetCustomers = \DB::table('users')
+        $targetCustomers =  DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
                 'customers.customerNumber',
@@ -80,7 +81,7 @@ class CartsController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get();
+            ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
@@ -94,6 +95,7 @@ class CartsController extends Controller
             $carts = $target;
             $carts->update(['quantityInCart' => $carts->quantityInCart + 1]);
         }
+        return ["message" => "success"];
     }
 
     /**
@@ -102,11 +104,11 @@ class CartsController extends Controller
      * @param  \App\Http\Requests\StoreCartsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function decrease(UpdateCartsRequest $request)
+    public function decrease(StoreCartsRequest $request)
     {
         //
         $username = $request->username;
-        $targetCustomers = \DB::table('users')
+        $targetCustomers = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
                 'customers.customerNumber',
@@ -123,7 +125,7 @@ class CartsController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get();
+            ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
@@ -137,6 +139,7 @@ class CartsController extends Controller
         } else {
             $carts->update(['quantityInCart' => $carts->quantityInCart - 1]);
         }
+        return ["message" => "success"];
     }
 
     /**
@@ -180,14 +183,14 @@ class CartsController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Carts  $carts
+     * @param  \App\Http\Requests\StoreCartsRequest  $carts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Request $request)
+    public function destroy(StoreCartsRequest $request)
     {
         //
         $username = $request->username;
-        $targetCustomers = \DB::table('users')
+        $targetCustomers = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
                 'customers.customerNumber',
@@ -204,7 +207,7 @@ class CartsController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get();
+            ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
@@ -212,5 +215,6 @@ class CartsController extends Controller
             ['productCode', '=', $v2],
         ])->get()->first();
         $target->delete();
+        return ["message" => "success"];
     }
 }
