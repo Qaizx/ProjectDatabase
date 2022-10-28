@@ -10,7 +10,6 @@ use App\Models\Orderdetails;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use App\Http\Requests\StoreOrdersRequest;
 
 class UsersController extends Controller
 {
@@ -120,13 +119,37 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
+
+        // $username = $request->username;
+        // $email = $request->email;
+        // $password = $request->password;
+
+        // $user = NULL;
+
+        // if ($email) {
+        //     $user = Users::where([
+        //         ['email', '=',  $email],
+        //     ])->first();
+        // } else if ($username) {
+            // $user = Users::where([
+            //     ['username', '=',  $username],
+            // ])->first();
+        // } else {
+        //     return ["error" => "Email or Username is not matched."];
+        // }
+
+        // if ($password != $user->password && !Hash::check($password, $user->password)) {
+        //     return ["error" => "Password is not matched."];
+        // }
+        // return ["status" => "ok"];
+
         $username = $request->username;
         $password = $request->password;
 
-        $user = Users::where(['email', '=',  $username])
-        ->orWhere(['username', '=',  $username])
-        ->first();
-        if(!$user)
+        $user = Users::where([['email', '=',  $username]])
+            ->orWhere([['username', '=',  $username]])
+            ->first();
+        if (!$user)
             return ["error" => "Email or Username is not matched."];
 
         if ($password != $user->password && !Hash::check($password, $user->password)) {
@@ -138,7 +161,7 @@ class UsersController extends Controller
     public function profile(Request $request)
     {
         $username = $request->username;
-        
+
         $targetCustomer = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->select(
@@ -156,7 +179,7 @@ class UsersController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get()->first();
+            ->where('username', '=', $username)->first();
 
         return $targetCustomer;
     }
@@ -191,11 +214,10 @@ class UsersController extends Controller
         $username = $request->username;
         $target = DB::table('users')
             ->join('orders', 'orders.customerNumber', '=', 'users.customerNumber')
-            ->join('orderdetails','orderdetails.orderNumber','=','orders.orderNumber')
-            ->join('products','orderdetails.productCode','=','products.productCode')
+            ->join('orderdetails', 'orderdetails.orderNumber', '=', 'orders.orderNumber')
+            ->join('products', 'orderdetails.productCode', '=', 'products.productCode')
             ->select(
                 'username',
-                'url',
                 'productName',
                 'quantityOrdered',
                 'priceEach',
@@ -223,26 +245,5 @@ class UsersController extends Controller
         });
 
         return ["status" => "update successfully"];
-    }
-
-    public function storeOrders(Request $request){
-        DB::transaction(function () use ($request) {
-            $username = $request->username;
-            $order = $request->order;
-            $orderdetails = $request->orderdetails;
-    
-            $targetCustomer = DB::table('users')->select('customerNumber')->where('username' , '=' , $username)->get()->first()->customerNumber;
-            app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
-    
-            $targerOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber' , '=' , $targetCustomer)->get()->first()->orderNumber;
-    
-            app('App\Http\Controllers\OrderdetailsController')->storeOrderdetails($orderdetails, $targetCustomer , $targerOrderNumber);
-        });
-        
-        return ['status' => 'ok'];
-    }
-
-    public function storePayments(Request $request){
-        
     }
 }
