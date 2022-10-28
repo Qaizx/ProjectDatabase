@@ -124,201 +124,67 @@ const Shop = () => {
         </div>
       );
     else {
-      // console.log(1);
-
       const listItems = products.map(function (tasks) {
+        const test = () => {
+          return (
+            <Card
+              style={{
+                width: "25rem",
+                margin: "30px 20px ",
+                paddingTop: "10px",
+              }}
+            >
+              <Card.Img
+                variant="top"
+                src={tasks.url}
+                onClick={() => handleClick(tasks.productCode)}
+                type="submit"
+              />
+              <Card.Body>
+                <div
+                  onClick={() => handleClick(tasks.productCode)}
+                  type="submit"
+                >
+                  <Card.Title>{tasks.productName}</Card.Title>
+                  <Card.Text>
+                    <b>Type :</b> {tasks.productLine}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Scale :</b> {tasks.productScale}
+                  </Card.Text>
+
+                  <Card.Text>
+                    <b>Stock :</b> {tasks.quantityInStock}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Price :</b> {tasks.buyPrice}
+                  </Card.Text>
+                </div>
+
+                <Button
+                  variant="primary"
+                  style={{ marginTop: "10px" }}
+                  disabled={disabled}
+                  href="/cart"
+                >
+                  Add product
+                </Button>
+              </Card.Body>
+            </Card>
+          );
+        };
         if (nameProduct === null) {
           if (tasks.productLine === typeProduct) {
-            return (
-              <Card
-                style={{
-                  width: "25rem",
-                  margin: "30px 20px ",
-                  paddingTop: "10px",
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={tasks.url}
-                  onClick={() => handleClick(tasks.productCode)}
-                  type="submit"
-                />
-                <Card.Body>
-                  <div
-                    onClick={() => handleClick(tasks.productCode)}
-                    type="submit"
-                  >
-                    <Card.Title>{tasks.productName}</Card.Title>
-                    <Card.Text>
-                      <b>Type :</b> {tasks.productLine}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Scale :</b> {tasks.productScale}
-                    </Card.Text>
-
-                    <Card.Text>
-                      <b>Stock :</b> {tasks.quantityInStock}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Price :</b> {tasks.buyPrice}
-                    </Card.Text>
-                  </div>
-
-                  <Button
-                    variant="primary"
-                    style={{ marginTop: "10px" }}
-                    disabled={disabled}
-                    href="/cart"
-                  >
-                    Add product
-                  </Button>
-                </Card.Body>
-              </Card>
-            );
+            return <>{test()}</>;
           } else if (typeProduct === "Show all") {
-            return (
-              <Card
-                style={{
-                  width: "25rem",
-                  margin: "30px 20px ",
-                  paddingTop: "10px",
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={tasks.url}
-                  onClick={() => handleClick(tasks.productCode)}
-                  type="submit"
-                />
-                <Card.Body>
-                  <div
-                    onClick={() => handleClick(tasks.productCode)}
-                    type="submit"
-                  >
-                    <Card.Title>{tasks.productName}</Card.Title>
-                    <Card.Text>
-                      <b>Type :</b> {tasks.productLine}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Scale :</b> {tasks.productScale}
-                    </Card.Text>
-
-                    <Card.Text>
-                      <b>Stock :</b> {tasks.quantityInStock}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Price :</b> {tasks.buyPrice}
-                    </Card.Text>
-                  </div>
-
-                  <Button
-                    variant="primary"
-                    style={{ marginTop: "10px" }}
-                    disabled={disabled}
-                    href="/cart"
-                  >
-                    Add product
-                  </Button>
-                </Card.Body>
-              </Card>
-            );
+            return <>{test()}</>;
           }
         } else {
           if (tasks.productName.includes(nameProduct)) {
             if (tasks.productLine === typeProduct) {
-              return (
-                <Card
-                style={{
-                  width: "25rem",
-                  margin: "30px 20px ",
-                  paddingTop: "10px",
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={tasks.url}
-                  onClick={() => handleClick(tasks.productCode)}
-                  type="submit"
-                />
-                <Card.Body>
-                  <div
-                    onClick={() => handleClick(tasks.productCode)}
-                    type="submit"
-                  >
-                    <Card.Title>{tasks.productName}</Card.Title>
-                    <Card.Text>
-                      <b>Type :</b> {tasks.productLine}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Scale :</b> {tasks.productScale}
-                    </Card.Text>
-
-                    <Card.Text>
-                      <b>Stock :</b> {tasks.quantityInStock}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Price :</b> {tasks.buyPrice}
-                    </Card.Text>
-                  </div>
-
-                  <Button
-                    variant="primary"
-                    style={{ marginTop: "10px" }}
-                    disabled={disabled}
-                    href="/cart"
-                  >
-                    Add product
-                  </Button>
-                </Card.Body>
-              </Card>
-              );
+              return <>{test()}</>;
             } else if (typeProduct === "Show all") {
-              return (
-                <Card
-                style={{
-                  width: "25rem",
-                  margin: "30px 20px ",
-                  paddingTop: "10px",
-                }}
-              >
-                <Card.Img
-                  variant="top"
-                  src={tasks.url}
-                  onClick={() => handleClick(tasks.productCode)}
-                  type="submit"
-                />
-                <Card.Body>
-                  <div
-                    onClick={() => handleClick(tasks.productCode)}
-                    type="submit"
-                  >
-                    <Card.Title>{tasks.productName}</Card.Title>
-                    <Card.Text>
-                      <b>Type :</b> {tasks.productLine}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Scale :</b> {tasks.productScale}
-                    </Card.Text>
-
-                    <Card.Text>
-                      <b>Stock :</b> {tasks.quantityInStock}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Price :</b> {tasks.buyPrice}
-                    </Card.Text>
-                  </div>
-
-                  <Button
-                    variant="primary"
-                    style={{ marginTop: "10px" }}
-                    disabled={disabled}
-                    href="/cart"
-                  >
-                    Add product
-                  </Button>
-                </Card.Body>
-              </Card>
-              );
+              return <>{test()}</>;
             }
           } else {
             return <div></div>;
