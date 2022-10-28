@@ -119,30 +119,14 @@ class UsersController extends Controller
 
     public function login(Request $request)
     {
-
         $username = $request->username;
-        $email = $request->email;
         $password = $request->password;
 
-        $user = NULL;
-
-        if ($email) {
-            $user = Users::where([
-                ['email', '=',  $email],
-            ])->first();
-            if(!$user)
-                return ["error" => "Email or Username is not matched."];
-        } else if ($username) {
-            $user = Users::where([
-                ['username', '=',  $username],
-            ])->first();
-            if(!$user)
-                return ["error" => "Email or Username is not matched."];
-        }
-
-        // if(!$user || !Hash::check($password, $user->password) ) {
-        //     return ["error" => "Email or password is not matched."];
-        // }
+        $user = Users::where(['email', '=',  $username])
+        ->orWhere(['username', '=',  $username])
+        ->first();
+        if(!$user)
+            return ["error" => "Email or Username is not matched."];
 
         if ($password != $user->password && !Hash::check($password, $user->password)) {
             return ["error" => "Password is not matched."];
