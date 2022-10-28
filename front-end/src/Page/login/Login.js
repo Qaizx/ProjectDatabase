@@ -84,11 +84,19 @@ const Login = () => {
             icon: 'error'
           })
 
+        }else{
+          MySwal.fire({
+            title: <strong>Login Fail</strong>,
+            icon: 'error'
+          })
         }
         
         
       })
-      .catch((error) => console.log("error", error));
+      .catch((error) => MySwal.fire({
+        title: <strong>Login Fail</strong>,
+        icon: 'error'
+      }));
   };
 
   return (
