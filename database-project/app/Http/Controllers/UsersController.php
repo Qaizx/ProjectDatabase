@@ -195,6 +195,7 @@ class UsersController extends Controller
             ->join('products','orderdetails.productCode','=','products.productCode')
             ->select(
                 'username',
+                'url',
                 'productName',
                 'quantityOrdered',
                 'priceEach',
