@@ -9,6 +9,7 @@ use App\Http\Requests\UpdateUsersRequest;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use App\Http\Requests\StoreOrdersRequest;
 
 class UsersController extends Controller
 {
@@ -129,12 +130,14 @@ class UsersController extends Controller
             $user = Users::where([
                 ['email', '=',  $email],
             ])->first();
+            if(!$user)
+                return ["error" => "Email or Username is not matched."];
         } else if ($username) {
             $user = Users::where([
                 ['username', '=',  $username],
             ])->first();
-        } else {
-            return ["error" => "Email or Username is not matched."];
+            if(!$user)
+                return ["error" => "Email or Username is not matched."];
         }
 
         // if(!$user || !Hash::check($password, $user->password) ) {
@@ -235,5 +238,21 @@ class UsersController extends Controller
         });
 
         return ["status" => "update successfully"];
+    }
+
+    public function storeOrders(Request $request){
+        $username = $request->username;
+        $order = $request->order;
+        $orderdetails = $request->orderdetails;
+
+        $targetCustomer = DB::table('users')->where('username' , '=' , $username)->get()->first();
+
+        app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
+
+        return ['status' => 'ok'];
+    }
+
+    public function storePayments(Request $request){
+        
     }
 }
