@@ -23,12 +23,12 @@ const Profile = () => {
     myHeaders.append("Content-Type", "application/json");
     myHeaders.append(
       "Cookie",
-      "XSRF-TOKEN=eyJpdiI6IlJJOFBKQ20xRjRUR0NhUCtTUEdyMHc9PSIsInZhbHVlIjoidnJySzRYMktmYVpUZkVzRDcrR0dQZjBBRDdkc0NpbmJ5cUdVdEc4T0p5Y0V5L1h3REVvUko2cWVvTUdaTFR4bm1lM3Arcmg1QklTTDBQMWM1RlRiVGdvN2l6RWt1MzNPUURnZ1hWSVhwL3VLYWlBTmFmc1ZYc1RkNFgrM2pBRUkiLCJtYWMiOiJjODQ2ZjBkNDI3ZTEwMTQyMjNiNmQ5NTJiZWIyYmI1NzViZTg0OWI1Y2E3OTdkNTE1NDIxNTY1ZDdhNWZjY2M5IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IjhHUUk5cW91blA0YkZQVTFiVjl2dFE9PSIsInZhbHVlIjoiTVJJa3lzUjk5V3kwdFRmVkNjMDN3QXAxQjhhM2JFN0FabDZpT2VFbWtaWTMrT0tIRUZqQ2I0VTB4VlpFYVNiMXZiZElUZWd6c0N1RHhFR0Y3YlBmNHVjQmN2TnM3eWRQNmJ6NjJSU1psdFFNVDZvcExwT2pwWjgvY2dxMnA0SjIiLCJtYWMiOiIzYjE5ZTZlOTU4OWI1ODE3ZmY2MDZkOGM0OTBjMGM2NTI5MmY4MDAyYzdhZmYwMjI3NGZmYTg0YjM4ODAyMWU0IiwidGFnIjoiIn0%3D"
+      "XSRF-TOKEN=eyJpdiI6IkpBMmNPeFhCUi9XQnpsVnRUaERSU1E9PSIsInZhbHVlIjoidGdPK1c4QTZLbFBhZ1VkdXdSemVRRzFzZmdGeThTbzljajQ2RWRHSTNSU3cvazN6eDNOaStXWHZLVEN0aE03VklMdno2YzBEZzdqYmwvUjltUmRVdFZmOGppTDZORU1KakdQcDVvMkttRm9XRkhnVStnMkFpZzJpSjAzSGl5USsiLCJtYWMiOiJmY2U4ZTA5N2Q2ZjdhMjExODY0OGVlZjQxOWViY2FiMTY3MzliYmUxZmFlNDJkZmFhNWY0NWUzODkxNDJhODI0IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IllBL041QzhkMnp2QnhPazhWU2JndUE9PSIsInZhbHVlIjoicHl0T1cvUlFhM1lHK1N1a1p3STc4T1ZhMnowTmhMV2JuTnZ0Z2ZZdFBad2lycFZXelhtZys2L1FFZWNPcEhVVmQvVHpObVlRRUh6K3VyQWlQWlR1dWNUc0t4TlhRSVZPcGV6VnN1MkNydVdaYW9KckVTVW50VFlqaGRoYmREOXIiLCJtYWMiOiJhY2MzZjVhYjZmOTRjOTMxZmY0NjQ2YTZjYzNkZDJmY2FiOTUyYjkyODNiNjIxODNiMDlkOTZiODU4YjllZjFhIiwidGFnIjoiIn0%3D"
     );
 
     var raw = JSON.stringify({
       username: username,
-    });
+    })
 
     var requestOptions = {
       method: "POST",
@@ -97,7 +97,7 @@ const Profile = () => {
 
   useEffect(() => {
     getProfile();
-    getPicture();
+    // getPicture();
     getProfileRep();
   }, []);
 
