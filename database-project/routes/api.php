@@ -64,6 +64,7 @@ Route::group(
         Route::post('/users/register' , [UsersController::class,'store']);
         Route::post('/products/random' , [ProductsController::class,'getRandomProduct']);
         Route::post('/addToCart', [CartsController::class, 'store']);
+        Route::post('/updateCart', [CartsController::class, 'update']);
         Route::post('/decreaseFromCart', [CartsController::class, 'decrease']);
         Route::delete('/deleteFromCart', [CartsController::class, 'destroy']);
         Route::post('/getProfile', [UsersController::class, 'profile']);                // get customer info by username
