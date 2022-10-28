@@ -8,12 +8,13 @@ import Login from "./Page/login/Login";
 import Register from "./Page/register/Register";
 import Info from "./Page/info/Info";
 import Shop from "./Page/shop/Shop";
-import Cart from "./Page/cart/Cart";
+import Cart from "./Page/cart/cart";
 import Product from "./Page/product/Product";
 import History from "./Page/history/History";
 import Profile from "./Page/profile/Profile";
 import Salesrep from "./Page/salesrep/Salesrep";
 import Money from "./Page/hackmoney/Money";
+import "@fontsource/jetbrains-mono";
 
 function App() {
   const [checkLogin, setLogin] = useState(false);

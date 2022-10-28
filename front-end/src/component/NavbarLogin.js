@@ -119,11 +119,10 @@ const NavbarLogin = () => {
           <a href="/">Home</a>
           <a href="/shop">shop</a>
           <div class="drop">
-            {/* <span style={{color : "white", marginRight: "10px"}}>Credit : {profile.creditLimit}$</span> */}
             <button class="dropbtn">
               <img
                 src=" https://cdn-icons.flaticon.com/svg/3917/3917035.svg?token=exp=1666540146~hmac=7f424a8d412c79789ebc16dcf4da4c50 "
-                width="30"
+                width="50"
                 height="30"
                 alt=""
                 title=""
@@ -132,8 +131,8 @@ const NavbarLogin = () => {
             </button>
             <div className="drop-content">
               <div>
-                <a href="/profile">
-                  Profile{" "}
+                <a href="/login">
+                  Login{" "}
                   <img
                     style={{ float: "right" }}
                     src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png "
@@ -143,8 +142,8 @@ const NavbarLogin = () => {
                 </a>
               </div>
               <div>
-                <a href="/cart">
-                  Cart{" "}
+                <a href="/register">
+                  Register{" "}
                   <img
                     style={{ float: "right" }} 
                     src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
@@ -153,15 +152,6 @@ const NavbarLogin = () => {
                   ></img>
                 </a>
               </div>
-              <a onClick={handleLogout} type="submit">
-                Logout{" "}
-                <img
-                  style={{ float: "right" }}
-                  src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png "
-                  width="30"
-                  height="30"
-                ></img>
-              </a>
             </div>
           </div>
         </div>
