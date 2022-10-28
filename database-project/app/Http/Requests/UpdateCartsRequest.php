@@ -27,13 +27,13 @@ class UpdateCartsRequest extends FormRequest
 
         if($method == 'PUT') {
             return [
-                'customerNumber' => ['sometimes'],
+                'username' => ['sometimes'],
                 'productCode' => ['required'],
                 'quantityInCart' => ['sometimes']
             ];
         } else {
             return [
-                'customerNumber' => ['sometimes'],
+                'username' => ['sometimes'],
                 'productCode' => ['sometimes','required'],
                 'quantityInCart' => ['sometimes']
             ];

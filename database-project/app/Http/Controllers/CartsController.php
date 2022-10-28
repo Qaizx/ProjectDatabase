@@ -90,7 +90,8 @@ class CartsController extends Controller
         ])->get()->first();
 
         if (!$target) {
-            Carts::create($request->all());
+            
+            Carts::create(['customerNumber' => $v1, 'productCode' => $v2]);
         } else {
             $carts = $target;
             $carts->update(['quantityInCart' => $carts->quantityInCart + 1]);
@@ -170,7 +171,7 @@ class CartsController extends Controller
                 'salesRepEmployeeNumber',
                 'creditLimit'
             )
-            ->where('username', '=', $username)->get();
+            ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
