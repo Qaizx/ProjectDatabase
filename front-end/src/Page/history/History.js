@@ -1,12 +1,35 @@
-import "./Payment.css"
+import "./History.css"
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
-import React from "react"
+import React, { useEffect } from "react";
+import { useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const Payment = () => {
+const History = () => {
+    const CryptoJS = require("crypto-js");
+    const getHistory = async () => {
+        const token = localStorage.getItem("token");
+        const username = CryptoJS.enc.Base64.parse(token).toString(
+            CryptoJS.enc.Utf8
+        );
+
+        var myHeaders = new Headers();
+        myHeaders.append("Accept", "application/json");
+
+        var requestOptions = {
+            method: 'GET',
+            headers: myHeaders,
+            redirect: 'follow'
+        };
+
+        fetch("http://127.0.0.1:8000/api/history", requestOptions)
+            .then(response => response.text())
+            .then(result => console.log(result))
+            .catch(error => console.log('error', error));
+    }
+
     return (
         <div>
             <div>
-                <h1> This is Payment page</h1>
                 <div class="head">Order History</div>
             </div>
             <div>
@@ -70,4 +93,4 @@ const Payment = () => {
 }
 
 
-export default Payment;
+export default History;
