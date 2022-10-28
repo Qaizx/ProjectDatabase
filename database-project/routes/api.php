@@ -7,6 +7,7 @@ use App\Http\Controllers\UsersController;
 use App\Http\Controllers\ProductsController;
 use App\Models\Carts;
 use App\Http\Controllers\EmployeesController;
+use App\Http\Controllers\OrderdetailsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -75,5 +76,7 @@ Route::group(
         Route::post('/getProductInfo', [ProductsController::class, 'getProductInfo']);  // get product info by productCode
         Route::put('/updateProfile' , [UsersController::class , 'updateProfile']);
         Route::patch('/updateProfile' , [UsersController::class , 'updateProfile']);
+        Route::post('/storeOrders' , [UsersController::class , 'storeOrders']);
+        Route::post('/storePayments' , [UsersController::class , 'storePayments']);
     }
 );

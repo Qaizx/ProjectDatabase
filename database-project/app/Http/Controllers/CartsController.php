@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Carts;
 use App\Http\Requests\StoreCartsRequest;
 use App\Http\Requests\UpdateCartsRequest;
+use Request;
 
 class CartsController extends Controller
 {
@@ -26,10 +27,29 @@ class CartsController extends Controller
      * @param  \App\Models\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function show(Carts $id)
+    public function show(Request $request)
     {
         //
-        $carts = Carts::find($id);
+        $username = $request->username;
+        $targetCustomers = \DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->get();
+        $carts = \DB::table('carts')->where('carts.customerNumber','=',$targetCustomers->customerNumber)->get();
         return $carts;
     }
 
@@ -39,10 +59,29 @@ class CartsController extends Controller
      * @param  \App\Http\Requests\StoreCartsRequest  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(StoreCartsRequest $request)
+    public function store(StoreCartsRequest $request) // request = username and productCode
     {
         //
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers = \DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->get();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
@@ -66,8 +105,26 @@ class CartsController extends Controller
     public function decrease(UpdateCartsRequest $request)
     {
         //
-
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers = \DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->get();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
@@ -92,7 +149,26 @@ class CartsController extends Controller
     public function update(UpdateCartsRequest $request)
     {
         //
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers = \DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->get();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
@@ -107,10 +183,29 @@ class CartsController extends Controller
      * @param  \App\Models\Carts  $carts
      * @return \Illuminate\Http\Response
      */
-    public function destroy(UpdateCartsRequest $request)
+    public function destroy(Request $request)
     {
         //
-        $v1 = $request->customerNumber;
+        $username = $request->username;
+        $targetCustomers = \DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->get();
+        $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
         $target = Carts::where([
             ['customerNumber', '=', $v1],
