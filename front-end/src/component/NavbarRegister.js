@@ -8,8 +8,8 @@ const NavbarRegister = () => {
       <div class="navbar_info d-flex justify-content-between align-items-center">
 
         <div>
-          <a href="/" className="gradient" style={{ height: "62px" }}>Home</a>
-          <a href="/shop" className="gradient" style={{ height: "62px" }}>Shop</a>
+          <a href="/" className="gradient" style={{ height: "62px" , color:"black" }}>Home</a>
+          <a href="/shop" className="gradient" style={{ height: "62px" , color:"black"}}>Shop</a>
         </div>
 
         <div class="drop">
