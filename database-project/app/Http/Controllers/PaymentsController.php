@@ -55,7 +55,7 @@ class PaymentsController extends Controller
         $target = Payments::where([
             ['customerNumber', '=', $v1],
             ['checkNumber', '=', $v2],
-        ])->get();
+        ])->get()->first();
         
         if(!$target ){Payments::create($request->all());}
         else{ return ["error" => "This request already existed in db."];}
@@ -68,11 +68,17 @@ class PaymentsController extends Controller
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Http\Response
      */
-    public function update(UpdatePaymentsRequest $request, $id)
+    public function update(UpdatePaymentsRequest $request)
     {
         //
-        $payments = Payments::find($id);
-        $payments->update($request->all());
+        Payments::create($request->all());
+        $v1 = $request -> customerNumber;
+        $v2 = $request -> checkNumber;
+        $target = Payments::where([
+            ['customerNumber', '=', $v1],
+            ['checkNumber', '=', $v2],
+        ])->get()->first();
+        $target->update($request->all());
     }
 
     /**
@@ -81,10 +87,16 @@ class PaymentsController extends Controller
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destroy(UpdatePaymentsRequest $request)
     {
         //
-        $payments = Payments::find($id);
-        $payments->delete();
+        Payments::create($request->all());
+        $v1 = $request -> customerNumber;
+        $v2 = $request -> checkNumber;
+        $target = Payments::where([
+            ['customerNumber', '=', $v1],
+            ['checkNumber', '=', $v2],
+        ])->get()->first();
+        $target->delete();
     }
 }
