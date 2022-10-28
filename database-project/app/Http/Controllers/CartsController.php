@@ -50,8 +50,11 @@ class CartsController extends Controller
                 'creditLimit'
             )
             ->where('username', '=', $username)->first();
-        
-        $carts = \DB::table('carts')->where('carts.customerNumber', '=', $targetCustomers->customerNumber)->get();
+
+        $carts = DB::table('carts')
+            ->join('products', 'carts.productCode', '=', 'products.productCode')
+            ->where('carts.customerNumber', '=', $targetCustomers->customerNumber)->get();
+
         return $carts;
     }
 
@@ -91,7 +94,7 @@ class CartsController extends Controller
         ])->get()->first();
 
         if (!$target) {
-            
+
             Carts::create(['customerNumber' => $v1, 'productCode' => $v2]);
         } else {
             $carts = $target;
@@ -180,7 +183,7 @@ class CartsController extends Controller
             ['productCode', '=', $v2],
         ])->get()->first();
         if (!$target) {
-            
+
             Carts::create(['customerNumber' => $v1, 'productCode' => $v2, 'quantityInCart' => $request->quantityInCart]);
         } else {
             $target->update(['quantityInCart' => $request->quantityInCart + $target->quantityInCart]);
