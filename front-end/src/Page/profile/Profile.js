@@ -129,7 +129,9 @@ const Profile = () => {
                         </Link>
 
                         <div class="mx-2    ">
-                          <button class="">History</button>
+                          <Link to="/history">
+                            <button class="">History</button>
+                          </Link>
                         </div>
                         <Link to="/info">
                           <div class="mx-2">

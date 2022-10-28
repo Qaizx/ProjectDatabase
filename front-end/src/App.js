@@ -8,11 +8,12 @@ import Login from "./Page/login/Login";
 import Register from "./Page/register/Register";
 import Info from "./Page/info/Info";
 import Shop from "./Page/shop/Shop";
-import Cart from "./Page/cart/cart";
+import Cart from "./Page/cart/Cart";
 import Product from "./Page/product/Product";
-import Payment from "./Page/payment/Payment";
+import History from "./Page/history/History";
 import Profile from "./Page/profile/Profile";
 import Salesrep from "./Page/salesrep/Salesrep";
+import Money from "./Page/hackmoney/Money";
 
 function App() {
   const [checkLogin, setLogin] = useState(false);
@@ -29,6 +30,7 @@ function App() {
     "/salesrep",
     "/cart",
     "/product",
+    "/history"
   ];
 
   useEffect(() => {
@@ -55,10 +57,11 @@ function App() {
           <Route path="profile" element={<Profile />} />
           <Route path="info" element={<Info />} />
           <Route path="shop" element={<Shop />} />
-          <Route path="payment" element={<Payment />} />
+          <Route path="history" element={<History />} />
           <Route path="product" element={<Product />} />
           <Route path="salesrep" element={<Salesrep />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="money" element={<Money />} />
         </Route>
       );
     } else {
