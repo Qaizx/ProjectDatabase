@@ -1,6 +1,7 @@
 .navbar_info {
   overflow: hidden;
-  background-color:chocolate;
+  background-color: #61764B;
+  font-family: "JetBrains Mono";
 }
 
 .navbar_info a {
@@ -13,23 +14,7 @@
 }
 
 .drop {
-  float: right;
   overflow: hidden;
-}
-
-.drop .dropbtn {
-  font-size: 20px;  
-  border: none;
-  outline: none;
-  color: white;
-  padding: 14px 16px;
-  background-color: inherit;
-  font-family: inherit;
-  margin: 0;
-}
-
-.navbar_info a:hover, .drop:hover .dropbtn {
-  background-color: red;
 }
 
 .drop-content {
@@ -38,7 +23,7 @@
   right: 0;
   background-color: #f9f9f9;
   min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
   z-index: 1;
 }
 
@@ -49,6 +34,8 @@
   text-decoration: none;
   display: block;
   text-align: left;
+  transition: 0.25s ease-out;
+
 }
 
 .drop-content a:hover {
@@ -57,4 +44,33 @@
 
 .drop:hover .drop-content {
   display: block;
+}
+
+.logo {
+  height: 30px;
+  width: 30px;
+}
+
+.gradient {
+  border: none;
+  position: relative;
+  background-color: #61764B;
+  z-index: 1;
+}
+
+.gradient::before {
+  position: absolute;
+  content: "";
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: #9BA17B;
+  z-index: -1;
+  transition: opacity 0.25s ease-out;
+  opacity: 0;
+}
+
+.gradient:hover::before {
+  opacity: 1;
 }

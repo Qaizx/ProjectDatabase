@@ -133,9 +133,9 @@ class UsersController extends Controller
         //         ['email', '=',  $email],
         //     ])->first();
         // } else if ($username) {
-            // $user = Users::where([
-            //     ['username', '=',  $username],
-            // ])->first();
+        // $user = Users::where([
+        //     ['username', '=',  $username],
+        // ])->first();
         // } else {
         //     return ["error" => "Email or Username is not matched."];
         // }
@@ -148,9 +148,11 @@ class UsersController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $user = Users::where(['email', '=',  $username])
-            ->orWhere(['username', '=',  $username])
-            ->first();
+        $user = DB::table('users')
+            ->where('email', $username)
+            ->orWhere('username',  $username)
+            ->get()->first();
+
         if (!$user)
             return ["error" => "Email or Username is not matched."];
 
@@ -254,12 +256,13 @@ class UsersController extends Controller
         $result = DB::transaction(function () use ($request) {
             $username = $request->username;
             $order = $request->order;
-            $orderdetails = $request->orderdetails;
 
             $targetCustomer = DB::table('users')->select('customerNumber')->where('username', '=', $username)->get()->first()->customerNumber;
             app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
-
+           
             $targetOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber', '=', $targetCustomer)->get()->first()->orderNumber;
+            $orderdetails = DB::table('carts')->where('customerNumber' , $targetCustomer)->get();
+
             app('App\Http\Controllers\OrderdetailsController')->storeOrderdetails($orderdetails, $targetCustomer, $targetOrderNumber);
 
             return ['status' => 'store orders ok'];

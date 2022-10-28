@@ -14,7 +14,11 @@ import History from "./Page/history/History";
 import Profile from "./Page/profile/Profile";
 import Salesrep from "./Page/salesrep/Salesrep";
 import Money from "./Page/hackmoney/Money";
+<<<<<<< HEAD
 import Parent from "./Parrent"
+=======
+import "@fontsource/jetbrains-mono";
+>>>>>>> 6fc9c17b4603c25760bbdd3d7eb92134e5c8b78b
 
 function App() {
   const [checkLogin, setLogin] = useState(false);
