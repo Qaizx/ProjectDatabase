@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Orders;
 use App\Http\Requests\StoreOrdersRequest;
 use App\Http\Requests\UpdateOrdersRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class OrdersController extends Controller
 {
@@ -41,7 +44,6 @@ class OrdersController extends Controller
         //
         Orders::create($request->all());
     }
-
     /**
      * Display the specified resource.
      *
@@ -53,17 +55,6 @@ class OrdersController extends Controller
         $order = Orders::find($id);
         return $order;
 
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  \App\Models\Orders  $orders
-     * @return \Illuminate\Http\Response
-     */
-    public function edit(Orders $orders)
-    {
-        //
     }
 
     /**
