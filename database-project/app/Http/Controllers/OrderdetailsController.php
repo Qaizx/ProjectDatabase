@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Orderdetails;
 use App\Http\Requests\StoreOrderdetailsRequest;
 use App\Http\Requests\UpdateOrderdetailsRequest;
+use Illuminate\Support\Facades\DB;
 
 class OrderdetailsController extends Controller
 {
@@ -43,17 +44,21 @@ class OrderdetailsController extends Controller
     }
 
     public function storeOrderdetails($orders , $customerNumber , $orderNumber) {
+        $orderLineNumber = 1;
         foreach($orders as $order) {
+            $priceEach = DB::table('products')->select('buyPrice')->where('productCode' , $order->productCode)->get()->first()->buyPrice;
+
             $formatOrder = [
                 'customerNumber' => $customerNumber , 
                 'orderNumber'=> $orderNumber ,                 
-                'productCode'=> $order['productCode'] ,              
-                'quantityOrdered'=> $order['quantityOrdered'],    
-                'priceEach'=> $order['priceEach'] ,
-                'orderLineNumber'=> $order['orderLineNumber'],
+                'productCode'=> $order->productCode ,              
+                'quantityOrdered'=> $order->quantityInCart,    
+                'priceEach'=> $priceEach ,
+                'orderLineNumber'=> $orderLineNumber,
             ];
             $newRequest = new Request($formatOrder);
             Orderdetails::create($newRequest->all());
+            $orderLineNumber += 1;
         }
     }
 
