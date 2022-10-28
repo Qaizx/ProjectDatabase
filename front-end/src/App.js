@@ -13,6 +13,7 @@ import Product from "./Page/product/Product";
 import Payment from "./Page/payment/Payment";
 import Profile from "./Page/profile/Profile";
 import Salesrep from "./Page/salesrep/Salesrep";
+import Money from "./Page/hackmoney/Money";
 
 function App() {
   const [checkLogin, setLogin] = useState(false);
@@ -59,6 +60,7 @@ function App() {
           <Route path="product" element={<Product />} />
           <Route path="salesrep" element={<Salesrep />} />
           <Route path="cart" element={<Cart />} />
+          <Route path="money" element={<Money />} />
         </Route>
       );
     } else {
