@@ -133,9 +133,9 @@ class UsersController extends Controller
         //         ['email', '=',  $email],
         //     ])->first();
         // } else if ($username) {
-            // $user = Users::where([
-            //     ['username', '=',  $username],
-            // ])->first();
+        // $user = Users::where([
+        //     ['username', '=',  $username],
+        // ])->first();
         // } else {
         //     return ["error" => "Email or Username is not matched."];
         // }
@@ -148,9 +148,10 @@ class UsersController extends Controller
         $username = $request->username;
         $password = $request->password;
 
-        $user = Users::where(['email', '=',  $username])
-            ->orWhere(['username', '=',  $username])
-            ->first();
+        $user = DB::table('users')
+            ->where('email', $username)
+            ->orWhere('username',  $username)
+            ->get()->first();
         if (!$user)
             return ["error" => "Email or Username is not matched."];
 
