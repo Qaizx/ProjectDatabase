@@ -1,15 +1,17 @@
 import "./Login.css";
 import { Button, Row, Form, Col } from "react-bootstrap";
 import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
+import { Link } from "react-router-dom";
+import { createBrowserHistory } from "@remix-run/router";
 
 const Login = () => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisable] = useState(true);
   const [inputs, setInputs] = useState({});
-  const MySwal = withReactContent(Swal) 
+  const MySwal = withReactContent(Swal);
+  const browserHistory = createBrowserHistory({ window });
 
   const handleChange = (event) => {
     const name = event.target.name;
@@ -30,17 +32,10 @@ const Login = () => {
     setValidated(true);
   };
 
-  const handleSubmit = async(event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     console.log(inputs);
     const CryptoJS = require("crypto-js");
-
-    const alertSweet = async() => {
-      await MySwal.fire({
-        title: <strong>Login Success</strong>,
-        icon: 'success'
-      })
-    }
 
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -61,6 +56,10 @@ const Login = () => {
       redirect: "follow",
     };
 
+    const test = () => {
+      console.log("this");
+    };
+
     //insecureBobolink6
     //Qo196EqODjjreL4C3STk
 
@@ -72,31 +71,31 @@ const Login = () => {
           let text = CryptoJS.enc.Base64.stringify(
             CryptoJS.enc.Utf8.parse(inputs.username)
           );
+          localStorage.setItem("token", text);
           MySwal.fire({
             title: <strong>Login Success</strong>,
-            icon: 'success'
-          })
-          localStorage.setItem("token", text);
-          window.location.href = "/";
-        }else if(result.error === 'Password is not matched.'){
+            icon: "success",
+          }).then((value) => {
+            window.location.href = "/";
+          });
+        } else if (result.error === "Password is not matched.") {
+          MySwal.fire({
+            title: <strong>Login fail</strong>,
+            icon: "error",
+          });
+        } else {
           MySwal.fire({
             title: <strong>Login Fail</strong>,
-            icon: 'error'
-          })
-
-        }else{
-          MySwal.fire({
-            title: <strong>Login Fail</strong>,
-            icon: 'error'
-          })
+            icon: "error",
+          });
         }
-        
-        
       })
-      .catch((error) => MySwal.fire({
-        title: <strong>Login Fail</strong>,
-        icon: 'error'
-      }));
+      .catch((error) =>
+        MySwal.fire({
+          title: <strong>Login Fail</strong>,
+          icon: "error",
+        })
+      );
   };
 
   return (
