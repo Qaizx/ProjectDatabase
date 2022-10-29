@@ -3,6 +3,7 @@ import "./ShopTable.css";
 
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import { Link } from "react-router-dom";
 
 const ShopTable = () => {
   const [products, setProducts] = useState([]);
@@ -43,6 +44,12 @@ const ShopTable = () => {
     window.location.href = "/product";
   };
 
+  const handleMouseMove = (IDProduct) => {
+    // console.log(IDProduct);
+    localStorage.setItem("IDProduct", IDProduct);
+    // window.location.href = "/product";
+  };
+
   const render = () => {
     if (check)
       return (
@@ -56,6 +63,7 @@ const ShopTable = () => {
         return (
           <Card
             style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
+            onMouseMove={() => handleMouseMove(tasks.productCode)}
           >
             <Card.Img
               variant="top"
@@ -83,22 +91,20 @@ const ShopTable = () => {
               </div>
 
               <div>
-                <Button
-                  variant="warning"
-                  style={{ marginTop: "10px" }}
-                  href="/product"
-                >
-                  more info
-                  <img
-                    src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
-                    width="20"
-                    height="20"
-                    alt=""
-                    title=""
-                    class="img-small"
-                    style={{ marginLeft: "9px" }}
-                  ></img>
-                </Button>
+                <Link to="/product">
+                  <Button variant="warning" style={{ marginTop: "10px" }}>
+                    more info
+                    <img
+                      src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
+                      width="20"
+                      height="20"
+                      alt=""
+                      title=""
+                      class="img-small"
+                      style={{ marginLeft: "9px" }}
+                    ></img>
+                  </Button>
+                </Link>
                 <Button
                   variant="primary"
                   style={{ marginTop: "10px", float: "right" }}
