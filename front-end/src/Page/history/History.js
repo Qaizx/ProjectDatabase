@@ -5,6 +5,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
 const History = () => {
+    const [order, setOrder] = useState();
     const CryptoJS = require("crypto-js");
     const getHistory = async () => {
         const token = localStorage.getItem("token");
@@ -14,18 +15,25 @@ const History = () => {
 
         var myHeaders = new Headers();
         myHeaders.append("Accept", "application/json");
+        myHeaders.append("Content-Type", "application/json");
 
         var requestOptions = {
-            method: 'GET',
+            method: 'POST',
             headers: myHeaders,
+            body: raw,
             redirect: 'follow'
         };
 
-        fetch("http://127.0.0.1:8000/api/history", requestOptions)
+        fetch("http://127.0.0.1:8000/api/getOrders", requestOptions)
             .then(response => response.text())
             .then(result => console.log(result))
             .catch(error => console.log('error', error));
     }
+
+    useEffect(() => {
+        getHistory()
+    } , [])
+
 
     return (
         <div>
