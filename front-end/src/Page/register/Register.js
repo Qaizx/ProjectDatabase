@@ -52,7 +52,20 @@ const Register = () => {
     fetch("http://127.0.0.1:8000/api/users/register", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        window.location.href = "/login";
+        if(result.status === 'ok'){
+          MySwal.fire({
+            title: <strong>Register Success</strong>,
+            icon: "success",
+          }).then((value) => {
+            window.location.href = "/login";
+          });
+        }else{
+          MySwal.fire({
+            title: <strong>Register Fail</strong>,
+            icon: "error",
+          })
+        }
+        
       })
       .catch((error) => console.log("error", error));
   };
