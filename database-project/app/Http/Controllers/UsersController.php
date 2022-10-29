@@ -45,9 +45,9 @@ class UsersController extends Controller
             $duplicateEmail = Users::where('email', $email)->first();
 
             if ($duplicateEmail != NULL)
-                return 1;
+                return ["error" => "This Email is already taken."];
             if ($duplicateUsername != NULL)
-                return 2;
+                return ["error" => "This Username is already taken."];
 
             $user = new Users();
             $user->username = $username;
@@ -61,16 +61,10 @@ class UsersController extends Controller
             ])->first();
 
             app('App\Http\Controllers\CustomersController')->createCustomer($findUser->customerNumber);
-            return 3;
+            return ["status" => "ok"];
         });
 
-        if ($result == 1) {
-            return ["error" => "This Email is already taken."];
-        } else if ($result == 2) {
-            return ["error" => "This Username is already taken."];
-        } else {
-            return ["status" => "ok"];
-        }
+        return $result;
     }
 
     /**

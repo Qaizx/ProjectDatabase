@@ -153,7 +153,7 @@ const Login = () => {
               type="submit"
               variant="success"
               size="lg"
-              style={{ margin: "0px 10px", opacity: "1", color: "black" }}
+              style={{ margin: "0px 10px", color: "black" }}
               active
               disabled={disabled}
             >
