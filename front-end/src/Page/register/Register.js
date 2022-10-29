@@ -63,8 +63,10 @@ const Register = () => {
             window.location.href = "/login";
           });
         }else{
+          console.log(result.error)
           MySwal.fire({
             title: <strong>Register Fail</strong>,
+            text: result.error,
             icon: "error",
           })
         }
