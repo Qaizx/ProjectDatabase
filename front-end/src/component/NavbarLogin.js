@@ -8,9 +8,9 @@ const NavbarLogin = () => {
   const [profile, setProfile] = useState();
   const [check, setChecked] = useState(true);
   const CryptoJS = require("crypto-js");
-  const MySwal = withReactContent(Swal) 
+  const MySwal = withReactContent(Swal)
 
-  const handleLogout = async() => {
+  const handleLogout = async () => {
     localStorage.removeItem("token");
     await MySwal.fire({
       title: <strong>Logout Success</strong>,
@@ -62,62 +62,63 @@ const NavbarLogin = () => {
   const render = () => {
     if (!check) {
       return (
-        <div class="navbar_info">
-          <a href="/">Home</a>
-          <a href="/shop">shop</a>
-          <div class="drop">
-            <span style={{color : "white", marginRight: "10px"}}>Credit : {profile.creditLimit}$</span>
-            <button class="dropbtn">
-              <img 
-                src=" https://cdn-icons-png.flaticon.com/512/2099/2099058.png "
-                width="30"
-                height="30"
-                alt=""
-                title=""
-                class="img-small"
-              />
-            </button>
-            <div className="drop-content">
-              <div>
-                <a href="/profile">
-                  Profile{" "}
+        <div class="navbar_info d-flex justify-content-between align-items-center">
+          <div>
+            <a href="/" class="gradient">Home</a>
+            <a href="/shop" class="gradient">Shop</a>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class="gradient d-flex align-items-center" style={{ height: "62px", padding: "10px" , fontSize:"20px"}}>
+              Credit : {profile.creditLimit}$
+            </div>
+            <div class="drop">
+              <button class="gradient" style={{ height: "62px", width: "62px" }}>
+                <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" className="logo"></img>
+              </button>
+              <div className="drop-content">
+                <div>
+                  <a href="/profile">
+                    Profile{" "}
+                    <img
+                      style={{ float: "right" }}
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png "
+                      width="30"
+                      height="30"
+                    ></img>
+                  </a>
+                </div>
+                <div>
+                  <a href="/cart">
+                    Cart{" "}
+                    <img
+                      style={{ float: "right" }}
+                      src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
+                      width="30"
+                      height="30"
+                    ></img>
+                  </a>
+                </div>
+                <a onClick={handleLogout} type="submit">
+                  Logout{" "}
                   <img
                     style={{ float: "right" }}
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png "
+                    src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png "
                     width="30"
                     height="30"
                   ></img>
                 </a>
               </div>
-              <div>
-                <a href="/cart">
-                  Cart{" "}
-                  <img
-                    style={{ float: "right" }} 
-                    src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
-                    width="30"
-                    height="30"
-                  ></img>
-                </a>
-              </div>
-              <a onClick={handleLogout} type="submit">
-                Logout{" "}
-                <img
-                  style={{ float: "right" }}
-                  src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png "
-                  width="30"
-                  height="30"
-                ></img>
-              </a>
             </div>
           </div>
+
         </div>
       );
-    }else{
-      return(
+    } else {
+      return (
         <div class="navbar_info">
-          <a href="/">Home</a>
-          <a href="/shop">shop</a>
+          <a href="/" className="gradient">Home</a>
+          <a href="/shop" className="gradient">Shop</a>
           <div class="drop">
             <button class="dropbtn">
               <img
@@ -145,7 +146,7 @@ const NavbarLogin = () => {
                 <a href="/register">
                   Register{" "}
                   <img
-                    style={{ float: "right" }} 
+                    style={{ float: "right" }}
                     src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
                     width="30"
                     height="30"
@@ -161,7 +162,7 @@ const NavbarLogin = () => {
 
   return (
     <>
-    {render()}
+      {render()}
       <Outlet />
     </>
   );

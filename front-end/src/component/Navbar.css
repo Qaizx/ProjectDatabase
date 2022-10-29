@@ -74,3 +74,8 @@
 .gradient:hover::before {
   opacity: 1;
 }
+
+a.gradient {
+  height:62px ;
+  color:black;
+}

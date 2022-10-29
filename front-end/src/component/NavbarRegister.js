@@ -8,8 +8,8 @@ const NavbarRegister = () => {
       <div class="navbar_info d-flex justify-content-between align-items-center">
 
         <div>
-          <a href="/" className="gradient" style={{ height: "62px" , color:"black" }}>Home</a>
-          <a href="/shop" className="gradient" style={{ height: "62px" , color:"black"}}>Shop</a>
+          <a href="/" className="gradient">Home</a>
+          <a href="/shop" className="gradient">Shop</a>
         </div>
 
         <div class="drop">
@@ -21,7 +21,7 @@ const NavbarRegister = () => {
               <a href="/login">Login <img align="right" style={{marginLeft:"10px" }} src="https://cdn-icons-png.flaticon.com/512/1828/1828391.png " alt="" width="30" height="30"></img></a>
             </div>
             <div>
-              <a href="/register">Register <img align="right" style={{  marginLeft:"10px" }} src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png " alt="" width="30" height="30"></img></a>
+              <a href="/register">Register <img align="right" style={{ marginLeft:"10px" }} src="https://cdn-icons-png.flaticon.com/512/2910/2910768.png " alt="" width="30" height="30"></img></a>
             </div>
           </div>
         </div>
