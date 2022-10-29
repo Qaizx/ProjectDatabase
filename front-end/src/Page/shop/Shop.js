@@ -22,7 +22,7 @@ const Shop = () => {
     "Vintage Cars",
   ]);
   const [inputs, setInputs] = useState({});
-  const nameProduct = localStorage.getItem("nameOfProduct");
+  var nameProduct = localStorage.getItem("nameOfProduct");
   const CryptoJS = require("crypto-js");
   const token = localStorage.getItem("token");
   var username = "";
@@ -53,14 +53,16 @@ const Shop = () => {
     // console.log(inputs.name);
   };
 
-  const handleSubmit = () => {
-    console.log(inputs);
-    localStorage.setItem("nameOfProduct", inputs.name);
+  const handleSubmit = async() => {
+    // console.log(inputs);
+    await localStorage.setItem("nameOfProduct", inputs.name);
     window.location.href = "/shop";
+    
   };
   const handleClear = () => {
+    setTypeP("type")
     localStorage.removeItem("nameOfProduct");
-    window.location.href = "/shop";
+    // window.location.href = "/shop";
   };
 
   const initProducts = async () => {
@@ -175,6 +177,7 @@ const Shop = () => {
         </div>
       );
     else {
+      
       const listItems = products.map(function (tasks) {
         const CardItem = () => {
           return (
