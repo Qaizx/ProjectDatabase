@@ -4,6 +4,7 @@ import React from "react";
 import { useState, useEffect } from "react";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
+import { Link } from "react-router-dom";
 
 const Shop = () => {
   const MySwal = withReactContent(Swal);
@@ -24,7 +25,7 @@ const Shop = () => {
   const nameProduct = localStorage.getItem("nameOfProduct");
   const CryptoJS = require("crypto-js");
   const token = localStorage.getItem("token");
-  var username = ""
+  var username = "";
   const [disabled, setDisabled] = useState(true);
 
   const checkToken = () => {
@@ -87,6 +88,12 @@ const Shop = () => {
   useEffect(() => {
     initProducts();
   }, []);
+
+  // useEffect(() => {
+  //   // typeFilter()
+  //   barType()
+  //   render()
+  // });
 
   const barType = () => {
     const Item = typeItem.map(function (tasks) {
@@ -201,22 +208,24 @@ const Shop = () => {
                 </div>
 
                 <div>
-                  <Button
-                    variant="warning"
-                    style={{ marginTop: "10px" }}
-                    href="/product"
-                  >
-                    more info
-                    <img
-                      src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
-                      width="20"
-                      height="20"
-                      alt=""
-                      title=""
-                      class="img-small"
-                      style={{ marginLeft: "9px" }}
-                    ></img>
-                  </Button>
+                  <Link to="/product">
+                    <Button
+                      variant="warning"
+                      style={{ marginTop: "10px" }}
+                    >
+                      more info
+                      <img
+                        src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
+                        width="20"
+                        height="20"
+                        alt=""
+                        title=""
+                        class="img-small"
+                        style={{ marginLeft: "9px" }}
+                      ></img>
+                    </Button>
+                  </Link>
+
                   <Button
                     variant="primary"
                     style={{ marginTop: "10px", float: "right" }}
