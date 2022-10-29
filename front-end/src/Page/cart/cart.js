@@ -159,7 +159,7 @@ const Cart = () => {
   };
 
   const sendOrder = () => {
-<<<<<<< HEAD
+
     var date, date2;
 
     date = new Date().toISOString().slice(0, 19).replace("T", " ");
@@ -180,15 +180,6 @@ const Cart = () => {
       ("00" + date2.getUTCMinutes()).slice(-2) +
       ":" +
       ("00" + date2.getUTCSeconds()).slice(-2);
-
-=======
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    let orderDate = year + "-" + month + "-" + day;
-    let requiredDate = year + "-" + month + "-" + day;
->>>>>>> efa1bc610ae6e036c285dd19ae629ae7c325f494
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
