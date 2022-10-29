@@ -88,22 +88,21 @@ class CartsController extends Controller
             ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
-        $target = Carts::where([
-            ['customerNumber', '=', $v1],
-            ['productCode', '=', $v2],
-        ])->get()->first();
-
-        if (!$target) {
-
+        $target = DB::table('carts')
+            ->where([
+                ['customerNumber', '=', $v1],
+                ['productCode', '=', $v2],])->get()->first();
+        if(!$target)
             Carts::create(['customerNumber' => $v1, 'productCode' => $v2]);
-        } else {
-            $carts = $target;
-            $carts->update(['quantityInCart' => $carts->quantityInCart + 1]);
-        }
+        else    
+            DB::table('carts')
+                ->where([['customerNumber', '=', $v1],['productCode', '=', $v2]])
+                ->increment('quantityInCart');
+
         return ["message" => "success"];
     }
 
-    /**
+     /**
      * Decrease product in cart 
      *
      * @param  \App\Http\Requests\StoreCartsRequest  $request
@@ -133,17 +132,17 @@ class CartsController extends Controller
             ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
-        $target = Carts::where([
-            ['customerNumber', '=', $v1],
-            ['productCode', '=', $v2],
-        ])->get()->first();
+        $target = DB::table('carts')
+            ->where([
+                ['customerNumber', '=', $v1],
+                ['productCode', '=', $v2],])->get()->first();
+        if($target->quantityInCart > 1)
+            DB::table('carts')
+                ->where([['customerNumber', '=', $v1],['productCode', '=', $v2]])
+                ->decrement('quantityInCart');
+        else    
+            DB::table('carts')->where([['customerNumber', '=', $v1],['productCode', '=', $v2]])->delete();
 
-        $carts = $target;
-        if ($target->quantityInCart == 1) {
-            $carts->delete();
-        } else {
-            $carts->update(['quantityInCart' => $carts->quantityInCart - 1]);
-        }
         return ["message" => "success"];
     }
 
@@ -178,17 +177,17 @@ class CartsController extends Controller
             ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
         $v2 = $request->productCode;
-        $target = Carts::where([
-            ['customerNumber', '=', $v1],
-            ['productCode', '=', $v2],
-        ])->get()->first();
-        if (!$target) {
+        $target = DB::table('carts')
+            ->where([
+                ['customerNumber', '=', $v1],
+                ['productCode', '=', $v2],])->get()->first();
+        if(!$target)
+            Carts::create(['customerNumber' => $v1, 'productCode' => $v2]);
+        else    
+            DB::table('carts')
+                ->where([['customerNumber', '=', $v1],['productCode', '=', $v2]])
+                ->update(['quantityInCart' => $request->quantityInCart + $target->quantityInCart]);
 
-            Carts::create(['customerNumber' => $v1, 'productCode' => $v2, 'quantityInCart' => $request->quantityInCart]);
-        } else {
-            $target->update(['quantityInCart' => $request->quantityInCart + $target->quantityInCart]);
-        }
-        // $target->update($request->all());
         return ["message" => "success"];
     }
 
@@ -221,12 +220,9 @@ class CartsController extends Controller
             )
             ->where('username', '=', $username)->first();
         $v1 = $targetCustomers->customerNumber;
-        $v2 = $request->productCode;
-        $target = Carts::where([
-            ['customerNumber', '=', $v1],
-            ['productCode', '=', $v2],
-        ])->get()->first();
-        $target->delete();
+        $v2 = $request->productCode;      
+        DB::table('carts')->where([['customerNumber', '=', $v1],['productCode', '=', $v2]])->delete();
+       
         return ["message" => "success"];
     }
 }
