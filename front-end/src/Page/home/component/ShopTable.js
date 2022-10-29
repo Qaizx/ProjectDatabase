@@ -13,7 +13,7 @@ const ShopTable = () => {
   const CryptoJS = require("crypto-js");
   const token = localStorage.getItem("token");
   const [disabled, setDisabled] = useState(true);
-  const username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
+  var username = ""
 
   const MySwal = withReactContent(Swal);
 
@@ -21,6 +21,7 @@ const ShopTable = () => {
     if (token == null) {
       setDisabled(true);
     } else {
+      username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
       setDisabled(false);
     }
   };
