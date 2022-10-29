@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Orderdetails;
 use App\Http\Requests\StoreOrderdetailsRequest;
 use App\Http\Requests\UpdateOrderdetailsRequest;
+use App\Models\Products;
 use Illuminate\Support\Facades\DB;
 
 class OrderdetailsController extends Controller
@@ -58,6 +59,9 @@ class OrderdetailsController extends Controller
             ];
             $newRequest = new Request($formatOrder);
             Orderdetails::create($newRequest->all());
+            $product = Products::find($order->productCode);
+            $product->quantityInStock = $product->quantityInStock - $order->quantityInCart;
+            $product->save();
             $orderLineNumber += 1;
         }
     }
