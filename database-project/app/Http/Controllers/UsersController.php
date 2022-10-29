@@ -217,13 +217,14 @@ class UsersController extends Controller
             ->join('products', 'orderdetails.productCode', '=', 'products.productCode')
             ->select(
                 'username',
+                'url',
                 'productName',
                 'quantityOrdered',
                 'priceEach',
             )
             ->where('username', '=', $username)->get()->first();
         if ($target == NULL)
-            return ["error" => "Username not found"];
+            return ["error" => "user doesn't have any order"];
         return $target;
     }
 
