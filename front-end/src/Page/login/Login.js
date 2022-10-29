@@ -28,7 +28,6 @@ const Login = () => {
     } else {
       setDisable(false);
     }
-
     setValidated(true);
   };
 
@@ -149,30 +148,32 @@ const Login = () => {
               />
             </Col>
           </Form.Group>
+          <div style={{ textAlign: "center" }} className="mt-5 d-flex justify-content-center">
+            <Button
+              type="submit"
+              variant="success"
+              size="lg"
+              style={{ margin: "0px 10px", opacity: "1", color: "black" }}
+              active
+              disabled={disabled}
+            >
+              Login
+            </Button>{" "}
+            <Button
+              variant="warning"
+              size="lg"
+              style={{ margin: "0px 10px" }}
+              active
+              href="/register"
+            >
+              Register
+            </Button>{" "}
+          </div>
         </Form>
+
       </div>
 
-      <div style={{ textAlign: "center" }} className="mt-5 d-flex justify-content-center">
-        <Button
-          type="submit"
-          variant="success"
-          size="lg"
-          style={{ margin: "0px 10px", opacity: "1", color: "black" }}
-          active
-          disabled={disabled}
-        >
-          Login
-        </Button>{" "}
-        <Button
-          variant="warning"
-          size="lg"
-          style={{ margin: "0px 10px" }}
-          active
-          href="/register"
-        >
-          Register
-        </Button>{" "}
-      </div>
+
     </div>
   );
 };
