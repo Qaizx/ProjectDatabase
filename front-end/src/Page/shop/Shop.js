@@ -27,6 +27,7 @@ const Shop = () => {
   const token = localStorage.getItem("token");
   var username = "";
   const [disabled, setDisabled] = useState(true);
+  const [typeP, setTypeP] = useState("")
 
   const checkToken = () => {
     if (token == null) {
@@ -89,6 +90,10 @@ const Shop = () => {
     initProducts();
   }, []);
 
+  useEffect(() => {
+    render();
+  }, [typeP]);
+
   // useEffect(() => {
   //   // typeFilter()
   //   barType()
@@ -124,8 +129,9 @@ const Shop = () => {
 
   const typeFilter = (type) => {
     console.log(type);
+    setTypeP(type)
     localStorage.setItem("type", type);
-    window.location.href = "/shop";
+    // window.location.href = "/shop";
   };
 
   const handleClick = () => {
