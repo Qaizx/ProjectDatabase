@@ -262,7 +262,7 @@ class UsersController extends Controller
            
             $targetOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber', '=', $targetCustomer)->get()->first()->orderNumber;
             $orderdetails = DB::table('carts')->where('customerNumber' , $targetCustomer)->get();
-
+            DB::table('carts')->where('customerNumber' , $targetCustomer)->delete();
             app('App\Http\Controllers\OrderdetailsController')->storeOrderdetails($orderdetails, $targetCustomer, $targetOrderNumber);
 
             return ['status' => 'store orders ok'];
