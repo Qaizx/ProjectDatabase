@@ -24,13 +24,14 @@ const Shop = () => {
   const nameProduct = localStorage.getItem("nameOfProduct");
   const CryptoJS = require("crypto-js");
   const token = localStorage.getItem("token");
-  const username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
+  const username = ""
   const [disabled, setDisabled] = useState(true);
 
   const checkToken = () => {
     if (token == null) {
       setDisabled(true);
     } else {
+      username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
       setDisabled(false);
     }
   };
@@ -203,7 +204,6 @@ const Shop = () => {
                   <Button
                     variant="warning"
                     style={{ marginTop: "10px" }}
-                    disabled={disabled}
                     href="/product"
                   >
                     more info
