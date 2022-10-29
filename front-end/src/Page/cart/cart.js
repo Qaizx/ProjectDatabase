@@ -26,7 +26,7 @@ const Cart = () => {
   const username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
   const [disabled, setDisabled] = useState(true);
 
-  const [inputs, setInputs] = useState();
+  const [checkSubmit, setCheckSubmit] = useState();
   const MySwal = withReactContent(Swal);
 
   let money = 0.0;
@@ -68,6 +68,9 @@ const Cart = () => {
   useEffect(() => {
     initProducts();
   }, []);
+
+
+
 
   const plus = () => {
     const IDProduct = localStorage.getItem("IDProduct");
@@ -209,7 +212,7 @@ const Cart = () => {
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        // window.location.href = "/cart";
+        window.location.href = "/cart";
       })
       .catch((error) => console.log("error", error));
   };
@@ -219,6 +222,7 @@ const Cart = () => {
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
+    setCheckSubmit("rrr")
 
     let newDate = year + "-" + month + "-" + day;
     var myHeaders = new Headers();
@@ -236,7 +240,7 @@ const Cart = () => {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow",
+      redirect: "follow"
     };
 
     fetch("http://127.0.0.1:8000/api/storePayments", requestOptions)
@@ -249,6 +253,7 @@ const Cart = () => {
           }).then((value) => {
             minusCredit();
             sendOrder();
+            
           });
         }
       })
@@ -460,14 +465,10 @@ const Cart = () => {
                         </MDBTypography>
                       </div>
                       <div style={{ float: "right", marginBottom: "30px" }}>
-                        <MDBBtn
-                          color="success"
-                          block
-                          size="lg"
-                          onClick={sendOrder}
-                        >
-                          Confirms
-                        </MDBBtn>
+                        
+                        <button className="submit_product" onClick={handleSubmit}>
+                          Confirm
+                        </button>
                       </div>
                       {/* <MDBBtn color="dark" block size="lg" >
                         Confirms
