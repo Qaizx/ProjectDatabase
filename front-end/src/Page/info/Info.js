@@ -183,9 +183,9 @@ function Info() {
                   <input
                     type="text"
                     class="form-control"
-                    placeholder={profile.addressLine1}
+                    placeholder={profile.addressLine2}
                     name="addr1"
-                    value={inputs.addr1 || ""}
+                    value={inputs.addr2 || ""}
                     onChange={handleChange}
                   />
                 </div>
