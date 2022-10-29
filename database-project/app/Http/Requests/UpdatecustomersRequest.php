@@ -26,7 +26,7 @@ class UpdatecustomersRequest extends FormRequest
 
         $method = $this->method();
 
-        if($method == 'PUT') {
+        if ($method == 'PUT') {
             return [
                 'username' => ['required'],
                 'customerNumber' => ['sometimes'],
@@ -41,27 +41,25 @@ class UpdatecustomersRequest extends FormRequest
                 'country' => ['required'],
                 'postalCode' => ['sometimes', 'nullable'],
                 'salesRepEmployeeNumber' => ['sometimes', 'nullable'],
-                'creditLimit' => ['required', 'integer'],
+                'creditLimit' => ['required', 'numeric'],
             ];
         } else {
             return [
                 'username' => ['required'],
                 'customerNumber' => ['sometimes'],
-                'customerName' => ['sometimes','required'],
-                'contactLastName' => ['sometimes','required'],
-                'contactFirstName' => ['sometimes','required'],
-                'phone' => ['sometimes','required'],
-                'addressLine1'=> ['sometimes','required'],
-                'addressLine2'=> ['sometimes','nullable'],
-                'city'=> ['sometimes','required'],
-                'state'=> ['sometimes','nullable'],
-                'country'=> ['sometimes','required'],
-                'postalCode'=> ['sometimes','nullable'],
-                'salesRepEmployeeNumber'=> ['sometimes','nullable'],
-                'creditLimit'=> ['sometimes', 'required' , 'integer'],
+                'customerName' => ['sometimes', 'required'],
+                'contactLastName' => ['sometimes', 'required'],
+                'contactFirstName' => ['sometimes', 'required'],
+                'phone' => ['sometimes', 'required'],
+                'addressLine1' => ['sometimes', 'required'],
+                'addressLine2' => ['sometimes', 'nullable'],
+                'city' => ['sometimes', 'required'],
+                'state' => ['sometimes', 'nullable'],
+                'country' => ['sometimes', 'required'],
+                'postalCode' => ['sometimes', 'nullable'],
+                'salesRepEmployeeNumber' => ['sometimes', 'nullable'],
+                'creditLimit' => ['sometimes', 'required', 'numeric'],
             ];
         }
-
-
     }
 }

@@ -35,7 +35,7 @@ class StoreCustomersRequest extends FormRequest
             'country' => ['required'],
             'postalCode' => ['sometimes', 'nullable'],
             'salesRepEmployeeNumber' => ['sometimes', 'nullable'],
-            'creditLimit' => ['required', 'integer'],
+            'creditLimit' => ['required', 'numeric'],
         ];
     }
 }
