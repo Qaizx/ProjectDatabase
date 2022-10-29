@@ -25,11 +25,11 @@ const Cart = () => {
   const token = localStorage.getItem("token");
   const username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
   const [disabled, setDisabled] = useState(true);
-  const [Confirms, setCheckConfirm] = useState(false);
+
   const [inputs, setInputs] = useState();
   const MySwal = withReactContent(Swal);
 
-  let money = 0.00;
+  let money = 0.0;
   let total = 0;
 
   const checkToken = () => {
@@ -68,8 +68,6 @@ const Cart = () => {
   useEffect(() => {
     initProducts();
   }, []);
-
-
 
   const plus = () => {
     const IDProduct = localStorage.getItem("IDProduct");
@@ -146,14 +144,12 @@ const Cart = () => {
     fetch("http://127.0.0.1:8000/api/deleteFromCart", requestOptions)
       .then((response) => response.json())
       .then((result) => {
-        if(!Confirms){
-            MySwal.fire({
-                title: <strong>Delete Success</strong>,
-                icon: "success",
-              }).then((value) => {
-                window.location.href = "/cart";
-              });
-        }
+        MySwal.fire({
+          title: <strong>Delete Success</strong>,
+          icon: "success",
+        }).then((value) => {
+          window.location.href = "/cart";
+        });
       })
       .catch((error) => console.log("error", error));
   };
@@ -163,12 +159,27 @@ const Cart = () => {
   };
 
   const sendOrder = () => {
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
-    let orderDate = year + "-" + month + "-" + day;
-    let requiredDate = year + "-" + month + "-" + (day + 7);
+    var date, date2;
+
+    date = new Date().toISOString().slice(0, 19).replace("T", " ");
+    const d = new Date();
+    let day = d.getDate();
+    let nextWeek = day+7
+
+    date2 = new Date();
+    date2 =
+      date2.getUTCFullYear() +
+      "-" +
+      ("00" + (date2.getUTCMonth() + 1)).slice(-2) +
+      "-" +
+      ("00" + date2.getUTCDate() + nextWeek).slice(-2) +
+      " " +
+      ("00" + date2.getUTCHours()).slice(-2) +
+      ":" +
+      ("00" + date2.getUTCMinutes()).slice(-2) +
+      ":" +
+      ("00" + date2.getUTCSeconds()).slice(-2);
+
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -177,11 +188,11 @@ const Cart = () => {
     var raw = JSON.stringify({
       username: username,
       order: {
-        orderDate: orderDate,
-        requiredDate: requiredDate,
+        orderDate: date,
+        requiredDate: date,
         shippedDate: null,
         status: "In Process",
-        comments: "",
+        comments: "dark",
       },
     });
 
@@ -194,7 +205,10 @@ const Cart = () => {
 
     fetch("http://127.0.0.1:8000/api/storeOrders", requestOptions)
       .then((response) => response.json())
-      .then((result) => console.log(result))
+      .then((result) => {
+        console.log(result);
+        // window.location.href = "/cart";
+      })
       .catch((error) => console.log("error", error));
   };
 
@@ -227,18 +241,13 @@ const Cart = () => {
       .then((response) => response.json())
       .then((result) => {
         if (result.status === "store payments ok") {
-
           MySwal.fire({
             title: <strong>Pay Success</strong>,
             icon: "success",
           }).then((value) => {
-            setCheckConfirm(true)
-            sendOrder();
             minusCredit();
-            deleteProduct()
-            
-          })
-          
+            sendOrder();
+          });
         }
       })
       .catch((error) => console.log("error", error));
@@ -252,15 +261,12 @@ const Cart = () => {
     // console.log(typeof(5555));
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
-    myHeaders.append(
-      "Cookie",
-      "XSRF-TOKEN=eyJpdiI6IlJJOFBKQ20xRjRUR0NhUCtTUEdyMHc9PSIsInZhbHVlIjoidnJySzRYMktmYVpUZkVzRDcrR0dQZjBBRDdkc0NpbmJ5cUdVdEc4T0p5Y0V5L1h3REVvUko2cWVvTUdaTFR4bm1lM3Arcmg1QklTTDBQMWM1RlRiVGdvN2l6RWt1MzNPUURnZ1hWSVhwL3VLYWlBTmFmc1ZYc1RkNFgrM2pBRUkiLCJtYWMiOiJjODQ2ZjBkNDI3ZTEwMTQyMjNiNmQ5NTJiZWIyYmI1NzViZTg0OWI1Y2E3OTdkNTE1NDIxNTY1ZDdhNWZjY2M5IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6IjhHUUk5cW91blA0YkZQVTFiVjl2dFE9PSIsInZhbHVlIjoiTVJJa3lzUjk5V3kwdFRmVkNjMDN3QXAxQjhhM2JFN0FabDZpT2VFbWtaWTMrT0tIRUZqQ2I0VTB4VlpFYVNiMXZiZElUZWd6c0N1RHhFR0Y3YlBmNHVjQmN2TnM3eWRQNmJ6NjJSU1psdFFNVDZvcExwT2pwWjgvY2dxMnA0SjIiLCJtYWMiOiIzYjE5ZTZlOTU4OWI1ODE3ZmY2MDZkOGM0OTBjMGM2NTI5MmY4MDAyYzdhZmYwMjI3NGZmYTg0YjM4ODAyMWU0IiwidGFnIjoiIn0%3D"
-    );
+
     var raw = JSON.stringify({
       username: username,
       //   addressLine2: mon
       //   creditLimit: parseFloat(credit).toFixed(2)
-      creditLimit: mon,
+      creditLimit: mon.toFixed(2),
     });
 
     var requestOptions = {
@@ -269,12 +275,12 @@ const Cart = () => {
       body: raw,
       redirect: "follow",
     };
-    localStorage.setItem("credit", mon);
+    // localStorage.setItem("credit", mon);
     fetch("http://127.0.0.1:8000/api/updateProfile", requestOptions)
       .then((response) => response.json())
       .then((result) => {
         console.log(result);
-        localStorage.setItem("credit", mon);
+        localStorage.setItem("credit", mon.toFixed(2));
       })
       .catch((error) => console.log("error", error));
   };
@@ -360,7 +366,7 @@ const Cart = () => {
   };
 
   return (
-    <section className="h-100 h-custom" style={{ backgroundColor: "#eee" }}>
+    <section className="h-100 h-custom">
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol size="12">
@@ -412,7 +418,9 @@ const Cart = () => {
                         <MDBTypography tag="h5" className="text-uppercase">
                           {products.length} items
                         </MDBTypography>
-                        <MDBTypography tag="h5">{money.toFixed(2)} $</MDBTypography>
+                        <MDBTypography tag="h5">
+                          {money.toFixed(2)} $
+                        </MDBTypography>
                       </div>
 
                       <MDBTypography tag="h5" className="text-uppercase mb-3">
@@ -445,14 +453,16 @@ const Cart = () => {
                         <MDBTypography tag="h5" className="text-uppercase">
                           Total price
                         </MDBTypography>
-                        <MDBTypography tag="h5">{money.toFixed(2)} $</MDBTypography>
+                        <MDBTypography tag="h5">
+                          {money.toFixed(2)} $
+                        </MDBTypography>
                       </div>
                       <div style={{ float: "right", marginBottom: "30px" }}>
                         <MDBBtn
                           color="success"
                           block
                           size="lg"
-                          onClick={handleSubmit}
+                          onClick={sendOrder}
                         >
                           Confirms
                         </MDBBtn>
