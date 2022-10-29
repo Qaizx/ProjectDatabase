@@ -8,16 +8,15 @@ const ShopTable = () => {
   const [products, setProducts] = useState([]);
   const [check, setChecked] = useState(true);
   const token = localStorage.getItem("token");
-  const [disabled, setDisabled] = useState(true)
+  const [disabled, setDisabled] = useState(true);
 
   const checkToken = () => {
     if (token == null) {
-      setDisabled(true)
+      setDisabled(true);
     } else {
-      setDisabled(false)
+      setDisabled(false);
     }
   };
-
 
   const initProducts = async () => {
     var requestOptions = {
@@ -66,7 +65,7 @@ const ShopTable = () => {
             />
 
             <Card.Body>
-              <div onClick={() => handleClick(tasks.productCode)} type="submit" >
+              <div onClick={() => handleClick(tasks.productCode)} type="submit">
                 <Card.Title>{tasks.productName}</Card.Title>
                 <Card.Text>
                   <b>Type :</b> {tasks.productLine}
@@ -83,9 +82,32 @@ const ShopTable = () => {
                 </Card.Text>
               </div>
 
-              <Button variant="primary" href="/cart"  style={{marginTop: "10px"}} disabled={disabled} >
-                Add product
-              </Button>
+              <div>
+                <Button
+                  variant="warning"
+                  style={{ marginTop: "10px" }}
+                  href="/product"
+                >
+                  more info
+                  <img
+                    src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
+                    width="20"
+                    height="20"
+                    alt=""
+                    title=""
+                    class="img-small"
+                    style={{ marginLeft: "9px" }}
+                  ></img>
+                </Button>
+                <Button
+                  variant="primary"
+                  style={{ marginTop: "10px", float: "right" }}
+                  disabled={disabled}
+                  onClick={handleClick}
+                >
+                  Add Product
+                </Button>
+              </div>
             </Card.Body>
           </Card>
         );
