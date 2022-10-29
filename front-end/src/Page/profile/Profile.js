@@ -28,7 +28,7 @@ const Profile = () => {
 
     var raw = JSON.stringify({
       username: username,
-    })
+    });
 
     var requestOptions = {
       method: "POST",
@@ -54,7 +54,7 @@ const Profile = () => {
     };
 
     fetch(
-      "https://api.unsplash.com/photos/random/?client_id=jQ6hAqjRKnrpBau5FEmUfJwYTRnc6RxZSab-P7PdTwA",
+      "https://api.unsplash.com/photos/random/?client_id=xpNXT57X0GEI_BNldxm4J4wbD6qTpR_0pVb2Gyqey9E",
       requestOptions
     )
       .then((response) => response.json())
@@ -97,7 +97,7 @@ const Profile = () => {
 
   useEffect(() => {
     getProfile();
-    // getPicture();
+    getPicture();
     getProfileRep();
   }, []);
 
@@ -111,69 +111,67 @@ const Profile = () => {
     } else {
       return (
         <div>
-          <div>
-            <div class="container py-5">
-              <div class="row d-flex justify-content-center my-4">
-                <div class="col-md-10">
-                  <div class="card ">
-                    <div class="card-header py-3 d-flex ">
-                      <div class="">
-                        <h3 class="mb-0">{profile.customerName}</h3>
-                      </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-5" style={{ marginLeft: "60px" }}>
+                <img
+                  class="rounded-circle mt-5"
+                  width="500px"
+                  height="500px"
+                  src={picture}
+                />
+              </div>
 
-                      <div class="eiei d-flex">
-                        <Link to="/salesrep">
-                          <div class="mx-2">
-                            <button class="">SalesRep</button>
-                          </div>
-                        </Link>
-
-                        <div class="mx-2    ">
-                          <Link to="/history">
-                            <button class="">History</button>
-                          </Link>
-                        </div>
-                        <Link to="/info">
-                          <div class="mx-2">
-                            <button type="button">Edit Profile</button>
-                          </div>
-                        </Link>
-                      </div>
+              <div
+                class="col-md-5 border-right"
+                style={{ marginLeft: "60px" }}
+              >
+                <div class="p-3 py-5">
+                  <div class="d-flex justify-content-between align-items-center mb-3">
+                    <h4 class="text-right">{profile.customerName}</h4>
+                  </div>
+                  <div class="row mt-2">
+                    <div class="col-md-6">
+                      <label class="labels">Name</label>
+                      <h5>{profile.contactFirstName}</h5>
                     </div>
-                    <div class="card-body">
-                      <div class="row">
-                        <div class="col-md-5">
-                          <img src={picture} class="w-100" alt="Profile Pic" />
-                        </div>
-                        <div class="col mt-2">
-                          <h2 class="mb-3">
-                            Contact : {profile.contactFirstName}{" "}
-                            {profile.contactLastName}
-                          </h2>
-                          <h2 class="mb-3">Phone : {profile.phone}</h2>
-                          <h2 class="mb-3">
-                            Address 1 : {profile.addressLine1}
-                          </h2>
-                          <h2 class="mb-3">
-                            Address 2 : {profile.addressLine2}
-                          </h2>
-                          <h2 class="mb-3">City : {profile.city}</h2>
-                          <h2 class="mb-3">State : {profile.state}</h2>
-
-                          <h2 class="mb-3">Country : {profile.country}</h2>
-                          <h2 class="mb-3">
-                            Postal Code : {profile.postalCode}
-                          </h2>
-                          <h2 class="mb-3">
-                            Credit Limit : {profile.creditLimit}${" "}
-                          </h2>
-                        </div>
-                      </div>
-                      <div style={{ textAlign: "right" }}>
-                        <Link to="/money">
-                          <button>hack money</button>
-                        </Link>
-                      </div>
+                    <div class="col-md-6">
+                      <label class="labels">Surname</label>
+                      <h5>{profile.contactLastName}</h5>
+                    </div>
+                  </div>
+                  <div class="row mt-3">
+                    <div class="col-md-12">
+                      <label class="labels">Mobile Number</label>
+                      <h5>{profile.phone}</h5>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="labels">Address Line 1</label>
+                      <h5>{profile.addressLine1}</h5>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="labels">Address Line 2</label>
+                      <h5>{profile.addressLine2}</h5>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="labels">City</label>
+                      <h5>{profile.city}</h5>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="labels">State</label>
+                      <h5>{profile.State}</h5>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="labels">Country</label>
+                      <h5>{profile.country}</h5>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="labels">Postal Code</label>
+                      <h5>{profile.postalCode}</h5>
+                    </div>
+                    <div class="col-md-12">
+                      <label class="labels">Credit Limit</label>
+                      <h5>{profile.creditLimit} $</h5>
                     </div>
                   </div>
                 </div>
@@ -188,9 +186,51 @@ const Profile = () => {
   return (
     <div>
       <div>
-        <h1 className="headerText"> User Information</h1>
+        <div class="container py-5">
+          <div class="row d-flex justify-content-center my-4">
+            <div class="col-md-15">
+              <div class="card ">
+                {" "}
+                <div class="card-header py-3 d-flex ">
+                  <div class="">
+                    <h3 class="mb-0">Information</h3>
+                  </div>
+
+                  <div class="eiei d-flex">
+                    <Link to="/salesrep">
+                      <div class="mx-2" style={{ marginTop: "5px" }}>
+                        <span class="border px-3 p-1 add-experience">
+                          <i class="fa fa-plus"></i>&nbsp;SaleRep
+                        </span>
+                      </div>
+                    </Link>
+
+                    <Link to="/history">
+                      <div class="mx-2" style={{ marginTop: "5px" }}>
+                        <span class="border px-3 p-1 add-experience">
+                          <i class="fa fa-plus"></i>&nbsp;History
+                        </span>
+                      </div>
+                    </Link>
+
+                    <Link to="/info">
+                      <div class="mx-2" style={{ marginTop: "5px" }}>
+                        <span class="border px-3 p-1 add-experience">
+                          <i class="fa fa-plus"></i>&nbsp;Edit
+                        </span>
+                      </div>
+                    </Link>
+                  </div>
+                  
+                </div>
+                {render()}
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
-      {render()}
+
+      {/* {render()} */}
     </div>
   );
 };
