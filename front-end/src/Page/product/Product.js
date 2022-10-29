@@ -11,7 +11,7 @@ const Product = () => {
   const token = localStorage.getItem("token");
   const [disabled, setDisabled] = useState(true);
   const CryptoJS = require("crypto-js");
-  const username = ""
+  var username = ""
 
   const MySwal = withReactContent(Swal);
 

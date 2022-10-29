@@ -24,7 +24,7 @@ const Shop = () => {
   const nameProduct = localStorage.getItem("nameOfProduct");
   const CryptoJS = require("crypto-js");
   const token = localStorage.getItem("token");
-  const username = ""
+  var username = ""
   const [disabled, setDisabled] = useState(true);
 
   const checkToken = () => {
