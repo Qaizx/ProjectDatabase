@@ -260,7 +260,7 @@ class UsersController extends Controller
             $targetCustomer = DB::table('users')->select('customerNumber')->where('username', '=', $username)->get()->first()->customerNumber;
             app('App\Http\Controllers\OrdersController')->store(new StoreOrdersRequest($order + ['customerNumber' => $targetCustomer]));
            
-            $targetOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber', '=', $targetCustomer)->get()->first()->orderNumber;
+            $targetOrderNumber = DB::table('orders')->select('orderNumber')->where('customerNumber', '=', $targetCustomer)->orderByDesc('orderNumber')->get()->first()->orderNumber;
             $orderdetails = DB::table('carts')->where('customerNumber' , $targetCustomer)->get();
             DB::table('carts')->where('customerNumber' , $targetCustomer)->delete();
             app('App\Http\Controllers\OrderdetailsController')->storeOrderdetails($orderdetails, $targetCustomer, $targetOrderNumber);

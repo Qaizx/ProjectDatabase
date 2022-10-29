@@ -168,7 +168,7 @@ const Cart = () => {
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
     let orderDate = year + "-" + month + "-" + day;
-    let requiredDate = year + "-" + month + "-" + (day + 7);
+    let requiredDate = year + "-" + month + "-" + day;
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -191,6 +191,8 @@ const Cart = () => {
       body: raw,
       redirect: "follow",
     };
+
+    console.log(requestOptions)
 
     fetch("http://127.0.0.1:8000/api/storeOrders", requestOptions)
       .then((response) => response.json())
