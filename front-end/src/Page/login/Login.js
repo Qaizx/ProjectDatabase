@@ -11,7 +11,7 @@ const Login = () => {
   const [disabled, setDisable] = useState(true);
   const [inputs, setInputs] = useState({});
   const MySwal = withReactContent(Swal);
-  const browserHistory = createBrowserHistory({ window });
+
 
   const handleChange = (event) => {
     const name = event.target.name;
