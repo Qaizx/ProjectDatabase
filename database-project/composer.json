@@ -12,7 +12,7 @@
         "laravel/framework": "^9.19",
         "laravel/sanctum": "^3.0",
         "laravel/tinker": "^2.7",
-        "tymon/jwt-auth": "^1.0.0-beta.3@dev"
+        "tymon/jwt-auth": "^1.0"
     },
     "require-dev": {
         "barryvdh/laravel-ide-helper": "^2.12",
