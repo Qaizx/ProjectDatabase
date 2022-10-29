@@ -2,11 +2,14 @@ import "./Register.css";
 import { Button, Row, Form, Col, Container } from "react-bootstrap";
 import React, { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const Register = () => {
   const [validated, setValidated] = useState(false);
   const [disabled, setDisable] = useState(true);
   const [inputs, setInputs] = useState({});
+  const MySwal = withReactContent(Swal);
 
   const navigate = useNavigate();
 
@@ -60,8 +63,10 @@ const Register = () => {
             window.location.href = "/login";
           });
         }else{
+          console.log(result.error)
           MySwal.fire({
             title: <strong>Register Fail</strong>,
+            text: result.error,
             icon: "error",
           })
         }

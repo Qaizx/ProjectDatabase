@@ -44,10 +44,11 @@ class UsersController extends Controller
             $duplicateUsername = Users::where('username', $username)->first();
             $duplicateEmail = Users::where('email', $email)->first();
 
-            if ($duplicateEmail != NULL)
-                return ["error" => "This Email is already taken."];
             if ($duplicateUsername != NULL)
                 return ["error" => "This Username is already taken."];
+            if ($duplicateEmail != NULL)
+                return ["error" => "This Email is already taken."];
+
 
             $user = new Users();
             $user->username = $username;
