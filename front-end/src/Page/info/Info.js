@@ -93,7 +93,7 @@ function Info() {
     setInputs((values) => ({ ...values, [name]: value }));
   };
 
-  const render = () => {
+  const ren = () => {
     if (check) {
       return (
         <div style={{ textAlign: "center", margin: "100px 0px" }}>
@@ -102,151 +102,169 @@ function Info() {
       );
     } else {
       return (
-        <div className="pad">
-          <Form>
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridEmail">
-                <Form.Label>First Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder={profile.contactFirstName}
-                  name="fname"
-                  value={inputs.fname || ""}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridPassword">
-                <Form.Label>Last Name</Form.Label>
-                <Form.Control
-                  type="text"
-                  placeholder={profile.contactLastName}
-                  name="lname"
-                  value={inputs.lname || ""}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Row>
-
-            <Form.Group className="mb-3" controlId="formGridAddress1">
-              <Form.Label>Name</Form.Label>
-              <Form.Control
-                placeholder={profile.customerName}
-                name="name"
-                value={inputs.name || ""}
-                onChange={handleChange}
+        <>
+          <div class="col-md-3 border-right">
+            <div class="d-flex flex-column align-items-center text-center p-3 py-5">
+              <img
+                class="rounded-circle mt-5"
+                width="150px"
+                src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-            </Form.Group>
+              <span class="font-weight-bold">Edogaru</span>
 
-            <Form.Group className="mb-3" controlId="formGridAddress1">
-              <Form.Label>Phone</Form.Label>
-              <Form.Control
-                placeholder={profile.phone}
-                name="phone"
-                value={inputs.phone || ""}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formGridAddress1">
-              <Form.Label>Address</Form.Label>
-              <Form.Control
-                placeholder={profile.addressLine1}
-                name="addr1"
-                value={inputs.addr1 || ""}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Form.Group className="mb-3" controlId="formGridAddress2">
-              <Form.Label>Address 2</Form.Label>
-              <Form.Control
-                placeholder={profile.addressLine2}
-                name="addr2"
-                value={inputs.addr2 || ""}
-                onChange={handleChange}
-              />
-            </Form.Group>
-
-            <Row className="mb-3">
-              <Form.Group as={Col} controlId="formGridCity">
-                <Form.Label>City</Form.Label>
-                <Form.Control
-                  placeholder={profile.city}
-                  name="city"
-                  value={inputs.city || ""}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>State</Form.Label>
-                <Form.Control
-                  placeholder={profile.state}
-                  name="state"
-                  value={inputs.state || ""}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridState">
-                <Form.Label>Country</Form.Label>
-                <Form.Control
-                  placeholder={profile.country}
-                  name="country"
-                  value={inputs.country || ""}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-
-              <Form.Group as={Col} controlId="formGridZip">
-                <Form.Label>Postal Code</Form.Label>
-                <Form.Control
-                  placeholder={profile.postalCode}
-                  name="postalCode"
-                  value={inputs.postalCode || ""}
-                  onChange={handleChange}
-                />
-              </Form.Group>
-            </Row>
-
-            {/* <div style={{ textAlign: "right" }}>
-              <Button
-                variant="danger"
-                
-                style={{ margin: "10px  10px" }}
-                href="/profile"
-              >
-                Cancel
-              </Button>
-              <Button variant="primary" type="submit">
-                Submit
-              </Button>
-              
-            </div> */}
-          </Form>
-
-          <div style={{ textAlign: "right" }}>
-            <Link to="/profile">
-              <button class="button button3" style={{ marginRight: "20px" }}>
-                Cancel
-              </button>
-            </Link>
-
-            <button class="button button1" onClick={pushInfo}>
-              Submit
-            </button>
+              <span> </span>
+            </div>
           </div>
-        </div>
+          <div class="col-md-5 border-right">
+            <div class="p-3 py-5">
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h4 class="text-right">Profile Settings</h4>
+              </div>
+              <div class="row mt-2">
+                <div class="col-md-6">
+                  <label class="labels">First Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.contactFirstName}
+                    name="fname"
+                    value={inputs.fname || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-6">
+                  <label class="labels">Last Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.contactLastName}
+                    name="lname"
+                    value={inputs.lname || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+              <div class="row mt-3">
+                <div class="col-md-12">
+                  <label class="labels">Name</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.customerName}
+                    name="name"
+                    value={inputs.name || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Phone</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.phone}
+                    name="phone"
+                    value={inputs.phone || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Address Line 1</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.addressLine1}
+                    name="addr1"
+                    value={inputs.addr1 || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Address Line 2</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.addressLine1}
+                    name="addr1"
+                    value={inputs.addr1 || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">City</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.city}
+                    name="city"
+                    value={inputs.city || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">State</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.state}
+                    name="state"
+                    value={inputs.state || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Country</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.country}
+                    name="country"
+                    value={inputs.country || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+                <div class="col-md-12">
+                  <label class="labels">Postal Code</label>
+                  <input
+                    type="text"
+                    class="form-control"
+                    placeholder={profile.postalCode}
+                    name="postalCode"
+                    value={inputs.postalCode || ""}
+                    onChange={handleChange}
+                  />
+                </div>
+              </div>
+
+              <div class="mt-5 text-center">
+                <Link to="/profile">
+                  <button
+                    class="btn btn-primary button3"
+                    type="button"
+                    style={{ marginRight: "20px" }}
+                  >
+                    Cancel
+                  </button>
+                </Link>
+                <button
+                  class="btn btn-primary button1"
+                  type="button"
+                  onClick={pushInfo}
+                >
+                  Save Profile
+                </button>
+              </div>
+            </div>
+          </div>
+        </>
       );
     }
   };
   return (
+
     <div>
-      <div>
-        <h1 className="headerText_info"> Edit Information</h1>
+      <div class="container rounded bg-white mt-5 mb-5">
+        <div class="row">{ren()}</div>
       </div>
-      {render()}
     </div>
   );
 }
