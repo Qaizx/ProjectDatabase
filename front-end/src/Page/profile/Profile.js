@@ -122,10 +122,7 @@ const Profile = () => {
                 />
               </div>
 
-              <div
-                class="col-md-5 border-right"
-                style={{ marginLeft: "60px" }}
-              >
+              <div class="col-md-5 border-right" style={{ marginLeft: "60px" }}>
                 <div class="p-3 py-5">
                   <div class="d-flex justify-content-between align-items-center mb-3">
                     <h4 class="text-right">{profile.customerName}</h4>
@@ -177,6 +174,13 @@ const Profile = () => {
                 </div>
               </div>
             </div>
+            <div style={{ textAlign: "right" }}>
+              <Link to="/money">
+                <button class="border px-3 p-1 add-experience">
+                  hack money
+                </button>
+              </Link>
+            </div>
           </div>
         </div>
       );
@@ -221,7 +225,6 @@ const Profile = () => {
                       </div>
                     </Link>
                   </div>
-                  
                 </div>
                 {render()}
               </div>
