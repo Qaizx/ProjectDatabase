@@ -1,7 +1,6 @@
-.head {
+.title {
     font-size: 90px;
-    text-align: center;
-    padding: 30px 16px;
+    margin: 5% 0% 0% 20%;
 }
 
 .info{
@@ -46,10 +45,4 @@
     border-top-color: yellow;
     border-right-color: yellow;
     border-bottom-color: yellow;
-}
-
-.forgot{
-    text-align: center;
-    color: red;
-    margin-top: 40px;
 }
