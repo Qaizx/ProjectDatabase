@@ -37,4 +37,26 @@ b {
   border-radius: 20px;
 }
 
+.btn {
+  margin-top: 10px; 
+  background-color:#9BA17B ; 
+  border:none;
+  transition: 0.2s ease-out;
+}
+
+.btn:hover {
+  background-color:#CFB997 ; 
+}
+
+.btn:disabled {
+  background-color:#9BA17B ; 
+}
+
+.card {
+  transition: 0.3s ease-out;
+}
+
+.card:hover {
+  transform: scale(1.02);
+}
 

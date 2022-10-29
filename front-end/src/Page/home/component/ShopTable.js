@@ -97,7 +97,7 @@ const ShopTable = () => {
           <Card
             style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
             onMouseMove={() => handleMouseMove(tasks.productCode)}
-            className="d-flex flex-column justify-content-between"
+            className="card d-flex flex-column justify-content-between"
           >
             <div>
               <Card.Img
@@ -105,6 +105,7 @@ const ShopTable = () => {
                 src={tasks.url}
                 onClick={() => handleClick(tasks.productCode)}
                 type="submit"
+                style = {{maxHeight:"250px" , minHeight:"250px"}}
               />
             </div>
 
@@ -127,10 +128,10 @@ const ShopTable = () => {
                   </Card.Text>
                 </div>
 
-                <div>
+                <div className="d-flex justify-content-between align-items-center">
                   <Link to="/product">
-                    <Button variant="warning" style={{ marginTop: "10px" }}>
-                      more info
+                    <Button className = "btn d-flex align-items-center" style={{ marginTop: "10px" }}>
+                      More info
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/471/471662.png "
                         width="20"
@@ -142,9 +143,9 @@ const ShopTable = () => {
                       ></img>
                     </Button>
                   </Link>
+                  
                   <Button
-                    variant="primary"
-                    style={{ marginTop: "10px", float: "right"}}
+                    className ="btn"
                     disabled={disabled}
                     onClick={handleClick}
                   >
@@ -163,7 +164,7 @@ const ShopTable = () => {
   };
 
   return (
-    <div style={{ fontFamily: "JetBrains Mono" }} className="" onMouseMove={checkToken}>
+    <div style={{ fontFamily: "JetBrains Mono" }} onMouseMove={checkToken}>
       <h1 className="product">
         Shop Today.
       </h1>
