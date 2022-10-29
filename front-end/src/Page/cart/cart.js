@@ -259,7 +259,7 @@ const Cart = () => {
       username: username,
       //   addressLine2: mon
       //   creditLimit: parseFloat(credit).toFixed(2)
-      creditLimit: parseInt(mon),
+      creditLimit: mon,
     });
 
     var requestOptions = {
