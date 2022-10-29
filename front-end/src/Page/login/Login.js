@@ -99,81 +99,79 @@ const Login = () => {
   };
 
   return (
-    <div>
-      <div class="head"> Login</div>
+    <div style={{ fontFamily: "JetBrains Mono" }} className="d-flex flex-column">
+      <div>
+        <div class="title">Login</div>
 
-      <Form noValidate onChange={handleCheck} onSubmit={handleSubmit}>
-        <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
-          <Form.Label
-            style={{ margin: "0px 350px", fontSize: "30px" }}
-            column
-            sm="2"
-          >
-            Username / Email
-          </Form.Label>
-          <Col sm="4">
-            <Form.Control
-              required
-              style={{ margin: "0px -290px", fontSize: "30px" }}
-              type="text"
-              placeholder="email"
-              name="username"
-              value={inputs.username || ""}
-              onChange={handleChange}
-            />
-          </Col>
+        <Form noValidate onChange={handleCheck} onSubmit={handleSubmit}>
+          <Form.Group as={Row} className="mt-4" controlId="formPlaintextEmail">
+            <Form.Label
+              style={{ margin: "0px 20%", fontSize: "30px" }}
+              column
+              sm="2"
+            >
+              Username/Email
+            </Form.Label>
+            <Col sm="4">
+              <Form.Control
+                required
+                style={{ margin: "0px -290px", fontSize: "30px" }}
+                type="text"
+                placeholder="Username/Email"
+                name="username"
+                value={inputs.username || ""}
+                onChange={handleChange}
+              />
+            </Col>
 
-          <Form.Control.Feedback type="invalid">
-            Please provide a valid city.
-          </Form.Control.Feedback>
-        </Form.Group>
+            <Form.Control.Feedback type="invalid">
+              Please provide a valid city.
+            </Form.Control.Feedback>
+          </Form.Group>
 
-        <Form.Group as={Row} className="mt-4" controlId="formPlaintextPassword">
-          <Form.Label
-            style={{ margin: "0px 350px", fontSize: "30px" }}
-            column
-            sm="2"
-          >
-            Password
-          </Form.Label>
-          <Col sm="4">
-            <Form.Control
-              required
-              style={{ margin: "0px -290px", fontSize: "30px" }}
-              type="password"
-              placeholder="Password"
-              name="password"
-              value={inputs.password || ""}
-              onChange={handleChange}
-            />
-          </Col>
-        </Form.Group>
+          <Form.Group as={Row} className="mt-4" controlId="formPlaintextPassword">
+            <Form.Label
+              style={{ margin: "0px 20%", fontSize: "30px" }}
+              column
+              sm="2"
+            >
+              Password
+            </Form.Label>
+            <Col sm="4">
+              <Form.Control
+                required
+                style={{ margin: "0px -290px", fontSize: "30px" }}
+                type="password"
+                placeholder="Password"
+                name="password"
+                value={inputs.password || ""}
+                onChange={handleChange}
+              />
+            </Col>
+          </Form.Group>
+        </Form>
+      </div>
 
-        <div style={{ textAlign: "center" }} className="mt-5">
-          <Button
-            type="submit"
-            variant="success"
-            size="lg"
-            style={{ margin: "0px 10px" }}
-            active
-            disabled={disabled}
-          >
-            login
-          </Button>{" "}
-          <Button
-            variant="warning"
-            size="lg"
-            style={{ margin: "0px 10px" }}
-            active
-            href="/register"
-          >
-            register
-          </Button>{" "}
-        </div>
-      </Form>
-
-      <div class="forgot">
-        <label>FORGOT PASSWORD ?</label>
+      <div style={{ textAlign: "center" }} className="mt-5 d-flex justify-content-center">
+        <Button
+          type="submit"
+          variant="success"
+          size="lg"
+          style={{ margin: "0px 10px", opacity: "1", color: "black" }}
+          active
+          disabled={disabled}
+        >
+          Login
+        </Button>{" "}
+        <Button
+          variant="warning"
+          size="lg"
+          style={{ margin: "0px 10px" }}
+          active
+          href="/register"
+        >
+          Register
+        </Button>{" "}
       </div>
     </div>
   );

@@ -61,3 +61,7 @@
 .myBtn:hover {
   background-color: #555;
 }
+
+body {
+  overflow-x: hidden; /* Hide horizontal scrollbar */
+}
