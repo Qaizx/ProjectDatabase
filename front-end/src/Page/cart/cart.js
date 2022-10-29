@@ -29,7 +29,8 @@ const Cart = () => {
   const [inputs, setInputs] = useState();
   const MySwal = withReactContent(Swal);
 
-  let money = 0;
+  let money = 0.00;
+  let total = 0;
 
   const checkToken = () => {
     if (token == null) {
@@ -284,6 +285,7 @@ const Cart = () => {
     } else {
       const listItem = products.map(function (tasks) {
         money += tasks.quantityInCart * tasks.buyPrice;
+        total = tasks.quantityInCart * tasks.buyPrice;
         return (
           <div onMouseMove={() => handleMouseMove(tasks.productCode)}>
             <MDBRow className="mb-4 d-flex justify-content-between align-items-center">
@@ -331,7 +333,7 @@ const Cart = () => {
 
               <MDBCol md="3" lg="1" xl="2" className="text-end">
                 <MDBTypography tag="h6" className="mb-0">
-                  {tasks.quantityInCart * tasks.buyPrice} $
+                  {total.toFixed(2)} $
                 </MDBTypography>
               </MDBCol>
               <MDBCol md="1" lg="1" xl="1" className="text-end">
@@ -410,7 +412,7 @@ const Cart = () => {
                         <MDBTypography tag="h5" className="text-uppercase">
                           {products.length} items
                         </MDBTypography>
-                        <MDBTypography tag="h5">{money} $</MDBTypography>
+                        <MDBTypography tag="h5">{money.toFixed(2)} $</MDBTypography>
                       </div>
 
                       <MDBTypography tag="h5" className="text-uppercase mb-3">
@@ -443,9 +445,8 @@ const Cart = () => {
                         <MDBTypography tag="h5" className="text-uppercase">
                           Total price
                         </MDBTypography>
-                        <MDBTypography tag="h5">{money} $</MDBTypography>
+                        <MDBTypography tag="h5">{money.toFixed(2)} $</MDBTypography>
                       </div>
-
                       <div style={{ float: "right", marginBottom: "30px" }}>
                         <MDBBtn
                           color="success"
