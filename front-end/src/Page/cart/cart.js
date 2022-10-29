@@ -26,7 +26,6 @@ const Cart = () => {
   const username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
   const [disabled, setDisabled] = useState(true);
 
-  const [checkSubmit, setCheckSubmit] = useState();
   const MySwal = withReactContent(Swal);
 
   let money = 0.0;
@@ -68,9 +67,6 @@ const Cart = () => {
   useEffect(() => {
     initProducts();
   }, []);
-
-
-
 
   const plus = () => {
     const IDProduct = localStorage.getItem("IDProduct");
@@ -222,7 +218,6 @@ const Cart = () => {
     var month = dateObj.getUTCMonth() + 1; //months from 1-12
     var day = dateObj.getUTCDate();
     var year = dateObj.getUTCFullYear();
-    setCheckSubmit("rrr")
 
     let newDate = year + "-" + month + "-" + day;
     var myHeaders = new Headers();
@@ -240,7 +235,7 @@ const Cart = () => {
       method: "POST",
       headers: myHeaders,
       body: raw,
-      redirect: "follow"
+      redirect: "follow",
     };
 
     fetch("http://127.0.0.1:8000/api/storePayments", requestOptions)
@@ -253,7 +248,6 @@ const Cart = () => {
           }).then((value) => {
             minusCredit();
             sendOrder();
-            
           });
         }
       })
