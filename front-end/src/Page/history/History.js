@@ -14,12 +14,12 @@ const History = () => {
 
     const checkToken = () => {
         if (token == null) {
-          setDisabled(true);
+            setDisabled(true);
         } else {
-          username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
-          setDisabled(false);
+            username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
+            setDisabled(false);
         }
-      };
+    };
 
     const getHistory = async () => {
         const token = localStorage.getItem("token");
@@ -73,7 +73,7 @@ const History = () => {
                                 class="mr-2" width="150" height="150" alt="Product" />
                         </div>
                         <div class="col">
-                            <h2 class="d-flex justify-content-center mt-5 mx-5">{count.productName}</h2>
+                            <h2 class="d-flex justify-content-center mt-5 mx-5 text-center">{count.productName}</h2>
                         </div>
                         <div class="col">
                             <h2 class="d-flex justify-content-center mt-5 mx-5">{count.quantityOrdered}</h2>
@@ -90,7 +90,38 @@ const History = () => {
         }
     }
 
+    // const render2 = () => {
+    //     if (check) {
+    //         return (
+    //             <div style={{ textAlign: "center", margin: "100px 0px" }}>
+    //                 <h1>Loading . . .</h1>
+    //             </div>
+    //         );
+    //     } else {
+    //         const listOrders = orderDetail.map((count) => {
+    //             return (
+    //                 <div class="row">
+    //                     <div class="col-md-1">
+    //                         <img src={count.url}
+    //                             class="mr-2" width="150" height="150" alt="Product" />
+    //                     </div>
+    //                     <div class="col">
+    //                         <h2 class="d-flex justify-content-center mt-5 mx-5 text-center">{count.productName}</h2>
+    //                     </div>
+    //                     <div class="col">
+    //                         <h2 class="d-flex justify-content-center mt-5 mx-5">{count.quantityOrdered}</h2>
+    //                     </div>
+    //                     <div class="col">
+    //                         <h2 class="d-flex justify-content-center mt-5 mx-5">{count.priceEach}</h2>
+    //                     </div>
+    //                     <hr class="my-2" />
+    //                 </div>
+    //             )
+    //         })
 
+    //         return <div>{listOrders}</div>
+    //     }
+    // }
 
 
     return (
@@ -100,23 +131,25 @@ const History = () => {
             </div>
             <div>
                 <div class="row px-5">
-                    <div class="card">
-                        <div class="card-body">
+                    <div class="card px-0">
+                        <div class="card-header">
                             <div class="row">
                                 <div class="col-md-1">
-                                    
+
                                 </div>
                                 <div class="col">
-                                    <h2 class="d-flex justify-content-center mt-5 mx-5">Product Name</h2>
+                                    <h2 class="d-flex justify-content-center mt-2 mx-5">Product Name</h2>
                                 </div>
                                 <div class="col">
-                                    <h2 class="d-flex justify-content-center mt-5 mx-5">Quantity</h2>
+                                    <h2 class="d-flex justify-content-center mt-2 mx-5">Quantity</h2>
                                 </div>
                                 <div class="col">
-                                    <h2 class="d-flex justify-content-center mt-5 mx-5">Price Each</h2>
+                                    <h2 class="d-flex justify-content-center mt-2 mx-5">Price Each</h2>
                                 </div>
                             </div>
-                            <hr class="my-2" />
+                        </div>
+                        <div class="card-body">
+
                             {render()}
 
                         </div>
