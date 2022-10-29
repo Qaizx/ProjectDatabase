@@ -1,21 +1,21 @@
 import "./Navbar.css";
 import { Link, Outlet } from "react-router-dom";
 import { useState, useEffect } from "react";
-import Swal from 'sweetalert2'
-import withReactContent from 'sweetalert2-react-content'
+import Swal from "sweetalert2";
+import withReactContent from "sweetalert2-react-content";
 
 const NavbarLogin = () => {
   const [profile, setProfile] = useState();
   const [check, setChecked] = useState(true);
   const CryptoJS = require("crypto-js");
-  const MySwal = withReactContent(Swal)
+  const MySwal = withReactContent(Swal);
 
   const handleLogout = async () => {
     localStorage.removeItem("token");
     await MySwal.fire({
       title: <strong>Logout Success</strong>,
-      icon: 'success'
-    })
+      icon: "success",
+    });
     window.location.href = "/";
   };
 
@@ -64,21 +64,38 @@ const NavbarLogin = () => {
       return (
         <div class="navbar_info d-flex justify-content-between align-items-center">
           <div>
-            <a href="/" class="gradient">Home</a>
-            <a href="/shop" class="gradient">Shop</a>
+            <Link to="/" className="gradient">
+              Home
+            </Link>
+            <Link to="/shop" className="gradient">
+              Shop
+            </Link>
           </div>
 
           <div class="d-flex align-items-center">
-            <div class="gradient d-flex align-items-center" style={{ height: "62px", padding: "10px" , fontSize:"20px"}}>
+            <div
+              class="gradient d-flex align-items-center"
+              style={{ height: "62px", padding: "10px", fontSize: "20px" }}
+            >
               Credit : {profile.creditLimit}$
             </div>
             <div class="drop">
-              <button class="gradient" style={{ height: "62px", width: "62px" }}>
-                <img src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png" className="logo"></img>
+              <button
+                class="gradient"
+                style={{ height: "62px", width: "62px" }}
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png"
+                  className="logo"
+                ></img>
               </button>
               <div className="drop-content">
                 <div>
-                  <a href="/profile">
+                  <Link
+                    to="/profile"
+                    className="gradient"
+                    style={{ backgroundColor: "white" }}
+                  >
                     Profile{" "}
                     <img
                       style={{ float: "right" }}
@@ -86,10 +103,14 @@ const NavbarLogin = () => {
                       width="30"
                       height="30"
                     ></img>
-                  </a>
+                  </Link>
                 </div>
                 <div>
-                  <a href="/cart">
+                  <Link
+                    to="/cart"
+                    className="gradient"
+                    style={{ backgroundColor: "white" }}
+                  >
                     Cart{" "}
                     <img
                       style={{ float: "right" }}
@@ -97,9 +118,14 @@ const NavbarLogin = () => {
                       width="30"
                       height="30"
                     ></img>
-                  </a>
+                  </Link>
                 </div>
-                <a onClick={handleLogout} type="submit">
+                <Link
+                  to="/"
+                  className="gradient"
+                  style={{ backgroundColor: "white" }}
+                  onClick={handleLogout}
+                >
                   Logout{" "}
                   <img
                     style={{ float: "right" }}
@@ -107,56 +133,85 @@ const NavbarLogin = () => {
                     width="30"
                     height="30"
                   ></img>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
-
         </div>
       );
     } else {
       return (
-        <div class="navbar_info">
-          <a href="/" className="gradient">Home</a>
-          <a href="/shop" className="gradient">Shop</a>
-          <div class="drop">
-            <button class="dropbtn">
-              <img
-                src=" https://cdn-icons.flaticon.com/svg/3917/3917035.svg?token=exp=1666540146~hmac=7f424a8d412c79789ebc16dcf4da4c50 "
-                width="50"
-                height="30"
-                alt=""
-                title=""
-                class="img-small"
-              />
-            </button>
-            <div className="drop-content">
-              <div>
-                <a href="/login">
-                  Login{" "}
+        <div class="navbar_info d-flex justify-content-between align-items-center">
+          <div>
+            <Link to="/" className="gradient">
+              Home
+            </Link>
+            <Link to="/shop" className="gradient">
+              Shop
+            </Link>
+          </div>
+
+          <div class="d-flex align-items-center">
+            <div class="drop">
+              <button
+                class="gradient"
+                style={{ height: "62px", width: "62px" }}
+              >
+                <img
+                  src="https://cdn-icons-png.flaticon.com/512/2099/2099058.png"
+                  className="logo"
+                ></img>
+              </button>
+              <div className="drop-content">
+                <div>
+                  <Link
+                    to="/profile"
+                    className="gradient"
+                    style={{ backgroundColor: "white" }}
+                  >
+                    Profile{" "}
+                    <img
+                      style={{ float: "right" }}
+                      src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png "
+                      width="30"
+                      height="30"
+                    ></img>
+                  </Link>
+                </div>
+                <div>
+                  <Link
+                    to="/cart"
+                    className="gradient"
+                    style={{ backgroundColor: "white" }}
+                  >
+                    Cart{" "}
+                    <img
+                      style={{ float: "right" }}
+                      src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
+                      width="30"
+                      height="30"
+                    ></img>
+                  </Link>
+                </div>
+                <Link
+                  to="/"
+                  className="gradient"
+                  style={{ backgroundColor: "white" }}
+                  onClick={handleLogout}
+                >
+                  Logout{" "}
                   <img
                     style={{ float: "right" }}
-                    src="https://cdn-icons-png.flaticon.com/512/1077/1077114.png "
+                    src="https://cdn-icons-png.flaticon.com/512/1828/1828479.png "
                     width="30"
                     height="30"
                   ></img>
-                </a>
-              </div>
-              <div>
-                <a href="/register">
-                  Register{" "}
-                  <img
-                    style={{ float: "right" }}
-                    src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
-                    width="30"
-                    height="30"
-                  ></img>
-                </a>
+                </Link>
               </div>
             </div>
           </div>
         </div>
-      )
+      );
     }
   };
 
