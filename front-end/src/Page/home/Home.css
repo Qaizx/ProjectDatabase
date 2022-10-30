@@ -73,3 +73,17 @@ a {
     min-width: 170px;
   }
 }
+
+.text-animation {
+  background-image: 
+    linear-gradient(to right, #61481C,#A47E3B, #BF9742 , #E6B325, #61481C ,#61481C); 
+  -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;  
+  animation: rainbow-animation 86400s linear infinite;
+}
+
+@keyframes rainbow-animation {
+    to {
+        background-position: 630000vh;
+    }
+}

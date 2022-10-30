@@ -105,7 +105,7 @@ const ShopTable = () => {
                 src={tasks.url}
                 onClick={() => handleClick(tasks.productCode)}
                 type="submit"
-                style = {{maxHeight:"250px" , minHeight:"250px"}}
+                style={{ maxHeight: "250px", minHeight: "250px" }}
               />
             </div>
 
@@ -130,7 +130,7 @@ const ShopTable = () => {
 
                 <div className="d-flex justify-content-between align-items-center">
                   <Link to="/product">
-                    <Button className = "btn d-flex align-items-center" style={{ marginTop: "10px" }}>
+                    <Button className="btn d-flex align-items-center" style={{ marginTop: "10px", color: "black" }}>
                       More info
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/471/471662.png "
@@ -143,13 +143,23 @@ const ShopTable = () => {
                       ></img>
                     </Button>
                   </Link>
-                  
+
                   <Button
-                    className ="btn"
+                    className="btn"
                     disabled={disabled}
                     onClick={handleClick}
+                    style={{ color: "black" }}
                   >
-                    Buy
+                    Order
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                      width="20"
+                      height="20"
+                      alt=""
+                      title=""
+                      class="img-small"
+                      style={{ marginLeft: "9px" }}
+                    ></img>
                   </Button>
                 </div>
               </Card.Body>
@@ -166,7 +176,7 @@ const ShopTable = () => {
   return (
     <div style={{ fontFamily: "JetBrains Mono" }} onMouseMove={checkToken}>
       <h1 className="product">
-        Shop Today.
+        Trending Product
       </h1>
       <div class="container">{render()}</div>
     </div>

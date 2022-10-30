@@ -221,6 +221,7 @@ class UsersController extends Controller
                 'productName',
                 'quantityOrdered',
                 'priceEach',
+                'orderDate'
             )
             ->where('username', '=', $username)->get();
         if ($target == NULL)

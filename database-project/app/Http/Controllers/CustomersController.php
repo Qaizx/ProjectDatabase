@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Customers;
 use App\Http\Requests\StoreCustomersRequest;
 use App\Http\Requests\UpdateCustomersRequest;
+use App\Models\Employees;
 use Illuminate\Http\Request;
 
 class CustomersController extends Controller
@@ -95,8 +96,14 @@ class CustomersController extends Controller
         //     'salesRepEmployeeNumber'=> $request->salesRepEmployeeNumber,
         //     'creditLimit'=> $request->creditLimit
         //  ]);
+
+
+        $salesRep = Employees::inRandomOrder()->first();
+        echo $salesRep;
+
         Customers::create([
             'customerNumber' => $customerNumber ,
+            'salesRepEmployeeNumber' => $salesRep->employeeNumber
         ]);
     }
 }
