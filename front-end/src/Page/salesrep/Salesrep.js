@@ -126,7 +126,7 @@ const Salesrep = () => {
                           <div class="">
                             <div class="row">
                               <div>
-                                <h3>SalesRep Info</h3>
+                                <h3>Info</h3>
                                 <div class = "col-md-12 d-flex">
                                   <div class = "me-5">
                                     <label class="labels">First Name</label>

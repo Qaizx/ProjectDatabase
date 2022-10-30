@@ -6,7 +6,7 @@ const Home = () => {
     <>
       <div className="d-flex flex-column" style={{ marginLeft: "2%" }}>
         <h1 class="welcomeText" id="head">
-          Every purchase <br></br> will be made <br></br>  with pleasure.
+          Every purchase <br></br> will be made <br></br>  with <span class ="text-animation">pleasure</span>
         </h1>
         <div>
           <button class="button-59" type="submit" >

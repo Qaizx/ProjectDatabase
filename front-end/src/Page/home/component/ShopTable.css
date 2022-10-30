@@ -21,10 +21,10 @@ b {
 .product {
     color: black;
     text-align: left;
-    font-weight: 600;
+    font-weight: 800;
     margin-top: 50px;
     margin-left:15.5%;
-    font-size: 100px;
+    font-size: 60px;
   }
 
 
@@ -59,4 +59,3 @@ b {
 .cardShopTable:hover {
   transform: scale(1.02);
 }
-

@@ -224,7 +224,7 @@ const Shop = () => {
                     <Link to="/product">
                       <Button className="btn d-flex align-items-center"
                         variant="warning"
-                        style={{ marginTop: "10px"  }}
+                        style={{ marginTop: "10px" }}
                       >
                         More info
                         <img
@@ -243,15 +243,22 @@ const Shop = () => {
                       className="btn"
                       disabled={disabled}
                       onClick={handleClick}
-                      style ={{color:"black"}}
+                      style={{ color: "black" }}
                     >
-                      Buy
+                      Order
+                      <img
+                        src = "https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                        width="20"
+                        height="20"
+                        alt=""
+                        title=""
+                        class="img-small"
+                        style={{ marginLeft: "9px" }}
+                      ></img>
                     </Button>
                   </div>
                 </Card.Body>
               </div>
-
-
             </Card>
           );
         };
@@ -281,7 +288,7 @@ const Shop = () => {
   return (
     <div style={{ fontFamily: "JetBrains Mono" }} class="" onMouseMove={checkToken}>
       <h1 className="product">
-        Shop.
+        Shop
       </h1>
       <div class="container">
         <div style={{ padding: "20px 0px" }}>
@@ -292,30 +299,30 @@ const Shop = () => {
 
             <div class="search-container d-flex align-items-center">
 
-                <input
-                  type="text"
-                  placeholder={checkNameProduct()}
-                  name="name"
-                  value={inputs.name || ""}
-                  onChange={handleChange}
+              <input
+                type="text"
+                placeholder={checkNameProduct()}
+                name="name"
+                value={inputs.name || ""}
+                onChange={handleChange}
+              />
+
+              <button type="submit" onClick={handleClear}>
+                clear
+              </button>
+
+              <button type="submit" onClick={handleSubmit}>
+                <img
+                  src=" https://cdn-icons-png.flaticon.com/512/54/54481.png"
+                  width="25"
+                  height="25"
+                  alt=""
+                  title=""
+                  class="img-small"
+                  type="submit"
                 />
+              </button>
 
-                <button type="submit" onClick={handleClear}>
-                  clear
-                </button>
-
-                <button type="submit" onClick={handleSubmit}>
-                  <img
-                    src=" https://cdn-icons-png.flaticon.com/512/54/54481.png"
-                    width="25"
-                    height="25"
-                    alt=""
-                    title=""
-                    class="img-small"
-                    type="submit"
-                  />
-                </button>
-              
             </div>
 
           </div>
