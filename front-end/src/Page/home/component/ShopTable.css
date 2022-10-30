@@ -52,11 +52,11 @@ b {
   background-color:#9BA17B ; 
 }
 
-.card {
+.cardShopTable {
   transition: 0.3s ease-out;
 }
 
-.card:hover {
+.cardShopTable:hover {
   transform: scale(1.02);
 }
 

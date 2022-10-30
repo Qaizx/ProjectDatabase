@@ -4,7 +4,7 @@ import ShopTable from "./component/ShopTable";
 const Home = () => {
   return (
     <>
-      <div className="d-flex flex-column" style={{marginLeft:"2%"}}>
+      <div className="d-flex flex-column" style={{ marginLeft: "2%" }}>
         <h1 class="welcomeText" id="head">
           Every purchase <br></br> will be made <br></br>  with pleasure.
         </h1>

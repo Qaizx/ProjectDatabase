@@ -106,14 +106,14 @@ const Shop = () => {
     const Item = typeItem.map(function (tasks) {
       if (typeProduct === tasks) {
         return (
-          <button style={{ fontSize: "13px" }} class="select active" onClick={() => typeFilter(tasks)}>
+          <button style={{ fontSize: "14px" }} class="select active" onClick={() => typeFilter(tasks)}>
             {" "}
             {tasks}
           </button>
         );
       } else {
         return (
-          <button style={{ fontSize: "13px" }} class="select" onClick={() => typeFilter(tasks)}>
+          <button style={{ fontSize: "14px" }} class="select" onClick={() => typeFilter(tasks)}>
             {" "}
             {tasks}
           </button>
@@ -187,7 +187,7 @@ const Shop = () => {
                 margin: "30px 20px ",
                 paddingTop: "10px"
               }}
-              className="card d-flex flex-column justify-content-between"
+              className="cardShop d-flex flex-column justify-content-between"
               onMouseMove={() => handleMouseMove(tasks.productCode)}
             >
               <Card.Img

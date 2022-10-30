@@ -97,7 +97,7 @@ const ShopTable = () => {
           <Card
             style={{ width: "25rem", margin: "30px 20px ", paddingTop: "10px" }}
             onMouseMove={() => handleMouseMove(tasks.productCode)}
-            className="card d-flex flex-column justify-content-between"
+            className="cardShopTable d-flex flex-column justify-content-between"
           >
             <div>
               <Card.Img

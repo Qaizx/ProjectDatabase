@@ -41,8 +41,8 @@ p {
 
 
 .search-container input[type=text] {
-  padding: 8px;
-  max-height: 44px;
+  padding: 9px;
+  /* max-height: 50px; */
   /* margin-top: 8px; */
   font-size: 17px;
   border: 1px solid #ddd;
@@ -50,7 +50,7 @@ p {
 
  .search-container button {
   float: right;
-  padding: 8px;
+  padding: 9px;
   max-height: 44px;
 
   /* margin-top: 8px; */
@@ -103,10 +103,10 @@ p {
   background-color:#9BA17B ; 
 }
 
-.card {
+.cardShop {
   transition: 0.3s ease-out;
 }
 
-.card:hover {
+.cardShop:hover {
   transform: scale(1.02);
 }
