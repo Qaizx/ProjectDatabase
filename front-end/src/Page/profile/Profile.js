@@ -115,7 +115,7 @@ const Profile = () => {
             <div class="row">
               <div class="col-md-5" style={{ marginLeft: "60px" }}>
                 <img
-                  class="rounded-circle mt-5"
+                  class="rounded-circle mt-5 shadow-lg"
                   width="500px"
                   height="500px"
                   src={picture}
@@ -148,7 +148,7 @@ const Profile = () => {
                     </div>
                     <div class="col-md-12">
                       <label class="labels">Address Line 2</label>
-                      <h5>{profile.addressLine2}</h5>
+                      <h5>{profile.addressLine2 ? profile.addressLine2 : '-'}</h5>
                     </div>
                     <div class="col-md-12">
                       <label class="labels">City</label>
@@ -156,7 +156,7 @@ const Profile = () => {
                     </div>
                     <div class="col-md-12">
                       <label class="labels">State</label>
-                      <h5>{profile.State}</h5>
+                      <h5>{profile.State ? profile.State : '-'}</h5>
                     </div>
                     <div class="col-md-12">
                       <label class="labels">Country</label>
@@ -164,11 +164,11 @@ const Profile = () => {
                     </div>
                     <div class="col-md-12">
                       <label class="labels">Postal Code</label>
-                      <h5>{profile.postalCode}</h5>
+                      <h5>{profile.postalCode ? profile.postalCode : '-'}</h5>
                     </div>
                     <div class="col-md-12">
                       <label class="labels">Credit Limit</label>
-                      <h5>{profile.creditLimit} $</h5>
+                      <h5>{profile.creditLimit}$</h5>
                     </div>
                   </div>
                 </div>
@@ -177,7 +177,7 @@ const Profile = () => {
             <div style={{ textAlign: "right" }}>
               <Link to="/money">
                 <button class="border px-3 p-1 add-experience">
-                  hack money
+                  Credit Hack
                 </button>
               </Link>
             </div>
@@ -188,7 +188,7 @@ const Profile = () => {
   };
 
   return (
-    <div>
+    <div style={{ fontFamily: "JetBrains Mono" }}>
       <div>
         <div class="container py-5">
           <div class="row d-flex justify-content-center my-4">
@@ -203,24 +203,46 @@ const Profile = () => {
                   <div class="eiei d-flex">
                     <Link to="/salesrep">
                       <div class="mx-2" style={{ marginTop: "5px" }}>
-                        <span class="border px-3 p-1 add-experience">
-                          <i class="fa fa-plus"></i>&nbsp;SaleRep
+                        <span class="border p-2 add-experience">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/5703/5703666.png"
+                            style={{
+                              height: "20px",
+                              marginRight: "5px"
+                            }}
+                          ></img>
+                          <i class="fa fa-plus"></i>SalesRep
+
                         </span>
                       </div>
                     </Link>
 
                     <Link to="/history">
                       <div class="mx-2" style={{ marginTop: "5px" }}>
-                        <span class="border px-3 p-1 add-experience">
-                          <i class="fa fa-plus"></i>&nbsp;History
+                        <span class="border p-2 add-experience">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/1008/1008010.png"
+                            style={{
+                              height: "20px",
+                              marginRight: "5px"
+                            }}
+                          ></img>
+                          <i class="fa fa-plus"></i>OrderHistory
                         </span>
                       </div>
                     </Link>
 
                     <Link to="/info">
                       <div class="mx-2" style={{ marginTop: "5px" }}>
-                        <span class="border px-3 p-1 add-experience">
-                          <i class="fa fa-plus"></i>&nbsp;Edit
+                        <span class="border p-2 add-experience">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png"
+                            style={{
+                              height: "20px",
+                              marginRight: "5px"
+                            }}
+                          ></img> 
+                          <i class="fa fa-plus"></i>Edit
                         </span>
                       </div>
                     </Link>

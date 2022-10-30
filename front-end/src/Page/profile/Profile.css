@@ -48,12 +48,14 @@
 .labels {
   font-size: 11px;
 }
-
+.add-experience{
+  color: black;
+}
 .add-experience:hover {
-  background: #ba68c8;
-  color: #fff;
+  background: #9BA17B;
+  color:black;
   cursor: pointer;
-  border: solid 1px #ba68c8;
+  border: solid 1px #61764B;
 }
 
 .vl2 {
