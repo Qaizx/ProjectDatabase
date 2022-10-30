@@ -130,7 +130,7 @@ const ShopTable = () => {
 
                 <div className="d-flex justify-content-between align-items-center">
                   <Link to="/product">
-                    <Button className = "btn d-flex align-items-center" style={{ marginTop: "10px" }}>
+                    <Button className = "btn d-flex align-items-center" style={{ marginTop: "10px" ,color:"black" }}>
                       More info
                       <img
                         src="https://cdn-icons-png.flaticon.com/512/471/471662.png "
@@ -148,6 +148,7 @@ const ShopTable = () => {
                     className ="btn"
                     disabled={disabled}
                     onClick={handleClick}
+                    style={{ color:"black" }}
                   >
                     Buy
                   </Button>
