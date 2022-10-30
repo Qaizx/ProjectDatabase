@@ -53,11 +53,11 @@ const Shop = () => {
     // console.log(inputs.name);
   };
 
-  const handleSubmit = async() => {
+  const handleSubmit = async () => {
     // console.log(inputs);
     await localStorage.setItem("nameOfProduct", inputs.name);
     window.location.href = "/shop";
-    
+
   };
   const handleClear = () => {
     setTypeP("type")
@@ -106,14 +106,14 @@ const Shop = () => {
     const Item = typeItem.map(function (tasks) {
       if (typeProduct === tasks) {
         return (
-          <button class="select active" onClick={() => typeFilter(tasks)}>
+          <button style={{ fontSize: "14px" }} class="select active" onClick={() => typeFilter(tasks)}>
             {" "}
             {tasks}
           </button>
         );
       } else {
         return (
-          <button class="select" onClick={() => typeFilter(tasks)}>
+          <button style={{ fontSize: "14px" }} class="select" onClick={() => typeFilter(tasks)}>
             {" "}
             {tasks}
           </button>
@@ -177,7 +177,7 @@ const Shop = () => {
         </div>
       );
     else {
-      
+
       const listItems = products.map(function (tasks) {
         const CardItem = () => {
           return (
@@ -185,8 +185,9 @@ const Shop = () => {
               style={{
                 width: "25rem",
                 margin: "30px 20px ",
-                paddingTop: "10px",
+                paddingTop: "10px"
               }}
+              className="cardShop d-flex flex-column justify-content-between"
               onMouseMove={() => handleMouseMove(tasks.productCode)}
             >
               <Card.Img
@@ -194,57 +195,63 @@ const Shop = () => {
                 src={tasks.url}
                 // onClick={() => handleClick(tasks.productCode)}
                 // type="submit"
+                style={{ maxHeight: "250px", minHeight: "250px" }}
+
               />
-              <Card.Body>
-                <div
-                // onClick={() => handleClick(tasks.productCode)}
-                // type="submit"
-                >
-                  <Card.Title>{tasks.productName}</Card.Title>
-                  <Card.Text>
-                    <b>Type :</b> {tasks.productLine}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Scale :</b> {tasks.productScale}
-                  </Card.Text>
-
-                  <Card.Text>
-                    <b>Stock :</b> {tasks.quantityInStock}
-                  </Card.Text>
-                  <Card.Text>
-                    <b>Price :</b> {tasks.buyPrice}
-                  </Card.Text>
-                </div>
-
-                <div>
-                  <Link to="/product">
-                    <Button
-                      variant="warning"
-                      style={{ marginTop: "10px" }}
-                    >
-                      more info
-                      <img
-                        src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
-                        width="20"
-                        height="20"
-                        alt=""
-                        title=""
-                        class="img-small"
-                        style={{ marginLeft: "9px" }}
-                      ></img>
-                    </Button>
-                  </Link>
-
-                  <Button
-                    variant="primary"
-                    style={{ marginTop: "10px", float: "right" }}
-                    disabled={disabled}
-                    onClick={handleClick}
+              <div>
+                <Card.Body>
+                  <div
+                  // onClick={() => handleClick(tasks.productCode)}
+                  // type="submit"
                   >
-                    Add Product
-                  </Button>
-                </div>
-              </Card.Body>
+                    <Card.Title>{tasks.productName}</Card.Title>
+                    <Card.Text>
+                      <b>Type :</b> {tasks.productLine}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Scale :</b> {tasks.productScale}
+                    </Card.Text>
+
+                    <Card.Text>
+                      <b>Stock :</b> {tasks.quantityInStock}
+                    </Card.Text>
+                    <Card.Text>
+                      <b>Price :</b> {tasks.buyPrice}
+                    </Card.Text>
+                  </div>
+
+                  <div className="d-flex justify-content-between align-items-center">
+                    <Link to="/product">
+                      <Button className="btn d-flex align-items-center"
+                        variant="warning"
+                        style={{ marginTop: "10px"  }}
+                      >
+                        More info
+                        <img
+                          src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
+                          width="20"
+                          height="20"
+                          alt=""
+                          title=""
+                          class="img-small"
+                          style={{ marginLeft: "9px" }}
+                        ></img>
+                      </Button>
+                    </Link>
+
+                    <Button
+                      className="btn"
+                      disabled={disabled}
+                      onClick={handleClick}
+                      style ={{color:"black"}}
+                    >
+                      Buy
+                    </Button>
+                  </div>
+                </Card.Body>
+              </div>
+
+
             </Card>
           );
         };
@@ -272,43 +279,50 @@ const Shop = () => {
   };
 
   return (
-    <div class="" onMouseMove={checkToken}>
+    <div style={{ fontFamily: "JetBrains Mono" }} class="" onMouseMove={checkToken}>
       <h1 className="product">
-        Shop <span style={{ color: "blue" }}>Page</span>
+        Shop.
       </h1>
       <div class="container">
         <div style={{ padding: "20px 0px" }}>
-          <div id="myBtnContainer" class="container">
-            {barType()}
-
-            <div class="search-container">
-              <input
-                type="text"
-                placeholder={checkNameProduct()}
-                name="name"
-                value={inputs.name || ""}
-                onChange={handleChange}
-              />
-              <button type="submit" onClick={handleClear}>
-                clear
-              </button>
-
-              <button type="submit" onClick={handleSubmit}>
-                <img
-                  src=" https://cdn-icons-png.flaticon.com/512/54/54481.png"
-                  width="25"
-                  height="25"
-                  alt=""
-                  title=""
-                  class="img-small"
-                  type="submit"
-                />
-              </button>
+          <div id="myBtnContainer" class="d-flex justify-content-between align-items-center">
+            <div>
+              {barType()}
             </div>
+
+            <div class="search-container d-flex align-items-center">
+
+                <input
+                  type="text"
+                  placeholder={checkNameProduct()}
+                  name="name"
+                  value={inputs.name || ""}
+                  onChange={handleChange}
+                />
+
+                <button type="submit" onClick={handleClear}>
+                  clear
+                </button>
+
+                <button type="submit" onClick={handleSubmit}>
+                  <img
+                    src=" https://cdn-icons-png.flaticon.com/512/54/54481.png"
+                    width="25"
+                    height="25"
+                    alt=""
+                    title=""
+                    class="img-small"
+                    type="submit"
+                  />
+                </button>
+              
+            </div>
+
           </div>
 
-          {render()}
         </div>
+        {render()}
+
       </div>
     </div>
   );

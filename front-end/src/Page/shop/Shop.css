@@ -41,20 +41,23 @@ p {
 
 
 .search-container input[type=text] {
-  padding: 6px;
-  margin-top: 8px;
+  padding: 9px;
+  /* max-height: 50px; */
+  /* margin-top: 8px; */
   font-size: 17px;
   border: 1px solid #ddd;
 }
 
  .search-container button {
   float: right;
-  padding: 6px 10px;
-  margin-top: 8px;
-  margin-right: 16px;
+  padding: 9px;
+  max-height: 44px;
+
+  /* margin-top: 8px; */
+  /* margin-right: 16px; */
   background: #ddd;
+  border:none;
   font-size: 17px;
-  border: none;
   cursor: pointer;
 }
 
@@ -83,4 +86,27 @@ p {
   font-size: 17px;
   border: none;
   cursor: pointer;
+}
+
+.btn {
+  margin-top: 10px; 
+  background-color:#9BA17B ; 
+  border:none;
+  transition: 0.2s ease-out;
+}
+
+.btn:hover {
+  background-color:#CFB997 ; 
+}
+
+.btn:disabled {
+  background-color:#9BA17B ; 
+}
+
+.cardShop {
+  transition: 0.3s ease-out;
+}
+
+.cardShop:hover {
+  transform: scale(1.02);
 }

@@ -116,7 +116,7 @@ const Login = () => {
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
                 type="text"
-                placeholder="Username/Email"
+                placeholder="username/email"
                 name="username"
                 value={inputs.username || ""}
                 onChange={handleChange}
@@ -141,7 +141,7 @@ const Login = () => {
                 required
                 style={{ margin: "0px -290px", fontSize: "30px" }}
                 type="password"
-                placeholder="Password"
+                placeholder="password"
                 name="password"
                 value={inputs.password || ""}
                 onChange={handleChange}

@@ -222,7 +222,7 @@ class UsersController extends Controller
                 'quantityOrdered',
                 'priceEach',
             )
-            ->where('username', '=', $username)->get()->first();
+            ->where('username', '=', $username)->get();
         if ($target == NULL)
             return ["error" => "user doesn't have any order"];
         return $target;
