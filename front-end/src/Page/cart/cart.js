@@ -68,6 +68,7 @@ const Cart = () => {
     initProducts();
   }, []);
 
+
   const plus = () => {
     const IDProduct = localStorage.getItem("IDProduct");
     var myHeaders = new Headers();
@@ -159,26 +160,39 @@ const Cart = () => {
 
   const sendOrder = () => {
 
-    var date, date2;
+    var today = new Date();
+    var dd = String(today.getDate()).padStart(2, "0");
+    var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
+    var yyyy = today.getFullYear();
+    var h = ("00" + today.getHours()).slice(-2)
+    var m = ("00" + today.getMinutes()).slice(-2)
+    var s = ("00" + today.getSeconds()).slice(-2)
 
-    date = new Date().toISOString().slice(0, 19).replace("T", " ");
-    const d = new Date();
-    let day = d.getDate();
-    let nextWeek = day+7
+    var newDD = parseInt(dd)+7
+    var newMM = parseInt(mm)
 
-    date2 = new Date();
-    date2 =
-      date2.getUTCFullYear() +
-      "-" +
-      ("00" + (date2.getUTCMonth() + 1)).slice(-2) +
-      "-" +
-      ("00" + date2.getUTCDate() + nextWeek).slice(-2) +
-      " " +
-      ("00" + date2.getUTCHours()).slice(-2) +
-      ":" +
-      ("00" + date2.getUTCMinutes()).slice(-2) +
-      ":" +
-      ("00" + date2.getUTCSeconds()).slice(-2);
+    if(newMM %2 == 0){
+      if(newMM == 2){
+        if(newDD > 28){
+          newMM += 1
+          newDD -= 28
+        }
+      }else{
+        if(newDD > 30){
+          newMM += 1
+          newDD -= 30
+        }
+      }
+    }else{
+      if(newDD > 31){
+        newMM += 1
+        newDD -= 31
+      }
+    }
+    
+    const orderDate = yyyy + "-" + mm + "-" + dd + " "
+    const requireDate = yyyy + "-" + newMM + "-" + newDD + " "
+    const time = h + ":" + m + ":" + s
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -187,8 +201,8 @@ const Cart = () => {
     var raw = JSON.stringify({
       username: username,
       order: {
-        orderDate: date,
-        requiredDate: date,
+        orderDate: orderDate+time,
+        requiredDate: requireDate+time,
         shippedDate: null,
         status: "In Process",
         comments: "dark",
