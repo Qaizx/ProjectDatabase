@@ -149,7 +149,7 @@ const ShopTable = () => {
                     disabled={disabled}
                     onClick={handleClick}
                   >
-                    Add Product
+                    Buy
                   </Button>
                 </div>
               </Card.Body>
