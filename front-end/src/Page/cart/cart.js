@@ -381,7 +381,7 @@ const Cart = () => {
   };
 
   return (
-    <section className="h-100 h-custom">
+    <section className="h-100 h-custom" style={{fontFamily:"JetBrains Mono"}}>
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol size="12">

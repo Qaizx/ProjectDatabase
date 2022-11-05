@@ -67,10 +67,10 @@ const History = () => {
         } else {
             const listOrders = orderDetail.map((count) => {
                 return (
-                    <div class="row">
-                        <div class="col-sm-1 ms-3 d-flex justify-content-center">
+                    <div class="row hoverRow">
+                        <div class="col-sm-1 ms-5 d-flex justify-content-center">
                             <img src={count.url}
-                                alt="Product" style={{ maxHeight: "100px" }} />
+                               class="align-self-center shadow-lg" alt="Product" style={{ borderRadius:"5px" , maxHeight: "100px" }} />
                         </div>
                         <div class="col d-flex justify-content-center ">
                             <p class="align-self-center">{count.productName}</p>
@@ -81,7 +81,6 @@ const History = () => {
                         <div class="col-sm-1 d-flex justify-content-center">
                             <p class="align-self-center">{count.priceEach}</p>
                         </div>
-                        <hr class="my-2" />
                     </div>
                 )
             })
@@ -125,36 +124,29 @@ const History = () => {
 
 
     return (
-        <div style={{ fontFamily: "JetBrains Mono" }} className="d-flex flex-column align-items-center">
+        <div style={{ fontFamily: "JetBrains Mono" }} className="mb-5 d-flex flex-column align-items-center">
             <div className="title align-self-start">
                 Order History
             </div>
-            <div className="w-75">
-                <div class="row">
-                    <div class="card">
-                        <div class="card-header">
-                            <div class="row">
-                                <div class="col-sm-1 d-flex justify-content-center">
-                                </div>
-                                <div class="col d-flex justify-content-center">
-                                    <p class="align-self-center ">Product Name</p>
-                                </div>
-                                <div class="col-sm-1 col d-flex justify-content-cente">
-                                    <p class="align-self-center ">Quantity</p>
-                                </div>
-                                <div class="col-sm-1 col d-flex justify-content-cente">
-                                    <p class="align-self-center ">PriceEach</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            {render()}
-                        </div>
+            <div className="container">
+                <div class="row headerRow">
+                    <div class="col-sm-1 d-flex justify-content-center">
+                    </div>
+                    <div class="col d-flex justify-content-center">
+                        <p class="align-self-center ">Product Name</p>
+                    </div>
+                    <div class="col-sm-1 col d-flex justify-content-center">
+                        <p class="align-self-center ">Quantity</p>
+                    </div>
+                    <div class="col-sm-1 col d-flex justify-content-center">
+                        <p class="align-self-center ">PriceEach</p>
                     </div>
                 </div>
+                {render()}
             </div>
 
         </div>
+
 
     )
 }
