@@ -78,17 +78,13 @@ const History = () => {
                             {count.quantityOrdered}
                         </div>
                         <div class="col-sm-1 d-flex justify-content-center">
-                            {count.priceEach}
+                            ${count.priceEach}
                         </div>
                     </div>
                 )
             });
             return <div>{listOrders}</div>
-
-
-
         }
-
         // const render2 = () => {
         //     if (check) {
         //         return (
@@ -159,55 +155,6 @@ const History = () => {
             </div>
         </div>
     )
-    return (
-        <div>
-            <div>
-                <div class="head">Order History</div>
-            </div>
-            <div>
-                <div class="rowOrderHistory px-5">
-                    <div class="card px-0">
-                        <div class="card-header">
-                            <div class="rowOrderHistory">
-                                <div class="col-md-1"></div>
-
-                                <div class="col">
-                                    <div style={{ marginLeft: "-120px" }}>
-                                        <Link to="/profile">
-                                            <button
-                                                class="btn btn-primary button3"
-                                                type="button"
-                                                style={{ marginRight: "20px" }}
-                                            >
-                                                Back
-                                            </button>
-                                        </Link>
-                                    </div>
-                                </div>
-
-                                <div class="col">
-                                    <h2 style={{ marginLeft: "-240px", marginTop: "10px" }}>
-                                        Product Name
-                                    </h2>
-                                </div>
-                                <div class="col">
-                                    <h2 style={{ marginLeft: "-75px", marginTop: "10px" }}>
-                                        Quantity
-                                    </h2>
-                                </div>
-                                <div class="col">
-                                    <h2 style={{ marginLeft: "50px", marginTop: "10px" }}>
-                                        Price Each
-                                    </h2>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="card-body">{render()}</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    );
 
 }
 
