@@ -19,17 +19,17 @@ b {
 }
 
 .product {
-    color: black;
-    text-align: left;
-    font-weight: 800;
-    margin-top: 50px;
-    margin-left:15.5%;
-    font-size: 60px;
-  }
+  color: black;
+  text-align: left;
+  font-weight: 800;
+  margin-top: 50px;
+  margin-left: 15.5%;
+  font-size: 60px;
+}
 
 
 .background {
-  background-color:grey;
+  background-color: grey;
   margin-left: 60px;
   margin-right: 60px;
   padding-top: 10px;
@@ -38,18 +38,18 @@ b {
 }
 
 .btn {
-  margin-top: 10px; 
-  background-color:#9BA17B ; 
-  border:none;
+  margin-top: 10px;
+  background-color: #9BA17B;
+  border: none;
   transition: 0.2s ease-out;
 }
 
 .btn:hover {
-  background-color:#CFB997 ; 
+  background-color: #CFB997;
 }
 
 .btn:disabled {
-  background-color:#9BA17B ; 
+  background-color: #9BA17B;
 }
 
 .cardShopTable {

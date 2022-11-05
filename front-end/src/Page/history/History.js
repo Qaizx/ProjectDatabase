@@ -68,18 +68,18 @@ const History = () => {
             const listOrders = orderDetail.map((count) => {
                 return (
                     <div class="row">
-                        <div class="col-md-1">
+                        <div class="col-sm-1 ms-3 d-flex justify-content-center">
                             <img src={count.url}
-                                class="mr-2" width="150" height="150" alt="Product" />
+                                alt="Product" style={{ maxHeight: "100px" }} />
                         </div>
-                        <div class="col">
-                            <h2 class="d-flex justify-content-center mt-5 mx-5 text-center">{count.productName}</h2>
+                        <div class="col d-flex justify-content-center ">
+                            <p class="align-self-center">{count.productName}</p>
                         </div>
-                        <div class="col">
-                            <h2 class="d-flex justify-content-center mt-5 mx-5">{count.quantityOrdered}</h2>
+                        <div class="col-sm-1 d-flex justify-content-center">
+                            <p class="align-self-center">{count.quantityOrdered}</p>
                         </div>
-                        <div class="col">
-                            <h2 class="d-flex justify-content-center mt-5 mx-5">{count.priceEach}</h2>
+                        <div class="col-sm-1 d-flex justify-content-center">
+                            <p class="align-self-center">{count.priceEach}</p>
                         </div>
                         <hr class="my-2" />
                     </div>
@@ -125,39 +125,37 @@ const History = () => {
 
 
     return (
-        <div>
-            <div>
-                <div class="head">Order History</div>
+        <div style={{ fontFamily: "JetBrains Mono" }} className="d-flex flex-column align-items-center">
+            <div className="title align-self-start">
+                Order History
             </div>
-            <div>
-                <div class="row px-5">
-                    <div class="card px-0">
+            <div className="w-75">
+                <div class="row">
+                    <div class="card">
                         <div class="card-header">
                             <div class="row">
-                                <div class="col-md-1">
-
+                                <div class="col-sm-1 d-flex justify-content-center">
                                 </div>
-                                <div class="col">
-                                    <h2 class="d-flex justify-content-center mt-2 mx-5">Product Name</h2>
+                                <div class="col d-flex justify-content-center">
+                                    <p class="align-self-center ">Product Name</p>
                                 </div>
-                                <div class="col">
-                                    <h2 class="d-flex justify-content-center mt-2 mx-5">Quantity</h2>
+                                <div class="col-sm-1 col d-flex justify-content-cente">
+                                    <p class="align-self-center ">Quantity</p>
                                 </div>
-                                <div class="col">
-                                    <h2 class="d-flex justify-content-center mt-2 mx-5">Price Each</h2>
+                                <div class="col-sm-1 col d-flex justify-content-cente">
+                                    <p class="align-self-center ">PriceEach</p>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
-
                             {render()}
-
                         </div>
                     </div>
-
                 </div>
             </div>
+
         </div>
+
     )
 }
 

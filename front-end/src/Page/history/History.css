@@ -1,0 +1,10 @@
+p {
+    font-size: 20px;
+    font-family: "JetBrains Mono";
+}
+
+.title {
+    margin-top: 50px;
+    font-size: 60px;
+    margin-left: 11.5%;
+}
