@@ -1,21 +1,10 @@
-.add-experience {
-    color: black;
-    font-size: 20px;
-    border-width: 1px;
-    border-color: grey;
-}
-
-.add-experience:hover {
-    background: #9BA17B;
-    color: black;
-    cursor: pointer;
-    border: solid 1px #61764B;
-}
 
 .title {
     margin-top: 50px;
     font-size: 60px;
     margin-left: 15%;
+    font-family: "JetBrains Mono";
+
 }
 
 .rowOrderHistory {

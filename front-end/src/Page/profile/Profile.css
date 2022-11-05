@@ -50,6 +50,8 @@
 }
 .add-experience{
   color: black;
+  border: solid 1px grey;
+  transition: 0.3s ease-out;
 }
 .add-experience:hover {
   background: #9BA17B;

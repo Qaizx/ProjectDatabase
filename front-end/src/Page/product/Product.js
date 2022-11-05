@@ -104,12 +104,12 @@ const Product = () => {
       );
     } else {
       return (
-        <div>
+        <div style={{ fontFamily: "JetBrains Mono" }}>
           <div>
-            <div class="container py-5">
+            <div class="container">
               <div class="row d-flex justify-content-center my-4">
                 <div class="col-md-10">
-                  <div class="card ">
+                  <div class="card">
                     <div class="card-header py-3">
                       <h3 class="mb-0">{product.productName}</h3>
                     </div>
@@ -145,7 +145,7 @@ const Product = () => {
                           <p class="card-text">
                             <b>MSRP :</b> {product.MSRP}
                           </p>
-                          <button disabled={disabled} onClick={handleClick}>
+                          <button disabled={disabled} onClick={handleClick} class="add-experience">
                             Add product
                           </button>
                         </div>
@@ -163,10 +163,13 @@ const Product = () => {
 
   return (
     <div onMouseMove={checkToken}>
-      <div>
-        <h1> This is product page</h1>
+      <div class="d-flex flex-column">
+        <div class="titleProduct">
+          Products
+        </div>
+        {render()} 
       </div>
-      {render()}
+
     </div>
   );
 };

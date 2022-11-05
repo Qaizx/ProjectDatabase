@@ -187,7 +187,7 @@ const Salesrep = () => {
 
                       <Link to="/profile">
                         <div class="mx-2" style={{ textAlign: "right" }}>
-                          <button type="button">Back</button>
+                          <button type="button" className="add-experience">Back</button>
                         </div>
                       </Link>
                     </div>
