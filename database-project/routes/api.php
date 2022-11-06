@@ -8,6 +8,7 @@ use App\Http\Controllers\ProductsController;
 use App\Models\Carts;
 use App\Http\Controllers\EmployeesController;
 use App\Http\Controllers\OrderdetailsController;
+use App\Http\Controllers\PaymentsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -69,6 +70,7 @@ Route::group(
         Route::post('/updateCart', [CartsController::class, 'update']);
         Route::post('/decreaseFromCart', [CartsController::class, 'decrease']);
         Route::delete('/deleteFromCart', [CartsController::class, 'destroy']);
+        Route::post('/getPayments', [PaymentsController::class, 'show']);
         Route::post('/getProfile', [UsersController::class, 'profile']);                // get customer info by username
         Route::post('/getEmployee', [UsersController::class, 'employee']);              // get employee by username
         Route::post('/getOffice', [EmployeesController::class, 'office']);              // get office by employeeNumber
