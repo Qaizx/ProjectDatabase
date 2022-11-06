@@ -80,19 +80,16 @@ const NavbarLogin = () => {
               Credit : {profile.creditLimit}$
             </div>
             <div>
-                  <Link
-                    to="/cart"
-                    className="gradient"
-                  >
-                    {/* Cart{" "} */}
-                    <img
-                      style={{ float: "right" }}
-                      src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
-                      width="30"
-                      height="30"
-                    ></img>
-                  </Link>
-                </div>
+              <Link to="/cart" className="gradient">
+                {/* Cart{" "} */}
+                <img
+                  style={{ float: "right" }}
+                  src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
+                  width="30"
+                  height="30"
+                ></img>
+              </Link>
+            </div>
             <div class="drop">
               <button
                 class="gradient"
@@ -166,6 +163,23 @@ const NavbarLogin = () => {
           </div>
 
           <div class="d-flex align-items-center">
+            <div
+              class="gradient d-flex align-items-center"
+              style={{ height: "62px", padding: "10px", fontSize: "20px" }}
+            >
+              Credit : $
+            </div>
+            <div>
+              <Link to="/cart" className="gradient">
+                {/* Cart{" "} */}
+                <img
+                  style={{ float: "right" }}
+                  src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
+                  width="30"
+                  height="30"
+                ></img>
+              </Link>
+            </div>
             <div class="drop">
               <button
                 class="gradient"
@@ -192,21 +206,21 @@ const NavbarLogin = () => {
                     ></img>
                   </Link>
                 </div>
-                <div>
-                  <Link
-                    to="/cart"
-                    className="gradient"
-                    style={{ backgroundColor: "white" }}
-                  >
-                    Cart{" "}
-                    <img
-                      style={{ float: "right" }}
-                      src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
-                      width="30"
-                      height="30"
-                    ></img>
-                  </Link>
-                </div>
+                {/* <div>
+                <Link
+                  to="/cart"
+                  className="gradient"
+                  style={{ backgroundColor: "white" }}
+                >
+                  Cart{" "}
+                  <img
+                    style={{ float: "right" }}
+                    src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png "
+                    width="30"
+                    height="30"
+                  ></img>
+                </Link>
+              </div> */}
                 <Link
                   to="/"
                   className="gradient"

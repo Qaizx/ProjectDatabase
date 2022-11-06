@@ -156,11 +156,11 @@ const Profile = () => {
                     </div>
                     <div class="col-md-12">
                       <label class="labels">State</label>
-                      <h5>{profile.State ? profile.State : '-'}</h5>
+                      <h5>{profile.state ? profile.state : '-'}</h5>
                     </div>
                     <div class="col-md-12">
                       <label class="labels">Country</label>
-                      <h5>{profile.country}</h5>
+                      <h5>{profile.country ? profile.country : '-'}</h5>
                     </div>
                     <div class="col-md-12">
                       <label class="labels">Postal Code</label>
