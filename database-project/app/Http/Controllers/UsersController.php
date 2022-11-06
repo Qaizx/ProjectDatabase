@@ -198,7 +198,7 @@ class UsersController extends Controller
                 'extension',
                 'offices.phone',
                 'employees.email',
-                'officeCode',
+                'employees.officeCode',
                 'reportsTo',
                 'jobTitle',
             )
