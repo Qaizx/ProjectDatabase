@@ -269,7 +269,7 @@ const Shop = () => {
             return <>{CardItem()}</>;
           }
         } else {
-          if (tasks.productName.includes(nameProduct)) {
+          if (tasks.productName.toLowerCase().includes(nameProduct.toLowerCase())) {
             if (tasks.productLine === typeProduct) {
               return <>{CardItem()}</>;
             } else if (typeProduct === "Show all") {
