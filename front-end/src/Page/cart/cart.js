@@ -492,7 +492,6 @@ const Cart = () => {
                         <button
                           id="ConfirmCart"
                           className="submit_product"
-                          disabled={checkList}
                           onClick={handleSubmit}
                         >
                           Confirm
