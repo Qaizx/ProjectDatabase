@@ -1,11 +1,11 @@
-import "./History.css";
+// import "./History.css";
 import { Button, rowOrderHistory, Form, Col, Container } from "react-bootstrap";
 import React, { useEffect } from "react";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 
-const History = () => {
-    const [orderDetail, setOrderDetail] = useState([]);
+const PaymentHistory = () => {
+    const [pH, setPH] = useState([]);
     const [check, setChecked] = useState(true);
     const CryptoJS = require("crypto-js");
     var username = "";
@@ -42,10 +42,10 @@ const History = () => {
             redirect: "follow",
         };
 
-        fetch("http://127.0.0.1:8000/api/getOrders", requestOptions)
+        fetch("http://127.0.0.1:8000/api/getPayments", requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                setOrderDetail(result);
+                setPH(result);
                 setChecked(false);
                 console.log(result);
             })
@@ -64,32 +64,29 @@ const History = () => {
                 </div>
             );
         } else {
-            const listOrders = orderDetail.map((count) => {
+            const listpH = pH.map((count) => {
                 return (
                     <div class="rowOrderHistory hoverRow d-flex align-items-center">
                         <div class="col-sm-1 ms-5  d-flex justify-content-center">
-                            <img src={count.url}
-                                class="shadow-lg" alt="Product" style={{ borderRadius: "5px", maxHeight: "100px" }} />
+                            {/* <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHBkFJdIANWwFk6E9ggqNLfQTe-IDgfDnsUC3zmtDd&s"
+                                /> */}
                         </div>
                         <div class="col d-flex justify-content-center">
-                            {count.productName}
+                            {count.paymentDate}
                         </div>
-                        <div class="col-sm-1 d-flex justify-content-center">
-                            {count.quantityOrdered}
-                        </div>
-                        <div class="col-sm-1 d-flex justify-content-center">
-                            ${count.priceEach}
+                        <div class="col-sm-1 d-flex justify-content-center me-3">
+                            {count.amount}
                         </div>
                     </div>
                 )
             });
-            return <div>{listOrders}</div>
+            return <div>{listpH}</div>
         }
     };
     return (
         <div style={{ fontFamily: "JetBrains Mono" }} className="mb-5">
             <div className="title">
-                Order History
+                Payment History
             </div>
             <div className="container d-flex flex-column">
                 <div class="rowOrderHistory headerRow1 d-flex align-items-center" style={{ borderRadius: "5px"}}>
@@ -105,17 +102,12 @@ const History = () => {
                     </div>
                     <div class="col d-flex justify-content-center">
                         <div style={{ fontSize: '25px' }}>
-                            Product Name
+                            Payment Date
                         </div>
                     </div>
                     <div class="col-sm-1 d-flex justify-content-center">
-                        <div>
-                            Quantity
-                        </div>
-                    </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <div>
-                            PriceEach
+                        <div style={{ fontSize: '25px' }} class="me-5">
+                            Amount
                         </div>
                     </div>
                 </div>
@@ -126,4 +118,4 @@ const History = () => {
 
 }
 
-export default History
+export default PaymentHistory

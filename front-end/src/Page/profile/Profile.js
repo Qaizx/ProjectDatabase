@@ -216,6 +216,21 @@ const Profile = () => {
                         </span>
                       </div>
                     </Link>
+                    
+                    <Link to="/paymenthistory">
+                      <div class="mx-2" style={{ marginTop: "5px" }}>
+                        <span class="border p-2 add-experience">
+                          <img
+                            src="https://cdn-icons-png.flaticon.com/512/1019/1019709.png"
+                            style={{
+                              height: "20px",
+                              marginRight: "5px"
+                            }}
+                          ></img>
+                          <i class="fa fa-plus"></i>PaymentHistory
+                        </span>
+                      </div>
+                    </Link>
 
                     <Link to="/history">
                       <div class="mx-2" style={{ marginTop: "5px" }}>

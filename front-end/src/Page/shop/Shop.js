@@ -307,10 +307,6 @@ const Shop = () => {
                 onChange={handleChange}
               />
 
-              <button type="submit" onClick={handleClear}>
-                clear
-              </button>
-
               <button type="submit" onClick={handleSubmit}>
                 <img
                   src=" https://cdn-icons-png.flaticon.com/512/54/54481.png"
@@ -323,6 +319,10 @@ const Shop = () => {
                 />
               </button>
 
+              <button type="submit" onClick={handleClear}>
+                clear
+              </button>
+              
             </div>
 
           </div>

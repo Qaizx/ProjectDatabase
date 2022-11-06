@@ -14,6 +14,7 @@ import History from "./Page/history/History";
 import Profile from "./Page/profile/Profile";
 import Salesrep from "./Page/salesrep/Salesrep";
 import Money from "./Page/hackmoney/Money";
+import PaymentHistory from "./Page/paymenthistory/PaymentHistory";
 import "@fontsource/jetbrains-mono";
 import { useCallback } from "react";
 import Particles from "react-tsparticles";
@@ -36,7 +37,8 @@ function App() {
     "/salesrep",
     "/cart",
     "/product",
-    "/history"
+    "/history",
+    "/paymenthistory"
   ];
 
   useEffect(() => {
@@ -65,6 +67,7 @@ function App() {
           <Route path="salesrep" element={<Salesrep />} />
           <Route path="cart" element={<Cart />} />
           <Route path="money" element={<Money />} />
+          <Route path="paymenthistory" element={<PaymentHistory />} />
         </Route>
       );
     } else {
