@@ -58,7 +58,7 @@ const Register = () => {
         if(result.status === 'ok'){
           MySwal.fire({
             title: <strong>Register Success</strong>,
-            icon: "success",
+            icon: "success"
           }).then((value) => {
             window.location.href = "/login";
           });

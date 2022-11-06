@@ -39,7 +39,7 @@ class EmployeesController extends Controller
         //     'reportsTo'=> $request->reportsTo,
         //     'jobTitle'=> $request->jobTitle,
         //  ]);
-         Employees::create($request->all());
+        Employees::create($request->all());
     }
 
     /**

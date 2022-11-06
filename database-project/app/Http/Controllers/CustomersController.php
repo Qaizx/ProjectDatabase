@@ -99,7 +99,7 @@ class CustomersController extends Controller
 
 
         $salesRep = Employees::inRandomOrder()->first();
-        echo $salesRep;
+
 
         Customers::create([
             'customerNumber' => $customerNumber ,
