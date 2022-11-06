@@ -190,12 +190,13 @@ class UsersController extends Controller
         $targetCustomer = DB::table('users')
             ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
             ->join('employees', 'customers.salesRepEmployeeNumber', '=', 'employees.employeeNumber')
+            ->join('offices', 'employees.officeCode', '=', 'offices.officeCode')
             ->select(
                 'employees.employeeNumber',
                 'lastName',
                 'firstName',
                 'extension',
-                'phone',
+                'offices.phone',
                 'employees.email',
                 'officeCode',
                 'reportsTo',
