@@ -96,7 +96,7 @@ const History = () => {
                     <div class="col-sm-1 d-flex justify-content-center">
                         <Link to="/profile">
                             <button
-                                class="add-experience"
+                                class="buttonn button4"
                                 type="button"
                             >
                                 Back
