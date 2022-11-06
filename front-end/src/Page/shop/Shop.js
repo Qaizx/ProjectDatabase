@@ -184,8 +184,8 @@ const Shop = () => {
             <Card
               style={{
                 width: "25rem",
-                margin: "30px 20px ",
-                paddingTop: "10px"
+                margin: "10px 10px"
+                // height:"35rem"
               }}
               className="cardShop d-flex flex-column justify-content-between"
               onMouseMove={() => handleMouseMove(tasks.productCode)}
@@ -262,6 +262,7 @@ const Shop = () => {
             </Card>
           );
         };
+
         if (nameProduct === null) {
           if (tasks.productLine === typeProduct) {
             return <>{CardItem()}</>;
@@ -276,12 +277,26 @@ const Shop = () => {
               return <>{CardItem()}</>;
             }
           } else {
-            return <div></div>;
+            return null;
           }
         }
       });
       // localStorage.removeItem("nameOfProduct");
-      return <div class="row justify-content-start">{listItems}</div>;
+      
+      var listItemsFilter = listItems.filter(Boolean)
+      const chunks = [];
+      
+      while (listItemsFilter.length) {
+        chunks.push(listItemsFilter.splice(0, 3));
+      }
+
+      // // console.log(chunks)
+    
+      return chunks.map(chunk => (
+        <div class="row d-flex">{chunk.map(item => <div class="col-4 d-flex justify-content-center" >{item}</div>)}</div>
+      ));
+
+      // return <div class="row justify-content-start">{listItems}</div>;
     }
   };
 
@@ -328,7 +343,10 @@ const Shop = () => {
           </div>
 
         </div>
+        <div className="container">
         {render()}
+
+        </div>
 
       </div>
     </div>
