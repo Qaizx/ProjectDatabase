@@ -247,7 +247,7 @@ const Shop = () => {
                     >
                       Order
                       <img
-                        src = "https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                        src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
                         width="20"
                         height="20"
                         alt=""
@@ -322,7 +322,7 @@ const Shop = () => {
               <button type="submit" onClick={handleClear}>
                 clear
               </button>
-              
+
             </div>
 
           </div>

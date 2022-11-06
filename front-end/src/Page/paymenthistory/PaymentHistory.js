@@ -74,7 +74,7 @@ const PaymentHistory = () => {
                         <div class="col d-flex justify-content-center">
                             {count.paymentDate}
                         </div>
-                        <div class="col-sm-1 d-flex justify-content-center me-3">
+                        <div class="col d-flex justify-content-center me-3">
                             {count.amount}
                         </div>
                     </div>
@@ -90,10 +90,10 @@ const PaymentHistory = () => {
             </div>
             <div className="container d-flex flex-column">
                 <div class="rowOrderHistory headerRow1 d-flex align-items-center" style={{ borderRadius: "5px"}}>
-                    <div class="col-sm-1 d-flex justify-content-center">
+                    <div class="col-sm-1 d-flex justify-content-center ms-5">
                         <Link to="/profile">
                             <button
-                                class="buttonn button4"
+                                class="button button4"
                                 type="button"
                             >
                                 Back
@@ -105,8 +105,8 @@ const PaymentHistory = () => {
                             Payment Date
                         </div>
                     </div>
-                    <div class="col-sm-1 d-flex justify-content-center">
-                        <div style={{ fontSize: '25px' }} class="me-5">
+                    <div class="col d-flex justify-content-center me-4">
+                        <div style={{ fontSize: '25px' }}>
                             Amount
                         </div>
                     </div>
