@@ -6,6 +6,7 @@ use App\Models\Payments;
 use App\Http\Requests\StorePaymentsRequest;
 use App\Http\Requests\UpdatePaymentsRequest;
 use Faker\Provider\ar_EG\Payment;
+use Illuminate\Support\Facades\DB;
 
 class PaymentsController extends Controller
 {
@@ -27,10 +28,31 @@ class PaymentsController extends Controller
      * @param  \App\Models\Payments  $payments
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function show(UpdatePaymentsRequest $request)
     {
         //
-        $payments = Payments::find($id);
+        $username = $request->username;
+        $targetCustomers = \DB::table('users')
+            ->join('customers', 'users.customerNumber', '=', 'customers.customerNumber')
+            ->select(
+                'customers.customerNumber',
+                'customerName',
+                'contactLastName',
+                'contactFirstName',
+                'phone',
+                'addressLine1',
+                'addressLine2',
+                'city',
+                'state',
+                'postalCode',
+                'country',
+                'salesRepEmployeeNumber',
+                'creditLimit'
+            )
+            ->where('username', '=', $username)->first();
+
+        $payments = \DB::table('payments')
+            ->where('payments.customerNumber', '=', $targetCustomers->customerNumber)->get();
         return $payments;
     }
 

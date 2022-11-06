@@ -34,7 +34,7 @@ class UpdatePaymentsRequest extends FormRequest
             ];
         } else {
             return [
-                'customerNumber' => ['required'],
+                'customerNumber' => ['sometimes','required'],
                 'checkNumber' => ['sometimes','required'],
                 'paymentDate' => ['sometimes','required'],
                 'amount' => ['sometimes','required']
