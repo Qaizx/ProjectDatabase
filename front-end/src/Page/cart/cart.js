@@ -21,6 +21,7 @@ import withReactContent from "sweetalert2-react-content";
 const Cart = () => {
   const [products, setProducts] = useState([]);
   const [check, setChecked] = useState(true);
+  const [checkList, setCheckList] = useState(true);
   const CryptoJS = require("crypto-js");
   const token = localStorage.getItem("token");
   const username = CryptoJS.enc.Base64.parse(token).toString(CryptoJS.enc.Utf8);
@@ -30,6 +31,14 @@ const Cart = () => {
 
   let money = 0.0;
   let total = 0;
+
+  function noneDisplay() {
+    document.getElementById("ConfirmCart").style.display = "none";
+  }
+
+  function nothingDisplay() {
+    document.getElementById("ConfirmCart").style.display = "";
+  }
 
   const checkToken = () => {
     if (token == null) {
@@ -60,14 +69,19 @@ const Cart = () => {
       .then((result) => {
         setProducts(result);
         setChecked(false);
+        console.log(result);
+        if(result.length != 0){
+          nothingDisplay()
+        }
+        
       })
       .catch((error) => console.log("error", error));
   };
 
   useEffect(() => {
+    noneDisplay()
     initProducts();
   }, []);
-
 
   const plus = () => {
     const IDProduct = localStorage.getItem("IDProduct");
@@ -159,40 +173,39 @@ const Cart = () => {
   };
 
   const sendOrder = () => {
-
     var today = new Date();
     var dd = String(today.getDate()).padStart(2, "0");
     var mm = String(today.getMonth() + 1).padStart(2, "0"); //January is 0!
     var yyyy = today.getFullYear();
-    var h = ("00" + today.getHours()).slice(-2)
-    var m = ("00" + today.getMinutes()).slice(-2)
-    var s = ("00" + today.getSeconds()).slice(-2)
+    var h = ("00" + today.getHours()).slice(-2);
+    var m = ("00" + today.getMinutes()).slice(-2);
+    var s = ("00" + today.getSeconds()).slice(-2);
 
-    var newDD = parseInt(dd)+7
-    var newMM = parseInt(mm)
+    var newDD = parseInt(dd) + 7;
+    var newMM = parseInt(mm);
 
-    if(newMM %2 == 0){
-      if(newMM == 2){
-        if(newDD > 28){
-          newMM += 1
-          newDD -= 28
+    if (newMM % 2 == 0) {
+      if (newMM == 2) {
+        if (newDD > 28) {
+          newMM += 1;
+          newDD -= 28;
         }
-      }else{
-        if(newDD > 30){
-          newMM += 1
-          newDD -= 30
+      } else {
+        if (newDD > 30) {
+          newMM += 1;
+          newDD -= 30;
         }
       }
-    }else{
-      if(newDD > 31){
-        newMM += 1
-        newDD -= 31
+    } else {
+      if (newDD > 31) {
+        newMM += 1;
+        newDD -= 31;
       }
     }
-    
-    const orderDate = yyyy + "-" + mm + "-" + dd + " "
-    const requireDate = yyyy + "-" + newMM + "-" + newDD + " "
-    const time = h + ":" + m + ":" + s
+
+    const orderDate = yyyy + "-" + mm + "-" + dd + " ";
+    const requireDate = yyyy + "-" + newMM + "-" + newDD + " ";
+    const time = h + ":" + m + ":" + s;
 
     var myHeaders = new Headers();
     myHeaders.append("Accept", "application/json");
@@ -201,8 +214,8 @@ const Cart = () => {
     var raw = JSON.stringify({
       username: username,
       order: {
-        orderDate: orderDate+time,
-        requiredDate: requireDate+time,
+        orderDate: orderDate + time,
+        requiredDate: requireDate + time,
         shippedDate: null,
         status: "In Process",
         comments: "dark",
@@ -216,7 +229,7 @@ const Cart = () => {
       redirect: "follow",
     };
 
-    console.log(requestOptions)
+    console.log(requestOptions);
 
     fetch("http://127.0.0.1:8000/api/storeOrders", requestOptions)
       .then((response) => response.json())
@@ -381,7 +394,10 @@ const Cart = () => {
   };
 
   return (
-    <section className="h-100 h-custom" style={{fontFamily:"JetBrains Mono"}}>
+    <section
+      className="h-100 h-custom"
+      style={{ fontFamily: "JetBrains Mono" }}
+    >
       <MDBContainer className="py-5 h-100">
         <MDBRow className="justify-content-center align-items-center h-100">
           <MDBCol size="12">
@@ -473,8 +489,12 @@ const Cart = () => {
                         </MDBTypography>
                       </div>
                       <div style={{ float: "right", marginBottom: "30px" }}>
-                        
-                        <button className="submit_product" onClick={handleSubmit}>
+                        <button
+                          id="ConfirmCart"
+                          className="submit_product"
+                          disabled={checkList}
+                          onClick={handleSubmit}
+                        >
                           Confirm
                         </button>
                       </div>
