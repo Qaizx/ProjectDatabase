@@ -11,7 +11,7 @@ const Salesrep = () => {
   const [checkPic, setCheckPic] = useState(true);
   const CryptoJS = require("crypto-js");
   const [office, setOffice] = useState();
-  const [checkOffice, setCheckOffice] = useState(true)
+  const [checkOffice, setCheckOffice] = useState(true);
 
   const getProfile = async () => {
     const token = localStorage.getItem("token");
@@ -82,7 +82,7 @@ const Salesrep = () => {
       .then((response) => response.json())
       .then((result) => {
         setOffice(result);
-        setCheckOffice(false)
+        setCheckOffice(false);
       })
       .catch((error) => console.log("error", error));
   };
@@ -108,47 +108,67 @@ const Salesrep = () => {
               <div class="row d-flex justify-content-center my-4">
                 <div class="col-md-10">
                   <div class="card ">
-                    <div class="card-header py-3 d-flex ">
+                    <div class="card-header py-3 d-flex  justify-content-between ">
                       <div class="">
-                        <h3 class="mb-0">
-                          SalesRep Information
-                        </h3>
+                        <h3 class="mb-0">SalesRep Information</h3>
                       </div>
+
+                      <Link to="/profile">
+                        <div class="mx-2" style={{ textAlign: "right" }}>
+                          <button class="border px-3 p-1 add-experience">
+                            Back
+                          </button>
+                        </div>
+                      </Link>
                     </div>
                     <div class="card-body my-2">
                       <div class="row d-flex justify-content-center">
                         <div class="col-md-5">
-                        {/* <img src={picture} alt="Profile Pic" style = {{height:"672px"}} class = "rounded-3"/>  */}
-                          <img src="https://i.redd.it/jeuusd992wd41.jpg" alt="Profile Pic" style = {{height:"656px"}} class = "rounded-3 shadow-lg"/>
+                          {/* <img src={picture} alt="Profile Pic" style = {{height:"672px"}} class = "rounded-3"/>  */}
+                          <img
+                            src="https://i.redd.it/jeuusd992wd41.jpg"
+                            alt="Profile Pic"
+                            style={{ height: "656px" }}
+                            class="rounded-3 shadow-lg"
+                          />
                         </div>
 
-                        <div class="col-md-5 border-right" style={{ marginLeft: "60px" }}>
+                        <div
+                          class="col-md-5 border-right"
+                          style={{ marginLeft: "60px" }}
+                        >
                           <div class="">
                             <div class="row">
                               <div>
                                 <h3>Info</h3>
-                                <div class = "col-md-12 d-flex">
-                                  <div class = "me-5">
+                                <div class="col-md-12 d-flex">
+                                  <div class="me-5">
                                     <label class="labels">First Name</label>
-                                    <h5>{profile.firstName ? profile.firstName : '-'}</h5>
+                                    <h5>
+                                      {profile.firstName
+                                        ? profile.firstName
+                                        : "-"}
+                                    </h5>
                                   </div>
                                   <div>
                                     <label class="labels">Last Name</label>
-                                    <h5>{profile.lastName ? profile.lastName : '-'}</h5>
+                                    <h5>
+                                      {profile.lastName
+                                        ? profile.lastName
+                                        : "-"}
+                                    </h5>
                                   </div>
                                 </div>
 
                                 <div class="col-md-12">
                                   <label class="labels">JobTitle</label>
-                                  <h5>{profile.jobTitle ? profile.jobTitle : '-'}</h5>
+                                  <h5>
+                                    {profile.jobTitle ? profile.jobTitle : "-"}
+                                  </h5>
                                 </div>
                                 <div class="col-md-12">
                                   <label class="labels">Email</label>
-                                  <h5>{profile.email ? profile.email : '-'}</h5>
-                                </div>
-                                <div class="col-md-12">
-                                  <label class="labels">Phone</label>
-                                  <h5>{profile.phone ? profile.phone : '-'}</h5>
+                                  <h5>{profile.email ? profile.email : "-"}</h5>
                                 </div>
                               </div>
 
@@ -156,40 +176,53 @@ const Salesrep = () => {
                                 <h3>Office</h3>
                                 <div class="col-md-12">
                                   <label class="labels">Address Line 1</label>
-                                  <h5>{office.addressLine1 ? office.addressLine1 : '-'}</h5>
+                                  <h5>
+                                    {office.addressLine1
+                                      ? office.addressLine1
+                                      : "-"}
+                                  </h5>
                                 </div>
                                 <div class="col-md-12">
                                   <label class="labels">Address Line 2</label>
-                                  <h5>{office.addressLine2 ? office.addressLine2 : '-'}</h5>
+                                  <h5>
+                                    {office.addressLine2
+                                      ? office.addressLine2
+                                      : "-"}
+                                  </h5>
                                 </div>
+
+                                <div class="col-md-12">
+                                  <label class="labels">Phone</label>
+                                  <h5>{profile.phone ? profile.phone : "-"}</h5>
+                                </div>
+
                                 <div class="col-md-12">
                                   <label class="labels">City</label>
-                                  <h5>{office.city ? office.city : '-'}</h5>
+                                  <h5>{office.city ? office.city : "-"}</h5>
                                 </div>
                                 <div class="col-md-12">
                                   <label class="labels">State</label>
-                                  <h5>{office.state ? office.state : '-'}</h5>
+                                  <h5>{office.state ? office.state : "-"}</h5>
                                 </div>
                                 <div class="col-md-12">
                                   <label class="labels">Country</label>
-                                  <h5>{office.country ? office.country : '-'}</h5>
+                                  <h5>
+                                    {office.country ? office.country : "-"}
+                                  </h5>
                                 </div>
                                 <div class="col-md-12">
                                   <label class="labels">Postal Code</label>
-                                  <h5>{office.postalCode ? office.postalCode : '-'}</h5>
+                                  <h5>
+                                    {office.postalCode
+                                      ? office.postalCode
+                                      : "-"}
+                                  </h5>
                                 </div>
                               </div>
-
                             </div>
                           </div>
                         </div>
                       </div>
-
-                      <Link to="/profile">
-                        <div class="mx-2" style={{ textAlign: "right" }}>
-                          <button type="button" className="add-experience">Back</button>
-                        </div>
-                      </Link>
                     </div>
                   </div>
                 </div>
