@@ -11,6 +11,9 @@ INSERT INTO
         MSRP,
         url
     )
+
+
+    
 VALUES
     (
         'S10_1678',
@@ -34,7 +37,7 @@ VALUES
         7305,
         98.58,
         214.3,
-        'https://upload.wikimedia.org/wikipedia/commons/thumb/9/99/Renault_Alpine_A_110_%28Sp%29.JPG/1920px-Renault_Alpine_A_110_%28Sp%29.JPG'
+        'https://www.motortrend.com/uploads/sites/5/2012/01/1975-Renault-Alpine-A110-1300VC-front-left-view.jpg'
     ),
 (
         'S10_2016',
@@ -311,7 +314,7 @@ VALUES
         9772,
         93.89,
         142.25,
-        'https://upload.wikimedia.org/wikipedia/commons/7/7c/1993-1995_Honda_Civic_GLi_3-door_hatchback_01.jpg'
+        'https://www.cnet.com/a/img/resize/9883c3f86fbb43d11cfecc4a0c1f633a3f6e7002/hub/2020/06/08/982a3c66-6f6f-431d-b0df-1105fe3bd23a/1995-honda-civic-main-art.jpg?auto=webp&fit=crop&height=675&width=1200'
     ),
 (
         'S18_2238',

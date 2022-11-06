@@ -63,7 +63,13 @@ const NavbarLogin = () => {
     if (!check) {
       return (
         <div class="navbar_info d-flex justify-content-between align-items-center">
-          <div>
+          <div className="d-flex">
+            <div style={{
+              fontSize: "40px",
+              fontWeight: "800",
+            }} className= "mx-3">
+              D-FAMILY.
+            </div>
             <Link to="/" className="gradient">
               Home
             </Link>
@@ -71,6 +77,7 @@ const NavbarLogin = () => {
               Shop
             </Link>
           </div>
+
 
           <div class="d-flex align-items-center">
             <div

@@ -48,12 +48,12 @@
 .labels {
   font-size: 11px;
 }
-.add-experience{
+.add-experience1{
   color: black;
   border: solid 1px grey;
   transition: 0.3s ease-out;
 }
-.add-experience:hover {
+.add-experience1:hover {
   background: #9BA17B;
   color:black;
   cursor: pointer;

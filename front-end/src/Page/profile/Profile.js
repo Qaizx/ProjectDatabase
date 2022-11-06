@@ -176,7 +176,7 @@ const Profile = () => {
             </div>
             <div style={{ textAlign: "right" }}>
               <Link to="/money">
-                <button class="border px-3 p-1 add-experience">
+                <button class="border px-3 p-1 add-experience1">
                   Credit Hack
                 </button>
               </Link>
@@ -203,7 +203,7 @@ const Profile = () => {
                   <div class="eiei d-flex">
                     <Link to="/salesrep">
                       <div class="mx-2" style={{ marginTop: "5px" }}>
-                        <span class="border p-2 add-experience">
+                        <span class="border p-2 add-experience1">
                           <img
                             src="https://cdn-icons-png.flaticon.com/512/5703/5703666.png"
                             style={{
@@ -219,7 +219,7 @@ const Profile = () => {
                     
                     <Link to="/paymenthistory">
                       <div class="mx-2" style={{ marginTop: "5px" }}>
-                        <span class="border p-2 add-experience">
+                        <span class="border p-2 add-experience1">
                           <img
                             src="https://cdn-icons-png.flaticon.com/512/1019/1019709.png"
                             style={{
@@ -234,7 +234,7 @@ const Profile = () => {
 
                     <Link to="/history">
                       <div class="mx-2" style={{ marginTop: "5px" }}>
-                        <span class="border p-2 add-experience">
+                        <span class="border p-2 add-experience1">
                           <img
                             src="https://cdn-icons-png.flaticon.com/512/1008/1008010.png"
                             style={{
@@ -249,7 +249,7 @@ const Profile = () => {
 
                     <Link to="/info">
                       <div class="mx-2" style={{ marginTop: "5px" }}>
-                        <span class="border p-2 add-experience">
+                        <span class="border p-2 add-experience1">
                           <img
                             src="https://cdn-icons-png.flaticon.com/512/1159/1159633.png"
                             style={{

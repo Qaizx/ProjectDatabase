@@ -110,12 +110,12 @@ function Info() {
                 width="150px"
                 src="https://st3.depositphotos.com/15648834/17930/v/600/depositphotos_179308454-stock-illustration-unknown-person-silhouette-glasses-profile.jpg"
               />
-              <span class="font-weight-bold">{profile.customerName}</span>
+              <span class="font-weight-bold" style={{fontFamily:"JetBrains Mono"}}>{profile.customerName}</span>
 
               <span> </span>
             </div>
           </div>
-          <div class="col-md-5 border-right">
+          <div class="col-md-5 border-right" style={{fontFamily:"JetBrains Mono"}}>
             <div class="p-3 py-5">
               <div class="d-flex justify-content-between align-items-center mb-3">
                 <h4 class="text-right">Profile Settings</h4>
@@ -238,7 +238,7 @@ function Info() {
               <div class="mt-5 text-center">
                 <Link to="/profile">
                   <button
-                    class="btn btn-primary button3"
+                    class="btn button3x"
                     type="button"
                     style={{ marginRight: "20px" }}
                   >
@@ -246,7 +246,7 @@ function Info() {
                   </button>
                 </Link>
                 <button
-                  class="btn btn-primary button1"
+                  class="btn button1x"
                   type="button"
                   onClick={pushInfo}
                 >

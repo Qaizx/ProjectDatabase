@@ -6,13 +6,20 @@ const NavbarRegister = () => {
   return (
     <>
       <div class="navbar_info d-flex justify-content-between align-items-center">
-        <div>
+        <div className="d-flex">
+          <div style={{
+            fontSize: "40px",
+            fontWeight: "800",
+          }} className="mx-3">
+            D-FAMILY.
+          </div>
           <Link to="/" className="gradient">
             Home
           </Link>
           <Link to="/shop" className="gradient">
             Shop
           </Link>
+
         </div>
 
         <div class="drop">
@@ -24,7 +31,7 @@ const NavbarRegister = () => {
           </button>
           <div className="drop-content">
             <div>
-              <Link to="/login" className="gradient" style={{backgroundColor: "white"}}>
+              <Link to="/login" className="gradient" style={{ backgroundColor: "white" }}>
                 Login{" "}
                 <img
                   align="right"
@@ -37,7 +44,7 @@ const NavbarRegister = () => {
               </Link>
             </div>
             <div>
-              <Link to="/register" className="gradient" style={{backgroundColor: "white"}}>
+              <Link to="/register" className="gradient" style={{ backgroundColor: "white" }}>
                 Register{" "}
                 <img
                   align="right"
