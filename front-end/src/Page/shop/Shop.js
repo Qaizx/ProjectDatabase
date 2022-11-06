@@ -203,7 +203,7 @@ const Shop = () => {
                 src={tasks.url}
                 // onClick={() => handleClick(tasks.productCode)}
                 // type="submit"
-                style={{ maxHeight: "250px", minHeight: "250px" }}
+                style={{ maxHeight: "250px", minHeight: "250px" , padding:"8px" , borderRadius:"15px 15px 0px 0px"}}
 
               />
               <div>
@@ -250,7 +250,7 @@ const Shop = () => {
                     <Button
                       className="btn"
                       disabled={disabled}
-                      onClick={() => {handleClick(task.quantityInStock)}}
+                      onClick={() => {handleClick(tasks.quantityInStock)}}
                       style={{ color: "black" }}
                     >
                       Order
