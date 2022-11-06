@@ -70,16 +70,15 @@ const Cart = () => {
         setProducts(result);
         setChecked(false);
         console.log(result);
-        if(result.length != 0){
-          nothingDisplay()
+        if (result.length != 0) {
+          nothingDisplay();
         }
-        
       })
       .catch((error) => console.log("error", error));
   };
 
   useEffect(() => {
-    noneDisplay()
+    noneDisplay();
     initProducts();
   }, []);
 
@@ -241,44 +240,53 @@ const Cart = () => {
   };
 
   const handleSubmit = () => {
-    var dateObj = new Date();
-    var month = dateObj.getUTCMonth() + 1; //months from 1-12
-    var day = dateObj.getUTCDate();
-    var year = dateObj.getUTCFullYear();
+    const credit = localStorage.getItem("credit");
 
-    let newDate = year + "-" + month + "-" + day;
-    var myHeaders = new Headers();
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      username: username,
-      payment: {
-        paymentDate: newDate,
-        amount: money,
-      },
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("http://127.0.0.1:8000/api/storePayments", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        if (result.status === "store payments ok") {
-          MySwal.fire({
-            title: <strong>Pay Success</strong>,
-            icon: "success",
-          }).then((value) => {
-            minusCredit();
-            sendOrder();
-          });
-        }
+    if (money > credit) {
+      MySwal.fire({
+        title: <strong>Not enough money</strong>,
+        icon: "error",
       })
-      .catch((error) => console.log("error", error));
+    } else {
+      var dateObj = new Date();
+      var month = dateObj.getUTCMonth() + 1; //months from 1-12
+      var day = dateObj.getUTCDate();
+      var year = dateObj.getUTCFullYear();
+
+      let newDate = year + "-" + month + "-" + day;
+      var myHeaders = new Headers();
+      myHeaders.append("Content-Type", "application/json");
+
+      var raw = JSON.stringify({
+        username: username,
+        payment: {
+          paymentDate: newDate,
+          amount: money,
+        },
+      });
+
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+
+      fetch("http://127.0.0.1:8000/api/storePayments", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          if (result.status === "store payments ok") {
+            MySwal.fire({
+              title: <strong>Pay Success</strong>,
+              icon: "success",
+            }).then((value) => {
+              minusCredit();
+              sendOrder();
+            });
+          }
+        })
+        .catch((error) => console.log("error", error));
+    }
   };
 
   const minusCredit = () => {
