@@ -95,14 +95,15 @@ const ShopTable = () => {
       const listItems = products.map((tasks) => {
         return (
           <Card
-              style={{
-                width: "25rem",
-                margin: "30px 20px ",
-                paddingTop: "10px"
-              }}
-              className="cardShop d-flex flex-column justify-content-between"
-              onMouseMove={() => handleMouseMove(tasks.productCode)}
-            >
+            style={{
+              width: "25rem",
+              margin: "30px 20px ",
+              paddingTop: "10px"
+            }}
+            className="cardShop d-flex flex-column justify-content-between"
+            onMouseMove={() => handleMouseMove(tasks.productCode)}
+          >
+            <Link to="/product">
               <Card.Img
                 variant="top"
                 src={tasks.url}
@@ -111,56 +112,39 @@ const ShopTable = () => {
                 style={{ maxHeight: "250px", minHeight: "250px" }}
 
               />
-              <div>
-                <Card.Body>
-                  <div
-                  // onClick={() => handleClick(tasks.productCode)}
-                  // type="submit"
-                  >
-                    <Card.Title>{tasks.productName}</Card.Title>
-                    <Card.Text>
-                      <b>Type :</b> {tasks.productLine}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Scale :</b> {tasks.productScale}
-                    </Card.Text>
+            </Link>
 
-                    <Card.Text>
-                      <b>Stock :</b> {tasks.quantityInStock}
-                    </Card.Text>
-                    <Card.Text>
-                      <b>Price :</b> {tasks.buyPrice}
-                    </Card.Text>
-                  </div>
+            <div>
+              <Card.Body>
+                <div
+                // onClick={() => handleClick(tasks.productCode)}
+                // type="submit"
+                >
+                  <Card.Title>{tasks.productName}</Card.Title>
+                  <Card.Text>
+                    <b>Type :</b> {tasks.productLine}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Scale :</b> {tasks.productScale}
+                  </Card.Text>
 
-                  <div className="d-flex justify-content-between align-items-center">
-                    <Link to="/product">
-                      <Button className="btn d-flex align-items-center"
-                        variant="warning"
-                        style={{ marginTop: "10px" }}
-                      >
-                        More info
-                        <img
-                          src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
-                          width="20"
-                          height="20"
-                          alt=""
-                          title=""
-                          class="img-small"
-                          style={{ marginLeft: "9px" }}
-                        ></img>
-                      </Button>
-                    </Link>
+                  <Card.Text>
+                    <b>Stock :</b> {tasks.quantityInStock}
+                  </Card.Text>
+                  <Card.Text>
+                    <b>Price :</b> {tasks.buyPrice}
+                  </Card.Text>
+                </div>
 
-                    <Button
-                      className="btn"
-                      disabled={disabled}
-                      onClick={handleClick}
-                      style={{ color: "black" }}
+                <div className="d-flex justify-content-between align-items-center">
+                  <Link to="/product">
+                    <Button className="btn d-flex align-items-center"
+                      variant="warning"
+                      style={{ marginTop: "10px" }}
                     >
-                      Order
+                      More info
                       <img
-                        src = "https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                        src="   https://cdn-icons-png.flaticon.com/512/471/471662.png "
                         width="20"
                         height="20"
                         alt=""
@@ -169,10 +153,29 @@ const ShopTable = () => {
                         style={{ marginLeft: "9px" }}
                       ></img>
                     </Button>
-                  </div>
-                </Card.Body>
-              </div>
-            </Card>
+                  </Link>
+
+                  <Button
+                    className="btn"
+                    disabled={disabled}
+                    onClick={handleClick}
+                    style={{ color: "black" }}
+                  >
+                    Order
+                    <img
+                      src="https://cdn-icons-png.flaticon.com/512/3144/3144456.png"
+                      width="20"
+                      height="20"
+                      alt=""
+                      title=""
+                      class="img-small"
+                      style={{ marginLeft: "9px" }}
+                    ></img>
+                  </Button>
+                </div>
+              </Card.Body>
+            </div>
+          </Card>
         );
       });
 
