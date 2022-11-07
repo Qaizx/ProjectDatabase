@@ -27,7 +27,7 @@ const Shop = () => {
   const token = localStorage.getItem("token");
   var username = "";
   const [disabled, setDisabled] = useState(true);
-  const [typeP, setTypeP] = useState("")
+  const [typeP, setTypeP] = useState("");
 
   const checkToken = () => {
     if (token == null) {
@@ -57,10 +57,9 @@ const Shop = () => {
     // console.log(inputs);
     await localStorage.setItem("nameOfProduct", inputs.name);
     window.location.href = "/shop";
-
   };
   const handleClear = () => {
-    setTypeP("type")
+    setTypeP("type");
     localStorage.removeItem("nameOfProduct");
     // window.location.href = "/shop";
   };
@@ -106,14 +105,22 @@ const Shop = () => {
     const Item = typeItem.map(function (tasks) {
       if (typeProduct === tasks) {
         return (
-          <button style={{ fontSize: "14px" }} class="select active" onClick={() => typeFilter(tasks)}>
+          <button
+            style={{ fontSize: "14px" }}
+            class="select active"
+            onClick={() => typeFilter(tasks)}
+          >
             {" "}
             {tasks}
           </button>
         );
       } else {
         return (
-          <button style={{ fontSize: "14px" }} class="select" onClick={() => typeFilter(tasks)}>
+          <button
+            style={{ fontSize: "14px" }}
+            class="select"
+            onClick={() => typeFilter(tasks)}
+          >
             {" "}
             {tasks}
           </button>
@@ -131,7 +138,7 @@ const Shop = () => {
 
   const typeFilter = (type) => {
     console.log(type);
-    setTypeP(type)
+    setTypeP(type);
     localStorage.setItem("type", type);
     // window.location.href = "/shop";
   };
@@ -174,7 +181,6 @@ const Shop = () => {
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
     }
-
   };
 
   const render = () => {
@@ -185,14 +191,13 @@ const Shop = () => {
         </div>
       );
     else {
-
       const listItems = products.map(function (tasks) {
         const CardItem = () => {
           return (
             <Card
               style={{
                 width: "25rem",
-                margin: "10px 10px"
+                margin: "10px 10px",
                 // height:"35rem"
               }}
               className="cardShop d-flex flex-column justify-content-between"
@@ -204,8 +209,12 @@ const Shop = () => {
                   src={tasks.url}
                   // onClick={() => handleClick(tasks.productCode)}
                   // type="submit"
-                  style={{ maxHeight: "250px", minHeight: "250px", padding: "8px", borderRadius: "15px 15px 0px 0px" }}
-
+                  style={{
+                    maxHeight: "250px",
+                    minHeight: "250px",
+                    padding: "8px",
+                    borderRadius: "15px 15px 0px 0px",
+                  }}
                 />
               </Link>
 
@@ -234,7 +243,8 @@ const Shop = () => {
 
                   <div className="d-flex justify-content-between align-items-center">
                     <Link to="/product">
-                      <Button className="btn d-flex align-items-center"
+                      <Button
+                        className="btn d-flex align-items-center"
                         variant="warning"
                         style={{ marginTop: "10px" }}
                       >
@@ -254,11 +264,12 @@ const Shop = () => {
                     <Button
                       className="btn"
                       disabled={disabled}
-<<<<<<< HEAD
-                      onClick={() => {handleClick(tasks.quantityInStock)}}
-=======
-                      onClick={() => { handleClick(tasks.quantityInStock) }}
->>>>>>> 5b7991e637e3828bb6ef2f9f1d42cf8536e1a44f
+                      onClick={() => {
+                        handleClick(tasks.quantityInStock);
+                      }}
+                      onClick={() => {
+                        handleClick(tasks.quantityInStock);
+                      }}
                       style={{ color: "black" }}
                     >
                       Order
@@ -286,7 +297,9 @@ const Shop = () => {
             return <>{CardItem()}</>;
           }
         } else {
-          if (tasks.productName.toLowerCase().includes(nameProduct.toLowerCase())) {
+          if (
+            tasks.productName.toLowerCase().includes(nameProduct.toLowerCase())
+          ) {
             if (tasks.productLine === typeProduct) {
               return <>{CardItem()}</>;
             } else if (typeProduct === "Show all") {
@@ -299,7 +312,7 @@ const Shop = () => {
       });
       // localStorage.removeItem("nameOfProduct");
 
-      var listItemsFilter = listItems.filter(Boolean)
+      var listItemsFilter = listItems.filter(Boolean);
       const chunks = [];
 
       while (listItemsFilter.length) {
@@ -308,8 +321,12 @@ const Shop = () => {
 
       // // console.log(chunks)
 
-      return chunks.map(chunk => (
-        <div class="row d-flex">{chunk.map(item => <div class="col-4 d-flex justify-content-center" >{item}</div>)}</div>
+      return chunks.map((chunk) => (
+        <div class="row d-flex">
+          {chunk.map((item) => (
+            <div class="col-4 d-flex justify-content-center">{item}</div>
+          ))}
+        </div>
       ));
 
       // return <div class="row justify-content-start">{listItems}</div>;
@@ -317,19 +334,21 @@ const Shop = () => {
   };
 
   return (
-    <div style={{ fontFamily: "JetBrains Mono" }} class="" onMouseMove={checkToken}>
-      <h1 className="product">
-        Shop
-      </h1>
+    <div
+      style={{ fontFamily: "JetBrains Mono" }}
+      class=""
+      onMouseMove={checkToken}
+    >
+      <h1 className="product">Shop</h1>
       <div class="container">
         <div style={{ padding: "20px 0px" }}>
-          <div id="myBtnContainer" class="d-flex justify-content-between align-items-center">
-            <div>
-              {barType()}
-            </div>
+          <div
+            id="myBtnContainer"
+            class="d-flex justify-content-between align-items-center"
+          >
+            <div>{barType()}</div>
 
             <div class="search-container d-flex align-items-center">
-
               <input
                 type="text"
                 placeholder={checkNameProduct()}
@@ -353,17 +372,10 @@ const Shop = () => {
               <button type="submit" onClick={handleClear}>
                 clear
               </button>
-
             </div>
-
           </div>
-
         </div>
-        <div className="container">
-          {render()}
-
-        </div>
-
+        <div className="container">{render()}</div>
       </div>
     </div>
   );
