@@ -87,7 +87,7 @@ const ShopTable = () => {
     if (check)
       return (
         <div>
-          <h1 className="headerText"> Bad Connection </h1>
+          <h1 className="headerText">Loading...</h1>
         </div>
       );
     else {
