@@ -137,17 +137,17 @@ const Shop = () => {
   };
 
   const handleClick = (task) => {
-    if(task <= 0){
+    if (task <= 0) {
       MySwal.fire({
         title: <strong>Out of stock</strong>,
         icon: "error",
       });
-    }else{
+    } else {
       MySwal.fire({
         title: <strong>Add Success</strong>,
         icon: "success",
       });
-  
+
       const IDProduct = localStorage.getItem("IDProduct");
       var myHeaders = new Headers();
       myHeaders.append("Accept", "application/json");
@@ -156,25 +156,25 @@ const Shop = () => {
         "Cookie",
         "XSRF-TOKEN=eyJpdiI6IldHQXF5UzNuM0NkQ0pZQ3huQ3hJSkE9PSIsInZhbHVlIjoiWU1aeVhBQUNZYmpLc1BITytPL0Z4VDhMTStiQUdBVzJ0d2ZoSGNCeU5RYmF3aXRDbUQzZDBaWHJTYklrQUI2NVBSR1BHd3BQTnNoTFdPSHR2Sll0dWFMTDFjd3JLMEpjeHNBZ3dKY1RBekFLSG5EWHRiQk1XNXJBc2lCTjhEMG4iLCJtYWMiOiI2ZjgwZGFhZWM1NTA0NzkzMDBkM2IwYmVjMDM2ZjAwNDUxNzNjOGIzNTU5NGYzMzEzODdlMzUyMTU4MzQxMjU5IiwidGFnIjoiIn0%3D; laravel_session=eyJpdiI6ImVLS25tSS95QS9BMmE5a0NmL0p6YWc9PSIsInZhbHVlIjoiWklzU05TWXlWVVc1ZEI5QVNwQUVWQUd4OHhJTkkwbTFqRVFrUnd1M0dYZExvd0N3b3JnNEo5aXVRQ2Fqc2F4L3Q2am5VWnhJRy9NV2VjL3ZNMFUyQzB4b3lQcTRxcTZIbFZMQ21ZaUh3NGlsVWdmaEtJTXFaVzJDUkpUYzBrMFkiLCJtYWMiOiIxOTdlODg2NTZmNTVjMDgzNTQwNTg3YmVlNGUxMTVkOTY3NjM2ZTFlZDJlOTA4ZWQxY2Y4MWNmMGIxYTA0NzAyIiwidGFnIjoiIn0%3D"
       );
-  
+
       var raw = JSON.stringify({
         username: username,
         productCode: IDProduct,
       });
-  
+
       var requestOptions = {
         method: "POST",
         headers: myHeaders,
         body: raw,
         redirect: "follow",
       };
-  
+
       fetch("http://127.0.0.1:8000/api/addToCart", requestOptions)
         .then((response) => response.json())
         .then((result) => console.log(result))
         .catch((error) => console.log("error", error));
     }
-    
+
   };
 
   const render = () => {
@@ -192,20 +192,23 @@ const Shop = () => {
             <Card
               style={{
                 width: "25rem",
-                margin: "30px 20px ",
-                paddingTop: "10px"
+                margin: "10px 10px"
+                // height:"35rem"
               }}
               className="cardShop d-flex flex-column justify-content-between"
               onMouseMove={() => handleMouseMove(tasks.productCode)}
             >
-              <Card.Img
-                variant="top"
-                src={tasks.url}
-                // onClick={() => handleClick(tasks.productCode)}
-                // type="submit"
-                style={{ maxHeight: "250px", minHeight: "250px" }}
+              <Link to="/product">
+                <Card.Img
+                  variant="top"
+                  src={tasks.url}
+                  // onClick={() => handleClick(tasks.productCode)}
+                  // type="submit"
+                  style={{ maxHeight: "250px", minHeight: "250px", padding: "8px", borderRadius: "15px 15px 0px 0px" }}
 
-              />
+                />
+              </Link>
+
               <div>
                 <Card.Body>
                   <div
@@ -213,6 +216,7 @@ const Shop = () => {
                   // type="submit"
                   >
                     <Card.Title>{tasks.productName}</Card.Title>
+
                     <Card.Text>
                       <b>Type :</b> {tasks.productLine}
                     </Card.Text>
@@ -250,7 +254,11 @@ const Shop = () => {
                     <Button
                       className="btn"
                       disabled={disabled}
+<<<<<<< HEAD
                       onClick={() => {handleClick(tasks.quantityInStock)}}
+=======
+                      onClick={() => { handleClick(tasks.quantityInStock) }}
+>>>>>>> 5b7991e637e3828bb6ef2f9f1d42cf8536e1a44f
                       style={{ color: "black" }}
                     >
                       Order
@@ -270,6 +278,7 @@ const Shop = () => {
             </Card>
           );
         };
+
         if (nameProduct === null) {
           if (tasks.productLine === typeProduct) {
             return <>{CardItem()}</>;
@@ -284,12 +293,26 @@ const Shop = () => {
               return <>{CardItem()}</>;
             }
           } else {
-            return <div></div>;
+            return null;
           }
         }
       });
       // localStorage.removeItem("nameOfProduct");
-      return <div class="row justify-content-start">{listItems}</div>;
+
+      var listItemsFilter = listItems.filter(Boolean)
+      const chunks = [];
+
+      while (listItemsFilter.length) {
+        chunks.push(listItemsFilter.splice(0, 3));
+      }
+
+      // // console.log(chunks)
+
+      return chunks.map(chunk => (
+        <div class="row d-flex">{chunk.map(item => <div class="col-4 d-flex justify-content-center" >{item}</div>)}</div>
+      ));
+
+      // return <div class="row justify-content-start">{listItems}</div>;
     }
   };
 
@@ -336,7 +359,10 @@ const Shop = () => {
           </div>
 
         </div>
-        {render()}
+        <div className="container">
+          {render()}
+
+        </div>
 
       </div>
     </div>

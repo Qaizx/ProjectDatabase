@@ -42,7 +42,9 @@ class OrdersController extends Controller
     public function store(StoreOrdersRequest $request)
     {
         //
-        Orders::create($request->all());
+        DB::transaction(function () use ($request) {
+            Orders::create($request->all());
+        });
     }
     /**
      * Display the specified resource.
@@ -54,7 +56,6 @@ class OrdersController extends Controller
     {
         $order = Orders::find($id);
         return $order;
-
     }
 
     /**
@@ -66,7 +67,7 @@ class OrdersController extends Controller
      */
     public function update(UpdateOrdersRequest $request, $id)
     {
-        
+
         $order = orders::find($id);
         $order->update($request->all());
     }

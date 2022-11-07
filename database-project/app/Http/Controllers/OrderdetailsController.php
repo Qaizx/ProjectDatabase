@@ -44,26 +44,29 @@ class OrderdetailsController extends Controller
         }
     }
 
-    public function storeOrderdetails($orders , $customerNumber , $orderNumber) {
-        $orderLineNumber = 1;
-        foreach($orders as $order) {
-            $priceEach = DB::table('products')->select('buyPrice')->where('productCode' , $order->productCode)->get()->first()->buyPrice;
+    public function storeOrderdetails($orders, $customerNumber, $orderNumber)
+    {
+        DB::transaction(function () use ($orders, $customerNumber, $orderNumber) {
+            $orderLineNumber = 1;
+            foreach ($orders as $order) {
+                $priceEach = DB::table('products')->select('buyPrice')->where('productCode', $order->productCode)->get()->first()->buyPrice;
 
-            $formatOrder = [
-                'customerNumber' => $customerNumber , 
-                'orderNumber'=> $orderNumber ,                 
-                'productCode'=> $order->productCode ,              
-                'quantityOrdered'=> $order->quantityInCart,    
-                'priceEach'=> $priceEach ,
-                'orderLineNumber'=> $orderLineNumber,
-            ];
-            $newRequest = new Request($formatOrder);
-            Orderdetails::create($newRequest->all());
-            $product = Products::find($order->productCode);
-            $product->quantityInStock = $product->quantityInStock - $order->quantityInCart;
-            $product->save();
-            $orderLineNumber += 1;
-        }
+                $formatOrder = [
+                    'customerNumber' => $customerNumber,
+                    'orderNumber' => $orderNumber,
+                    'productCode' => $order->productCode,
+                    'quantityOrdered' => $order->quantityInCart,
+                    'priceEach' => $priceEach,
+                    'orderLineNumber' => $orderLineNumber,
+                ];
+                $newRequest = new Request($formatOrder);
+                Orderdetails::create($newRequest->all());
+                $product = Products::find($order->productCode);
+                $product->quantityInStock = $product->quantityInStock - $order->quantityInCart;
+                $product->save();
+                $orderLineNumber += 1;
+            }
+        });
     }
 
     /**

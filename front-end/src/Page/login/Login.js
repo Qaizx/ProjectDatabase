@@ -79,12 +79,26 @@ const Login = () => {
           });
         } else if (result.error === "Password is not matched.") {
           MySwal.fire({
-            title: <strong>Login fail</strong>,
+            title: <div className="d-flex flex-column justify-content-center">
+              <strong>
+                Login Fail
+              </strong>
+              <div style={{fontSize:"25px"}}>
+                Password is not matched.
+              </div>
+            </div>,
             icon: "error",
           });
         } else {
           MySwal.fire({
-            title: <strong>Login Fail</strong>,
+            title: <div className="d-flex flex-column justify-content-center">
+            <strong>
+              Login Fail
+            </strong>
+            <div style={{fontSize:"25px"}}>
+            Email or Username is not matched.
+            </div>
+          </div>,
             icon: "error",
           });
         }
