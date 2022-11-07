@@ -368,7 +368,7 @@ const Cart = () => {
                   style={{ margin: "5px" }}
                   onClick={minus}
                 />
-                {tasks.quantityInCart}
+                {tasks.quantityInCart >= tasks.quantityInStock ? tasks.quantityInStock : tasks.quantityInCart}
                 <img
                   src="   https://cdn-icons-png.flaticon.com/512/4315/4315609.png "
                   width="30"
