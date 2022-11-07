@@ -6,7 +6,7 @@ use App\Models\Customers;
 use App\Http\Requests\StoreCustomersRequest;
 use App\Http\Requests\UpdateCustomersRequest;
 use App\Models\Employees;
-use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class CustomersController extends Controller
 {
@@ -97,13 +97,13 @@ class CustomersController extends Controller
         //     'creditLimit'=> $request->creditLimit
         //  ]);
 
+        DB::transaction(function () use ($customerNumber){
+            $salesRep = Employees::inRandomOrder()->first();
+            Customers::create([
+                'customerNumber' => $customerNumber ,
+                'salesRepEmployeeNumber' => $salesRep->employeeNumber
+            ]);
+        });
 
-        $salesRep = Employees::inRandomOrder()->first();
-
-
-        Customers::create([
-            'customerNumber' => $customerNumber ,
-            'salesRepEmployeeNumber' => $salesRep->employeeNumber
-        ]);
     }
 }
