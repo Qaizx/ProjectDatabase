@@ -250,7 +250,7 @@ const Shop = () => {
                     <Button
                       className="btn"
                       disabled={disabled}
-                      onClick={() => {handleClick(task.quantityInStock)}}
+                      onClick={() => {handleClick(tasks.quantityInStock)}}
                       style={{ color: "black" }}
                     >
                       Order

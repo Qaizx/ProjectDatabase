@@ -82,33 +82,42 @@ const Cart = () => {
     initProducts();
   }, []);
 
-  const plus = () => {
-    const IDProduct = localStorage.getItem("IDProduct");
-    var myHeaders = new Headers();
-    myHeaders.append("Accept", "application/json");
-    myHeaders.append("Content-Type", "application/json");
-
-    var raw = JSON.stringify({
-      username: username,
-      productCode: IDProduct,
-    });
-
-    var requestOptions = {
-      method: "POST",
-      headers: myHeaders,
-      body: raw,
-      redirect: "follow",
-    };
-
-    fetch("http://127.0.0.1:8000/api/addToCart", requestOptions)
-      .then((response) => response.json())
-      .then((result) => {
-        window.location.href = "/cart";
+  const plus = (quantityInStock, quantityInCart) => {
+    if(quantityInStock <= quantityInCart){
+      MySwal.fire({
+        title: <strong>Stock Limit</strong>,
+        icon: "error",
       })
-      .catch((error) => console.log("error", error));
+    }else{
+      const IDProduct = localStorage.getItem("IDProduct");
+      var myHeaders = new Headers();
+      myHeaders.append("Accept", "application/json");
+      myHeaders.append("Content-Type", "application/json");
+  
+      var raw = JSON.stringify({
+        username: username,
+        productCode: IDProduct,
+      });
+  
+      var requestOptions = {
+        method: "POST",
+        headers: myHeaders,
+        body: raw,
+        redirect: "follow",
+      };
+  
+      fetch("http://127.0.0.1:8000/api/addToCart", requestOptions)
+        .then((response) => response.json())
+        .then((result) => {
+          window.location.href = "/cart";
+        })
+        .catch((error) => console.log("error", error));
+    }
+    
   };
 
   const minus = () => {
+
     const IDProduct = localStorage.getItem("IDProduct");
     var myHeaders = new Headers();
     myHeaders.append("Content-Type", "application/json");
@@ -239,7 +248,7 @@ const Cart = () => {
       .catch((error) => console.log("error", error));
   };
 
-  const handleSubmit = () => {
+  const handleSubmit = (quantityInStock, quantityInCart) => {
     const credit = localStorage.getItem("credit");
 
     if (money > credit) {
@@ -369,7 +378,7 @@ const Cart = () => {
                   class="img-small"
                   type="submit"
                   style={{ margin: "5px" }}
-                  onClick={plus}
+                  onClick={() => {plus(tasks.quantityInStock, tasks.quantityInCart)}}
                 />
               </MDBCol>
 
